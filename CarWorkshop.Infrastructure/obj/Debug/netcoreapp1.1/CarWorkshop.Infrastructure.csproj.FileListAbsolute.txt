@@ -1,9 +1,0 @@
-C:\Users\Szymon Kalista\Dropbox\Programowanie\C#\CarWorkshop\CarWorkshop.Infrastructure\bin\Debug\netcoreapp1.1\CarWorkshop.Infrastructure.deps.json
-C:\Users\Szymon Kalista\Dropbox\Programowanie\C#\CarWorkshop\CarWorkshop.Infrastructure\bin\Debug\netcoreapp1.1\CarWorkshop.Infrastructure.dll
-C:\Users\Szymon Kalista\Dropbox\Programowanie\C#\CarWorkshop\CarWorkshop.Infrastructure\bin\Debug\netcoreapp1.1\CarWorkshop.Infrastructure.pdb
-C:\Users\Szymon Kalista\Dropbox\Programowanie\C#\CarWorkshop\CarWorkshop.Infrastructure\bin\Debug\netcoreapp1.1\CarWorkshop.Core.dll
-C:\Users\Szymon Kalista\Dropbox\Programowanie\C#\CarWorkshop\CarWorkshop.Infrastructure\bin\Debug\netcoreapp1.1\CarWorkshop.Core.pdb
-C:\Users\Szymon Kalista\Dropbox\Programowanie\C#\CarWorkshop\CarWorkshop.Infrastructure\obj\Debug\netcoreapp1.1\CarWorkshop.Infrastructure.csprojResolveAssemblyReference.cache
-C:\Users\Szymon Kalista\Dropbox\Programowanie\C#\CarWorkshop\CarWorkshop.Infrastructure\obj\Debug\netcoreapp1.1\CarWorkshop.Infrastructure.AssemblyInfo.cs
-C:\Users\Szymon Kalista\Dropbox\Programowanie\C#\CarWorkshop\CarWorkshop.Infrastructure\obj\Debug\netcoreapp1.1\CarWorkshop.Infrastructure.dll
-C:\Users\Szymon Kalista\Dropbox\Programowanie\C#\CarWorkshop\CarWorkshop.Infrastructure\obj\Debug\netcoreapp1.1\CarWorkshop.Infrastructure.pdb

@@ -8,9 +8,16 @@ namespace CarWorkshop.Core.Models
     {
         public IEnumerable<Car> Cars;
         
-        protected Client()
+        protected Client() :
+            base()
         {
             
+        }
+
+        public Client(string firstname, string lastname, string email, string password) : 
+            base(firstname, lastname, email, password)
+        {
+
         }
     }
 }

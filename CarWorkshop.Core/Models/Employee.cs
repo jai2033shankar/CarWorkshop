@@ -14,5 +14,18 @@ namespace CarWorkshop.Core.Models
 
         //TODO: Add working position
 
+        protected Employee() : 
+            base()
+        {
+
+        }
+
+        public Employee(string firstname, string lastname, string email, string password, string pesel, Decimal salary) : 
+            base(firstname, lastname, email, password)
+        {
+            Pesel = pesel;
+            Salary = salary;
+        }
+
     }
 }

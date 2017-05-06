@@ -27,7 +27,7 @@ namespace CarWorkshop.Core.Models
 
         }
 
-        public User(string firstname, string lastname, string email, string password)
+        protected User(string firstname, string lastname, string email, string password)
         {
             ID = Guid.NewGuid();
             FirstName = firstname;

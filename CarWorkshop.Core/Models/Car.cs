@@ -12,6 +12,8 @@ namespace CarWorkshop.Core.Models
 
         public string Model { get; protected set; }
 
+        public string RegistrationNumber { get; protected set; }
+
         public IEnumerable<Repair> Repairs;
     }
 }

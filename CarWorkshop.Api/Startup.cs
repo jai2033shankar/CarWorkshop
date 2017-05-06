@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using CarWorkshop.Infrastructure.Services;
+using CarWorkshop.Core.Repositories;
+using CarWorkshop.Infrastructure.Repositories;
 
 namespace CarWorkshop.Api
 {
@@ -27,6 +30,8 @@ namespace CarWorkshop.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped < IClientRepository, ClientRepository>();
+            services.AddScoped<IClientService, ClientService>();
             // Add framework services.
             services.AddMvc();
         }

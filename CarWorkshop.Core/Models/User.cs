@@ -32,7 +32,7 @@ namespace CarWorkshop.Core.Models
             ID = Guid.NewGuid();
             FirstName = firstname;
             LastName = lastname;
-            email = Email;
+            Email = email;
             password = Password;
             CreatedAt = DateTime.UtcNow;
         }

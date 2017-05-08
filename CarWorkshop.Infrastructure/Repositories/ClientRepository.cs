@@ -8,11 +8,12 @@ namespace CarWorkshop.Infrastructure.Repositories
 {
     public class ClientRepository : IClientRepository
     {
-        private static ISet<Client> _clients = new HashSet<Client>();
+        
 
         public void AddClient(Client client)
         {
-            _clients.Add(client);
+            throw new NotImplementedException();
+
         }
 
         public IEnumerable<Client> GetAllClients()
@@ -28,6 +29,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         public Client GetClientById(int Id)
         {
             throw new NotImplementedException();
+
         }
 
         public void RemoveClient(int clientId)

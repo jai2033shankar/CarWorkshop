@@ -32,9 +32,8 @@ namespace CarWorkshop.Api
             // Add framework services.
             services.AddMvc();
 
-            //TODO: Move later to connectionStrings
-            var connection = @"Server=DESKTOP-FQTL9LU;Database=CarWorkshop;Trusted_Connection=True;";
-            services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(connection));
+            //var connection = @"Server=DESKTOP-FQTL9LU;Database=CarWorkshop;Trusted_Connection=True;";
+            services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

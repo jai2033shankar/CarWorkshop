@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CarWorkshop.Core.Models
 {
-    public class Car
+    public partial class Car
     {
-        public Guid ID { get; protected set; }
+        public int CarId { get; set; }
+        public int? BrandId { get; set; }
+        public int? ModelId { get; set; }
+        public string RegistrationNumber { get; set; }
+        public int ClientId { get; set; }
 
-        public string Brand { get; protected set; }
-
-        public string Model { get; protected set; }
-
-        public string RegistrationNumber { get; protected set; }
-
-        public IEnumerable<Repair> Repairs;
+        public virtual CarBrand Brand { get; set; }
+        public virtual Client Client { get; set; }
+        public virtual CarModel Model { get; set; }
     }
 }

@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CarWorkshop.Core.Models
 {
-    public class Client : User
+    public partial class Client
     {
-        public IEnumerable<Car> Cars;
-        
-        protected Client() :
-            base()
+        public Client()
         {
-            
+            Car = new HashSet<Car>();
         }
 
-        public Client(string firstname, string lastname, string email, string password) : 
-            base(firstname, lastname, email, password)
-        {
+        public int ClientId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string IdentityCardNumber { get; set; }
+        public string Pesel { get; set; }
+        public string PhoneNumber { get; set; }
+        public string EmailAddress { get; set; }
 
-        }
+        public virtual ICollection<Car> Car { get; set; }
     }
 }

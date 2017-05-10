@@ -17,6 +17,11 @@ namespace CarWorkshop.Infrastructure.Services
             _clientRepository = clientRepository;
         }
 
+        public ClientDTO GetAllClients()
+        {
+            throw new NotImplementedException();
+        }
+
         public ClientDTO GetClient(int ID)
         {
             Client client = _clientRepository.GetClientById(ID);

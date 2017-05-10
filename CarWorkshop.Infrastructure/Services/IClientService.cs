@@ -8,5 +8,7 @@ namespace CarWorkshop.Infrastructure.Services
     public interface IClientService
     {
         ClientDTO GetClient(int ID);
+
+        ClientDTO GetAllClients();
     }
 }

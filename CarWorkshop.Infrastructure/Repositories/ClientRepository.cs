@@ -26,7 +26,7 @@ namespace CarWorkshop.Infrastructure.Repositories
                 throw new ArgumentNullException("client");
             }
             clients.Add(client);
-            _context.SaveChanges()
+            _context.SaveChanges();
         }
 
         public IEnumerable<Client> GetAllClients()
@@ -41,8 +41,8 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public Client GetClientById(int Id)
         {
-            throw new NotImplementedException();
-
+            var client = clients.Single(c => c.ClientId == Id);
+            return client;
         }
 
         public void RemoveClient(int clientId)

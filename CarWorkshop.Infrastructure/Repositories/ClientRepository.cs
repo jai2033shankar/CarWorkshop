@@ -40,10 +40,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         }
 
         public Client GetClientById(int Id)
-        {
-            var client = clients.Single(c => c.ClientId == Id);
-            return client;
-        }
+            => clients.Single(c => c.ClientId == Id);
 
         public void RemoveClient(int clientId)
         {

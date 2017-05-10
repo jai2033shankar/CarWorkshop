@@ -23,5 +23,10 @@ namespace CarWorkshop.Api.Controllers
         {
             return new string[] { "value1", "value2" };
         }
+
+        [HttpGet("{id}")]
+        public ClientDTO Get(int id)
+            => _clientService.GetClient(id);
+
     }
 }

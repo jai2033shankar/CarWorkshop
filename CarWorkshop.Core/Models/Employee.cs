@@ -1,31 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CarWorkshop.Core.Models
 {
-    public class Employee : User
+    public partial class Employee
     {
-        public string Pesel { get; protected set; }
-
-        public DateTime EmploymentDate { get; protected set; }
-
-        public Decimal Salary { get; protected set; }
-
-        //TODO: Add working position
-
-        protected Employee() : 
-            base()
+        public Employee()
         {
-
+            Repair = new HashSet<Repair>();
         }
 
-        public Employee(string firstname, string lastname, string email, string password, string pesel, Decimal salary) : 
-            base(firstname, lastname, email, password)
-        {
-            Pesel = pesel;
-            Salary = salary;
-        }
+        public int EmployeeId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string IdentityCardNumber { get; set; }
+        public string Pesel { get; set; }
+        public DateTime EmploymentDate { get; set; }
+        public string PhoneNumber { get; set; }
+        public string EmailAddress { get; set; }
+        public int Salary { get; set; }
+        public int Position { get; set; }
 
+        public virtual ICollection<Repair> Repair { get; set; }
+        public virtual Position PositionNavigation { get; set; }
+        public virtual Salary SalaryNavigation { get; set; }
     }
 }

@@ -1,23 +1,24 @@
-﻿using CarWorkshop.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CarWorkshop.Core.Models;
 
 namespace CarWorkshop.Core.Repositories
 {
     public interface IClientRepository
     {
-        Client Get(Guid Id);
+        Client GetClientById(int Id);
 
-        Client Get(string email);
+        Client GetClientByEmail(string email);
 
-        IEnumerable<Client> GetAll();
+        IEnumerable<Client> GetAllClients();
 
-        void Add(Client client);
+        void AddClient(Client client);
 
-        void Remove(Guid Id);
+        void RemoveClient(int clientId);
 
-        void Update(Client client);
-    
+        void UpdateClient(Client client);
+
+        void SaveChanges();
     }
 }

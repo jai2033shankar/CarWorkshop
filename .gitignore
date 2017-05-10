@@ -1,3 +1,4 @@
 .suo 
 applicationhost.config
 */obj
+*.suo

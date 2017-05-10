@@ -7,8 +7,8 @@ namespace CarWorkshop.Infrastructure.Services
 {
     public interface IClientService
     {
-        ClientDTO Get(string email);
+        ClientDTO GetClient(int ID);
 
-        void CreateClient(string firstname, string lastname, string email, string password);
+        ClientDTO GetAllClients();
     }
 }

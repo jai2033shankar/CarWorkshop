@@ -1,42 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using CarWorkshop.Core.Models;
 using CarWorkshop.Core.Repositories;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarWorkshop.Infrastructure.Repositories
 {
     public class ClientRepository : IClientRepository
     {
-        private static ISet<Client> _clients = new HashSet<Client>
-        {
-            new Client("test", "testsowski", "test@email.com", "pass")
-        };
+        private readonly CarWorkshopContext _context;
+        private DbSet<Client> clients;
 
-        public void Add(Client client)
+        public ClientRepository(CarWorkshopContext context)
         {
-            _clients.Add(client);
+            _context = context;
+            clients = _context.Set<Client>();
         }
 
-        public Client Get(Guid Id)
-            => _clients.Single(cl => cl.ID == Id);
-
-        public Client Get(string email)
-            => _clients.Single(cl => cl.Email == email);
-
-        public IEnumerable<Client> GetAll()
-            => _clients;
-
-        public void Remove(Guid Id)
+        public void AddClient(Client client)
         {
-            var client = Get(Id);
-            _clients.Remove(client);
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+            clients.Add(client);
+            _context.SaveChanges();
         }
 
-        public void Update(Client client)
+        public IEnumerable<Client> GetAllClients()
         {
-            //TO DO
+            return clients.AsEnumerable();
+        }
+
+        public Client GetClientByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Client GetClientById(int Id)
+            => clients.Single(c => c.ClientId == Id);
+
+        public void RemoveClient(int clientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+
+        public void UpdateClient(Client client)
+        {
+            throw new NotImplementedException();
         }
     }
 }

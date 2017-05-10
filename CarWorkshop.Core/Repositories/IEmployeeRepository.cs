@@ -1,23 +1,23 @@
-﻿using CarWorkshop.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CarWorkshop.Core.Models;
 
 namespace CarWorkshop.Core.Repositories
 {
     public interface IEmployeeRepository
     {
-        Employee Get(Guid Id);
+        Employee GetEmployeeById(int Id);
 
-        Employee Get(string firstname);
+        Employee GetEmployeeByEmail(string email);
 
-        IEnumerable<Employee> GetAll();
+        IEnumerable<Employee> GetAllEmployees();
 
-        void Add(Employee employee);
+        void AddEmployee(Employee employee);
 
-        void Remove(Guid Id);
+        void RemoveEmployee(int Id);
 
-        void Update(Employee employee);
+        void UpdateEmployee(Employee employee);
 
     }
 }

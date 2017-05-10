@@ -9,13 +9,13 @@ using CarWorkshop.Infrastructure.DTO;
 namespace CarWorkshop.Api.Controllers
 {
     [Route("/[controller]")]
-    public class ClientController : Controller
+    public class EmployeeController : Controller
     {
-        private readonly IClientService _clientService;
+        private readonly IEmployeeService _employeeService;
 
-        public ClientController(IClientService clientService)
+        public EmployeeController(IEmployeeService employeeService)
         {
-            _clientService = clientService;
+            _employeeService = employeeService;
         }
         
         [HttpGet]
@@ -25,8 +25,8 @@ namespace CarWorkshop.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public ClientDTO Get(int id)
-            => _clientService.GetClient(id);
+        public EmployeeDTO Get(int id)
+            => _employeeService.GetEmployeeById(id);
 
     }
 }

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CarWorkshop.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore;
+using CarWorkshop.Core.Models;
 using CarWorkshop.Core.Repositories;
 using CarWorkshop.Infrastructure.Repositories;
+using CarWorkshop.Infrastructure.Services;
 
 namespace CarWorkshop.Api
 {
@@ -30,10 +32,17 @@ namespace CarWorkshop.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped < IClientRepository, ClientRepository>();
+
+            services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IClientService, ClientService>();
+
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
             // Add framework services.
             services.AddMvc();
+
+            //var connection = @"Server=DESKTOP-FQTL9LU;Database=CarWorkshop;Trusted_Connection=True;";
+            services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

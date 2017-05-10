@@ -35,6 +35,9 @@ namespace CarWorkshop.Api
 
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IClientService, ClientService>();
+
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
             // Add framework services.
             services.AddMvc();
 

@@ -29,8 +29,8 @@ namespace CarWorkshop.Infrastructure.Services
                 LastName = employee.LastName,
                 Pesel = employee.Pesel,
                 PhoneNumber = employee.PhoneNumber,
-                Position = employee.Position,
-                Salary = employee.Salary
+                Position = _employeeRepository.GetPosition(employee),
+                Salary = _employeeRepository.GetSalary(employee)
             };
         }
     }

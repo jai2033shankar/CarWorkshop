@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWorkshop.Core", "CarWorkshop.Core\CarWorkshop.Core.csproj", "{6E4E6F6E-5FF1-4331-9368-72B7D83E65B0}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWorkshop.Api", "CarWorkshop.Api\CarWorkshop.Api.csproj", "{B472F024-924E-463A-8A70-455155385F5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWorkshop.Tests", "CarWorkshop.Tests\CarWorkshop.Tests.csproj", "{5BD5973C-0CD1-4E21-B256-38545446094F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWorkshop.Web", "CarWorkshop.Web\CarWorkshop.Web.csproj", "{A6D27643-8C91-4404-A632-B3FA06F9EF6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5BD5973C-0CD1-4E21-B256-38545446094F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BD5973C-0CD1-4E21-B256-38545446094F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BD5973C-0CD1-4E21-B256-38545446094F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6D27643-8C91-4404-A632-B3FA06F9EF6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D27643-8C91-4404-A632-B3FA06F9EF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6D27643-8C91-4404-A632-B3FA06F9EF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D27643-8C91-4404-A632-B3FA06F9EF6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

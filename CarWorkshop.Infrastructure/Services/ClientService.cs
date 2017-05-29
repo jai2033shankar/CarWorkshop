@@ -23,9 +23,24 @@ namespace CarWorkshop.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ClientDTO> GetClient(int ID)
+        public async Task<ClientDTO> GetClient(int Id)
         {
-            Client client = await _clientRepository.GetClientById(ID);
+            Client client = await _clientRepository.GetClientById(Id);
+
+            return new ClientDTO
+            {
+                EmailAddress = client.EmailAddress,
+                FirstName = client.FirstName,
+                IdentityCardNumber = client.IdentityCardNumber,
+                LastName = client.LastName,
+                Pesel = client.Pesel,
+                PhoneNumber = client.PhoneNumber
+            };
+        }
+
+        public async Task<ClientDTO> GetClient(string email)
+        {
+            Client client = await _clientRepository.GetClientByEmail(email);
 
             return new ClientDTO
             {

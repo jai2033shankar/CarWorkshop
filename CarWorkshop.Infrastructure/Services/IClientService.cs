@@ -8,7 +8,9 @@ namespace CarWorkshop.Infrastructure.Services
 {
     public interface IClientService
     {
-        Task<ClientDTO> GetClient(int ID);
+        Task<ClientDTO> GetClient(int Id);
+
+        Task<ClientDTO> GetClient(string email);
 
         ClientDTO GetAllClients();
     }

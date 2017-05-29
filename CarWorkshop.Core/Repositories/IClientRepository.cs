@@ -8,11 +8,9 @@ namespace CarWorkshop.Core.Repositories
 {
     public interface IClientRepository
     {
-        //Client GetClientById(int Id);
-
         Task<Client> GetClientById(int Id);
 
-        Client GetClientByEmail(string email);
+        Task<Client> GetClientByEmail(string email);
 
         IEnumerable<Client> GetAllClients();
 

@@ -1,7 +1,8 @@
-﻿@model CarWorkshop.Infrastructure.DTO.ClientDTO
-@{
-    ViewData["Title"] = "Test Client Page";
-}
-
-@Html.DisplayFor(model => model.FirstName)
-@Html.DisplayFor(model => model.EmailAddress)
+﻿@model CarWorkshop.Web.Models.ClientSearchViewModel
+<form asp-controller="Client" asp-action="GetClient" method="get">
+    <p>
+        ID: @Html.TextBoxFor(model => model.Id)
+        email: @Html.TextBoxFor(model => model.Email)
+        <input type="submit" value="Search" />
+    </p>   
+</form>

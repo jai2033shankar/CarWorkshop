@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CarWorkshop.Infrastructure.Services;
 using CarWorkshop.Infrastructure.DTO;
+using CarWorkshop.Web.Models;
 
 namespace CarWorkshop.Web.Controllers
 {
@@ -17,10 +18,27 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpGet]
-        public  async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View( await _clientService.GetClient(2));
+            return View();
         }
 
+        [HttpGet]
+        public  async Task<IActionResult> GetClient(ClientSearchViewModel clientSearch)
+        {
+
+        if (!String.IsNullOrEmpty(clientSearch.Email))
+        {
+            return View(await _clientService.GetClient(clientSearch.Email));
+        }
+
+        if (clientSearch.Id > 0)
+        {
+            return View(await _clientService.GetClient(clientSearch.Id));
+
+        }
+
+            return View();
+        }
     }
 }

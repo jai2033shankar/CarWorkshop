@@ -35,9 +35,9 @@ namespace CarWorkshop.Infrastructure.Repositories
             return clients.AsEnumerable();
         }
 
-        public Client GetClientByEmail(string email)
+        public async Task<Client> GetClientByEmail(string email)
         {
-            throw new NotImplementedException();
+            return await clients.SingleAsync(c => c.EmailAddress == email);
         }
 
         public void RemoveClient(int clientId)

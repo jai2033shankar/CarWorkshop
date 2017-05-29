@@ -1,7 +1,12 @@
-﻿@model CarWorkshop.Infrastructure.DTO.ClientDTO
+﻿@model List<CarWorkshop.Infrastructure.DTO.ClientDTO>
 @{
     ViewData["Title"] = "Test Client Page";
 }
 
-@Html.DisplayFor(model => model.FirstName)
-@Html.DisplayFor(model => model.EmailAddress)
+@foreach(var test in Model)
+{
+    <br />
+    @Html.DisplayFor(item => test.FirstName)
+<br />
+    @Html.DisplayFor(item => test.EmailAddress)
+}

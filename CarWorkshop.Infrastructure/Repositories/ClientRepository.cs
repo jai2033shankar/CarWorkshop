@@ -5,6 +5,7 @@ using System.Linq;
 using CarWorkshop.Core.Models;
 using CarWorkshop.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace CarWorkshop.Infrastructure.Repositories
 {
@@ -39,9 +40,6 @@ namespace CarWorkshop.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Client GetClientById(int Id)
-            => clients.Single(c => c.ClientId == Id);
-
         public void RemoveClient(int clientId)
         {
             throw new NotImplementedException();
@@ -55,6 +53,11 @@ namespace CarWorkshop.Infrastructure.Repositories
         public void UpdateClient(Client client)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Client> GetClientById(int Id)
+        {
+            return await clients.SingleAsync(c => c.ClientId == Id);
         }
     }
 }

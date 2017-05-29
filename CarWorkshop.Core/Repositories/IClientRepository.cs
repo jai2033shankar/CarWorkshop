@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using CarWorkshop.Core.Models;
+using System.Threading.Tasks;
 
 namespace CarWorkshop.Core.Repositories
 {
     public interface IClientRepository
     {
-        Client GetClientById(int Id);
+        //Client GetClientById(int Id);
+
+        Task<Client> GetClientById(int Id);
 
         Client GetClientByEmail(string email);
 

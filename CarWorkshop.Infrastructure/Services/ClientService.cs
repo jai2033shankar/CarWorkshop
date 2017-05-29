@@ -4,6 +4,7 @@ using System.Text;
 using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Core.Repositories;
 using CarWorkshop.Core.Models;
+using System.Threading.Tasks;
 
 namespace CarWorkshop.Infrastructure.Services
 {
@@ -22,9 +23,9 @@ namespace CarWorkshop.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public ClientDTO GetClient(int ID)
+        public async Task<ClientDTO> GetClient(int ID)
         {
-            Client client = _clientRepository.GetClientById(ID);
+            Client client = await _clientRepository.GetClientById(ID);
 
             return new ClientDTO
             {

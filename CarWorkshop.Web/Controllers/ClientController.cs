@@ -40,5 +40,11 @@ namespace CarWorkshop.Web.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public IActionResult GetAllClients()
+        {
+            return View(_clientService.GetAllClients());
+        }
     }
 }

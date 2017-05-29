@@ -18,9 +18,24 @@ namespace CarWorkshop.Infrastructure.Services
             _clientRepository = clientRepository;
         }
 
-        public ClientDTO GetAllClients()
+        public List<ClientDTO> GetAllClients()
         {
-            throw new NotImplementedException();
+            List<ClientDTO> clients = new List<ClientDTO>();
+
+            foreach (var client in _clientRepository.GetAllClients())
+            {
+                clients.Add(new ClientDTO
+                {
+                    EmailAddress = client.EmailAddress,
+                    FirstName = client.FirstName,
+                    IdentityCardNumber = client.IdentityCardNumber,
+                    LastName = client.LastName,
+                    Pesel = client.Pesel,
+                    PhoneNumber = client.PhoneNumber
+                });
+            }
+
+            return clients;
         }
 
         public async Task<ClientDTO> GetClient(int Id)

@@ -30,7 +30,7 @@ namespace CarWorkshop.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<Client> GetAllClients()
+        public  IEnumerable<Client> GetAllClients()
         {
             return clients.AsEnumerable();
         }

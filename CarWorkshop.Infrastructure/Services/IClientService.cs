@@ -12,6 +12,6 @@ namespace CarWorkshop.Infrastructure.Services
 
         Task<ClientDTO> GetClient(string email);
 
-        ClientDTO GetAllClients();
+        List<ClientDTO> GetAllClients();
     }
 }

@@ -37,7 +37,7 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public async Task<Client> GetClientByEmail(string email)
         {
-            return await clients.SingleAsync(c => c.EmailAddress == email);
+            return await clients.SingleAsync(c => c.EmailAddress.Contains(email));
         }
 
         public void RemoveClient(int clientId)

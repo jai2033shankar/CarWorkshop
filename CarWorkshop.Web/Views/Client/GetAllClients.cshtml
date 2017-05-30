@@ -3,10 +3,28 @@
     ViewData["Title"] = "Test Client Page";
 }
 
-@foreach(var test in Model)
-{
-    <br />
-    @Html.DisplayFor(item => test.FirstName)
-<br />
-    @Html.DisplayFor(item => test.EmailAddress)
-}
+<div class="container">
+    <h1>Clients</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var client in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(item => client.FirstName)</td>
+                    <td>@Html.DisplayFor(item => client.LastName)</td>
+                    <td>@Html.DisplayFor(item => client.EmailAddress)</td>
+                    <td>@Html.DisplayFor(item => client.PhoneNumber)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

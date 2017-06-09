@@ -12,6 +12,7 @@ using CarWorkshop.Infrastructure.Repositories;
 using CarWorkshop.Core.Repositories;
 using CarWorkshop.Infrastructure.Services;
 using CarWorkshop.Core.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace CarWorkshop.Web
 {
@@ -61,7 +62,16 @@ namespace CarWorkshop.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = "CookieAuthMiddleware",
+                LoginPath = new PathString(Configuration["Authentication:LoginPath"]),
+                AccessDeniedPath = new PathString(Configuration["Authentication:AccessDeniedPath"]),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
 
             app.UseMvc(routes =>
             {

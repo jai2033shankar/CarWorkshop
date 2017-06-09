@@ -63,7 +63,7 @@ namespace CarWorkshop.Web
             }
 
             //app.UseStaticFiles();
-
+            // Obsolete
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                 AuthenticationScheme = "CookieAuthMiddleware",

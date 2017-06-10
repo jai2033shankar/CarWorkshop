@@ -41,6 +41,11 @@ namespace CarWorkshop.Web
             // Add framework services.
             services.AddMvc();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("TestPolicy", policy => policy.RequireRole("TestRole"));
+            });
+
             services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
 
@@ -63,7 +68,6 @@ namespace CarWorkshop.Web
             }
 
             //app.UseStaticFiles();
-            // Obsolete
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                 AuthenticationScheme = "CookieAuthMiddleware",

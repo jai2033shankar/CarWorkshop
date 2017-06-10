@@ -30,6 +30,23 @@ namespace CarWorkshop.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LogIn(LogInViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                return View(model);
+
+            }
+            return View();
+        }
+
         public async Task<IActionResult> Unauthorized()
         {
             return View();

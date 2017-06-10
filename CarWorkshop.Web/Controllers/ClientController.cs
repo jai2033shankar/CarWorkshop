@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using CarWorkshop.Infrastructure.Services;
 using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarWorkshop.Web.Controllers
 {
@@ -41,6 +42,7 @@ namespace CarWorkshop.Web.Controllers
             return View();
         }
 
+        [Authorize(Policy = "TestPolicy")]
         [HttpGet]
         public IActionResult GetAllClients()
         {

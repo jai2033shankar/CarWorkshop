@@ -16,10 +16,10 @@ namespace CarWorkshop.Core.Models
         public virtual DbSet<Repair> Repair { get; set; }
         public virtual DbSet<Salary> Salary { get; set; }
 
-        public CarWorkshopContext(DbContextOptions<CarWorkshopContext> options)
-            :base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-FQTL9LU;Database=CarWorkshop;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -103,12 +103,19 @@ namespace CarWorkshop.Core.Models
                     .IsRequired()
                     .HasMaxLength(64);
 
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnType("char(64)")
+                    .HasDefaultValueSql("''");
+
                 entity.Property(e => e.Pesel)
                     .IsRequired()
                     .HasColumnName("PESEL")
                     .HasColumnType("varchar(11)");
 
                 entity.Property(e => e.PhoneNumber).HasColumnType("varchar(11)");
+
+                entity.Property(e => e.UserRole).HasColumnType("varchar(32)");
             });
 
             modelBuilder.Entity<Discount>(entity =>

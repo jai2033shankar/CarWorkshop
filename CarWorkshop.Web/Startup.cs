@@ -43,7 +43,7 @@ namespace CarWorkshop.Web
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("TestPolicy", policy => policy.RequireRole("TestRole"));
+                options.AddPolicy("TestPolicy", policy => policy.RequireRole("Client"));
             });
 
             services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
@@ -67,7 +67,7 @@ namespace CarWorkshop.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
                 AuthenticationScheme = "CookieAuthMiddleware",

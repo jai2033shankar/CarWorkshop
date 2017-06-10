@@ -31,7 +31,9 @@ namespace CarWorkshop.Infrastructure.Services
                     IdentityCardNumber = client.IdentityCardNumber,
                     LastName = client.LastName,
                     Pesel = client.Pesel,
-                    PhoneNumber = client.PhoneNumber
+                    PhoneNumber = client.PhoneNumber,
+                    UserRole = client.UserRole,
+                    Password = client.Password
                 });
             }
 
@@ -49,7 +51,9 @@ namespace CarWorkshop.Infrastructure.Services
                 IdentityCardNumber = client.IdentityCardNumber,
                 LastName = client.LastName,
                 Pesel = client.Pesel,
-                PhoneNumber = client.PhoneNumber
+                PhoneNumber = client.PhoneNumber,
+                UserRole = client.UserRole,
+                Password = client.Password
             };
         }
 
@@ -64,8 +68,30 @@ namespace CarWorkshop.Infrastructure.Services
                 IdentityCardNumber = client.IdentityCardNumber,
                 LastName = client.LastName,
                 Pesel = client.Pesel,
-                PhoneNumber = client.PhoneNumber
+                PhoneNumber = client.PhoneNumber,
+                UserRole = client.UserRole,
+                Password = client.Password
             };
+        }
+
+        public async Task<Boolean> AddClient(ClientDTO client)
+        {
+
+            var Newclient = new Client
+            {
+                EmailAddress = client.EmailAddress,
+                FirstName = client.FirstName,
+                LastName = client.LastName,
+                IdentityCardNumber = client.IdentityCardNumber,
+                Pesel = client.Pesel,
+                PhoneNumber = client.PhoneNumber,
+                UserRole = "Client",
+                Password = client.Password
+            };
+
+            _clientRepository.AddClient(Newclient);
+
+            return true;
         }
     }
 }

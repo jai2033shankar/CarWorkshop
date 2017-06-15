@@ -1,6 +1,6 @@
-#CarWorkshop
+# CarWorkshop
 
-##About:
+## About:
 CarWorkshop is a simple application, still in development, created because I 
 want to learn how to create web applications. In it's finished state it should 
 simulate management system for small car workshop. Clients should be able to 

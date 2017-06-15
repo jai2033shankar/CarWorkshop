@@ -22,6 +22,13 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpGet]
+        public IActionResult Index()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Register()
         {
             return View();
@@ -55,7 +62,7 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LogIn()
+        public IActionResult LogIn()
         {
             return View();
         }
@@ -65,9 +72,7 @@ namespace CarWorkshop.Web.Controllers
         {
             if(ModelState.IsValid)
             {
-
-
-                var user = await _clientService.GetClient(model.EmailAddress);
+                ClientDTO user = await _clientService.GetClient(model.EmailAddress);
 
                 var claims = new[]
                 {
@@ -80,11 +85,11 @@ namespace CarWorkshop.Web.Controllers
 
                 await HttpContext.Authentication.SignInAsync("CookieAuthMiddleware", principal);
 
-                var testAccount = new AccountModel(user.EmailAddress, true);
 
-                return View("Index");
-
+                return RedirectToAction("Index");
             }
+
+            // Something failed.
             return View();
         }
 
@@ -92,15 +97,15 @@ namespace CarWorkshop.Web.Controllers
         {
             await HttpContext.Authentication.SignOutAsync("CookieAuthMiddleware");
 
-            return View("Index");
+            return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> Unauthorized()
+        public IActionResult Unauthorized()
         {
             return View();
         }
 
-        public async Task<IActionResult> Forbidden()
+        public IActionResult Forbidden()
         {
             return View();
         }

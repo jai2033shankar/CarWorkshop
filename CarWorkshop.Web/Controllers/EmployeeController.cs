@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CarWorkshop.Web.Controllers
 {
+    [Authorize(Policy = "TestPolicy")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeService;

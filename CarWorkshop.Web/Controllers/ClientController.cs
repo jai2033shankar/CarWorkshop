@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CarWorkshop.Web.Controllers
 {
+    [Authorize(Policy = "TestPolicy")]
     public class ClientController : Controller
     {
         private readonly IClientService _clientService;
@@ -42,7 +43,6 @@ namespace CarWorkshop.Web.Controllers
             return View();
         }
 
-        [Authorize(Policy = "TestPolicy")]
         [HttpGet]
         public IActionResult GetAllClients()
         {

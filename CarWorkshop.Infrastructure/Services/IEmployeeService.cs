@@ -8,5 +8,6 @@ namespace CarWorkshop.Infrastructure.Services
     public interface IEmployeeService
     {
         EmployeeDTO GetEmployeeById(int Id);
+        IEnumerable<EmployeeDTO> GetAllEmployees();
     }
 }

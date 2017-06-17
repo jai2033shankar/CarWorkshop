@@ -43,7 +43,7 @@ namespace CarWorkshop.Web
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("TestPolicy", policy => policy.RequireRole("Client"));
+                options.AddPolicy("TestPolicy", policy => policy.RequireRole("Admin"));
             });
 
             services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));

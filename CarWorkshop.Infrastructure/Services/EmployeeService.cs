@@ -16,6 +16,29 @@ namespace CarWorkshop.Infrastructure.Services
             _employeeRepository = employeeRepository;
         }
 
+        public IEnumerable<EmployeeDTO> GetAllEmployees()
+        {
+            var employees = new List<EmployeeDTO>();
+
+            foreach(var employee in _employeeRepository.GetAllEmployees())
+            {
+                employees.Add(new EmployeeDTO
+                {
+                    EmailAddress = employee.EmailAddress,
+                    EmploymentDate = employee.EmploymentDate,
+                    FirstName = employee.FirstName,
+                    IdentityCardNumber = employee.IdentityCardNumber,
+                    LastName = employee.LastName,
+                    Pesel = employee.Pesel,
+                    PhoneNumber = employee.PhoneNumber,
+                    Position = _employeeRepository.GetPosition(employee),
+                    Salary = _employeeRepository.GetSalary(employee)
+                });
+            }
+
+            return employees;
+        }
+
         public EmployeeDTO GetEmployeeById(int Id)
         {
             Employee employee = _employeeRepository.GetEmployeeById(Id);

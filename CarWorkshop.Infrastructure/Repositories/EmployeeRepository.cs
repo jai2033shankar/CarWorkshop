@@ -12,15 +12,15 @@ namespace CarWorkshop.Infrastructure.Repositories
     {
         private readonly CarWorkshopContext _context;
         private DbSet<Employee> employees;
-        private DbSet<Salary> salaries;
-        private DbSet<Position> positions;
+        private readonly List<Salary> salaries;
+        private readonly List<Position> positions;
 
         public EmployeeRepository(CarWorkshopContext context)
         {
             _context = context;
             employees = _context.Set<Employee>();
-            salaries = _context.Set<Salary>();
-            positions = _context.Set<Position>();
+            salaries = _context.Set<Salary>().ToList();
+            positions = _context.Set<Position>().ToList();
         }
 
         public void AddEmployee(Employee employee)
@@ -49,16 +49,15 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public Decimal GetSalary(Employee employee)
         {
-            Salary salary = salaries.Single(s => s.SalaryId == employee.Salary);
+            var salary = salaries.Single(s => s.SalaryId == employee.Salary).Salary1;
 
-            return salary.Salary1;
+            return salary;
         }
 
         public string GetPosition(Employee employee)
         {
-            Position position = positions.Single(p => p.PositionId == employee.Position);
-
-            return position.Description;
+            var position = positions.Single(p => p.PositionId == employee.Position).Description;
+            return position;
         }
 
         public void RemoveEmployee(int Id)

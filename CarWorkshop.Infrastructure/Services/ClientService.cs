@@ -5,6 +5,7 @@ using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Core.Repositories;
 using CarWorkshop.Core.Models;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace CarWorkshop.Infrastructure.Services
 {
@@ -12,10 +13,12 @@ namespace CarWorkshop.Infrastructure.Services
     {
 
         private readonly IClientRepository  _clientRepository;
+        private readonly IMapper _mapper;
 
-        public ClientService(IClientRepository clientRepository)
+        public ClientService(IClientRepository clientRepository, IMapper mapper)
         {
             _clientRepository = clientRepository;
+            _mapper = mapper;
         }
 
         public List<ClientDTO> GetAllClients()
@@ -24,17 +27,7 @@ namespace CarWorkshop.Infrastructure.Services
 
             foreach (var client in _clientRepository.GetAllClients())
             {
-                clients.Add(new ClientDTO
-                {
-                    EmailAddress = client.EmailAddress,
-                    FirstName = client.FirstName,
-                    IdentityCardNumber = client.IdentityCardNumber,
-                    LastName = client.LastName,
-                    Pesel = client.Pesel,
-                    PhoneNumber = client.PhoneNumber,
-                    UserRole = client.UserRole,
-                    Password = client.Password
-                });
+                clients.Add(_mapper.Map<Client, ClientDTO>(client));
             }
 
             return clients;
@@ -44,50 +37,20 @@ namespace CarWorkshop.Infrastructure.Services
         {
             Client client = await _clientRepository.GetClientById(Id);
 
-            return new ClientDTO
-            {
-                EmailAddress = client.EmailAddress,
-                FirstName = client.FirstName,
-                IdentityCardNumber = client.IdentityCardNumber,
-                LastName = client.LastName,
-                Pesel = client.Pesel,
-                PhoneNumber = client.PhoneNumber,
-                UserRole = client.UserRole,
-                Password = client.Password
-            };
+            return _mapper.Map<Client, ClientDTO>(client);
         }
 
         public async Task<ClientDTO> GetClient(string email)
         {
             Client client = await _clientRepository.GetClientByEmail(email);
 
-            return new ClientDTO
-            {
-                EmailAddress = client.EmailAddress,
-                FirstName = client.FirstName,
-                IdentityCardNumber = client.IdentityCardNumber,
-                LastName = client.LastName,
-                Pesel = client.Pesel,
-                PhoneNumber = client.PhoneNumber,
-                UserRole = client.UserRole,
-                Password = client.Password
-            };
+            return _mapper.Map<Client, ClientDTO>(client);
         }
 
         public async Task<Boolean> AddClient(ClientDTO client)
         {
-
-            var Newclient = new Client
-            {
-                EmailAddress = client.EmailAddress,
-                FirstName = client.FirstName,
-                LastName = client.LastName,
-                IdentityCardNumber = client.IdentityCardNumber,
-                Pesel = client.Pesel,
-                PhoneNumber = client.PhoneNumber,
-                UserRole = "Client",
-                Password = client.Password
-            };
+            var Newclient = _mapper.Map<ClientDTO, Client>(client);
+            Newclient.UserRole = "Client";
 
             _clientRepository.AddClient(Newclient);
 

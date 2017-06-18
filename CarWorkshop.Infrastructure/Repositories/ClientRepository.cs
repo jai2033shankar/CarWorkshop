@@ -13,11 +13,17 @@ namespace CarWorkshop.Infrastructure.Repositories
     {
         private readonly CarWorkshopContext _context;
         private DbSet<Client> clients;
+        private DbSet<Car> cars;
+        private List<CarBrand> carBrand;
+        private List<CarModel> carModel;
 
         public ClientRepository(CarWorkshopContext context)
         {
             _context = context;
             clients = _context.Set<Client>();
+            cars = _context.Set<Car>();
+            carBrand = _context.Set<CarBrand>().ToList();
+            carModel = _context.Set<CarModel>().ToList();
         }
 
         public void AddClient(Client client)
@@ -35,9 +41,23 @@ namespace CarWorkshop.Infrastructure.Repositories
             return clients.AsEnumerable();
         }
 
+        private List<Car> GetCars(Client client)
+        {
+            var clientCars = cars.Where(c => c.ClientId == client.ClientId).ToList();
+            foreach (var car in clientCars)
+            {
+                car.Brand = carBrand.Single(b => b.BrandId == car.BrandId);
+                car.Model = carModel.Single(m => m.ModelId == car.ModelId);
+            }
+            return clientCars;
+        
+        }
+
         public async Task<Client> GetClientByEmail(string email)
         {
-            return await clients.SingleAsync(c => c.EmailAddress.Contains(email));
+            var client = await clients.SingleAsync(c => c.EmailAddress.Contains(email));
+            client.Car = GetCars(client);
+            return client;
         }
 
         public void RemoveClient(int clientId)
@@ -56,7 +76,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         }
 
         public async Task<Client> GetClientById(int Id)
-        {
+        { 
             return await clients.SingleAsync(c => c.ClientId == Id);
         }
     }

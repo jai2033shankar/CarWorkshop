@@ -37,7 +37,6 @@ namespace CarWorkshop.Web.Controllers
         if (clientSearch.Id > 0)
         {
             return View(await _clientService.GetClient(clientSearch.Id));
-
         }
 
             return View();

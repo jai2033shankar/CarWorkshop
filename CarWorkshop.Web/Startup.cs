@@ -13,6 +13,7 @@ using CarWorkshop.Core.Repositories;
 using CarWorkshop.Infrastructure.Services;
 using CarWorkshop.Core.Models;
 using Microsoft.AspNetCore.Http;
+using CarWorkshop.Infrastructure.AutoMapper;
 
 namespace CarWorkshop.Web
 {
@@ -38,6 +39,8 @@ namespace CarWorkshop.Web
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+
+            services.AddSingleton(AutoMapperConfig.Configure());
             // Add framework services.
             services.AddMvc();
 

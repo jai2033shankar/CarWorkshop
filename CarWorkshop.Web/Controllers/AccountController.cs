@@ -54,7 +54,7 @@ namespace CarWorkshop.Web.Controllers
 
                 await _clientService.AddClient(client);
 
-                return View(model);
+                return RedirectToAction("Index");
             }
 
             // If we got this far something failed. Redisplay form.

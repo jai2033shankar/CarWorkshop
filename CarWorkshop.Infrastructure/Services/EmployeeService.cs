@@ -4,16 +4,19 @@ using System.Text;
 using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Core.Repositories;
 using CarWorkshop.Core.Models;
+using AutoMapper;
 
 namespace CarWorkshop.Infrastructure.Services
 {
     public class EmployeeService : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IMapper _mapper;
 
-        public EmployeeService(IEmployeeRepository employeeRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper)
         {
             _employeeRepository = employeeRepository;
+            _mapper = mapper;
         }
 
         public IEnumerable<EmployeeDTO> GetAllEmployees()
@@ -22,18 +25,7 @@ namespace CarWorkshop.Infrastructure.Services
 
             foreach(var employee in _employeeRepository.GetAllEmployees())
             {
-                employees.Add(new EmployeeDTO
-                {
-                    EmailAddress = employee.EmailAddress,
-                    EmploymentDate = employee.EmploymentDate,
-                    FirstName = employee.FirstName,
-                    IdentityCardNumber = employee.IdentityCardNumber,
-                    LastName = employee.LastName,
-                    Pesel = employee.Pesel,
-                    PhoneNumber = employee.PhoneNumber,
-                    Position = _employeeRepository.GetPosition(employee),
-                    Salary = _employeeRepository.GetSalary(employee)
-                });
+                employees.Add(_mapper.Map<Employee, EmployeeDTO>(employee));
             }
 
             return employees;
@@ -43,18 +35,7 @@ namespace CarWorkshop.Infrastructure.Services
         {
             Employee employee = _employeeRepository.GetEmployeeById(Id);
 
-            return new EmployeeDTO
-            {
-                EmailAddress = employee.EmailAddress,
-                EmploymentDate = employee.EmploymentDate,
-                FirstName = employee.FirstName,
-                IdentityCardNumber = employee.IdentityCardNumber,
-                LastName = employee.LastName,
-                Pesel = employee.Pesel,
-                PhoneNumber = employee.PhoneNumber,
-                Position = _employeeRepository.GetPosition(employee),
-                Salary = _employeeRepository.GetSalary(employee)
-            };
+            return _mapper.Map<Employee, EmployeeDTO>(employee);
         }
     }
 }

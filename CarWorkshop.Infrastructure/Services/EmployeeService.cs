@@ -25,7 +25,7 @@ namespace CarWorkshop.Infrastructure.Services
 
             foreach(var employee in _employeeRepository.GetAllEmployees())
             {
-                employees.Add(_mapper.Map<Employee, EmployeeDTO>(employee));
+                employees.Add(_mapper.Map<Employee, EmployeeDTO>(employee)); 
             }
 
             return employees;

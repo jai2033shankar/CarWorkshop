@@ -13,8 +13,12 @@ namespace CarWorkshop.Infrastructure.AutoMapper
         => new MapperConfiguration(cfg =>
            {
                cfg.CreateMap<Client, ClientDTO>();
-               cfg.CreateMap<Employee, EmployeeDTO>();
                cfg.CreateMap<ClientDTO, Client>();
+               cfg.CreateMap<Employee, EmployeeDTO>()
+                    .ForMember(dest => dest.Salary, opt => opt.MapFrom(src => src.SalaryNavigation))
+                    .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.PositionNavigation.Description));
+               cfg.CreateMap<Salary, SalaryDTO>()
+                .ForMember(dest => dest.Salary, opt => opt.MapFrom(src => src.Salary1));
            }).CreateMapper();
         
     }

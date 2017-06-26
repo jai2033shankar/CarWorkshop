@@ -9,5 +9,6 @@ namespace CarWorkshop.Infrastructure.Services
     {
         EmployeeDTO GetEmployeeById(int Id);
         IEnumerable<EmployeeDTO> GetAllEmployees();
+        void AddEmployee(EmployeeDTO employee);
     }
 }

@@ -39,7 +39,7 @@ namespace CarWorkshop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                // Change to automapper later.
                 ClientDTO client = new ClientDTO
                 {
                     EmailAddress = model.EmailAddress,

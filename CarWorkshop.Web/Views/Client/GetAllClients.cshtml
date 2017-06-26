@@ -12,6 +12,8 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
+                <th>Car</th>
+                <th>Reg No.</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +24,8 @@
                     <td>@Html.DisplayFor(item => client.LastName)</td>
                     <td>@Html.DisplayFor(item => client.EmailAddress)</td>
                     <td>@Html.DisplayFor(item => client.PhoneNumber)</td>
+                    <td>@Html.DisplayFor(item => client.Cars.SingleOrDefault().Model)</td>
+                    <td>@Html.DisplayFor(item => client.Cars.SingleOrDefault().RegistratrionNumber)</td>
                 </tr>
             }
         </tbody>

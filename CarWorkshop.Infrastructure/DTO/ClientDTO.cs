@@ -15,5 +15,7 @@ namespace CarWorkshop.Infrastructure.DTO
         public string UserRole { get; set; }
         public string Password { get; set; }
 
+        public List<CarDTO> Cars { get; set; }
+
     }
 }

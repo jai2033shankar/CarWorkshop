@@ -30,5 +30,24 @@ namespace CarWorkshop.Web.Controllers
         {
             return View(_employeeService.GetAllEmployees());
         }
+
+        [HttpGet]
+        public IActionResult AddEmployee()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddEmployee(EmployeeDTO employee)
+        {
+            if (ModelState.IsValid)
+            {
+                _employeeService.AddEmployee(employee);
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
     }
 }

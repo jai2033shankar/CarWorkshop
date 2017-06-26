@@ -37,5 +37,11 @@ namespace CarWorkshop.Infrastructure.Services
 
             return _mapper.Map<Employee, EmployeeDTO>(employee);
         }
+
+        public void AddEmployee(EmployeeDTO employee)
+        {
+            Employee emp = _mapper.Map<EmployeeDTO, Employee>(employee);
+            _employeeRepository.AddEmployee(emp);
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace CarWorkshop.Infrastructure.Repositories
     {
         private readonly CarWorkshopContext _context;
         private DbSet<Client> clients;
-        private DbSet<Car> cars;
+        private List<Car> cars;
         private List<CarBrand> carBrand;
         private List<CarModel> carModel;
 
@@ -21,7 +21,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         {
             _context = context;
             clients = _context.Set<Client>();
-            cars = _context.Set<Car>();
+            cars = _context.Set<Car>().ToList();
             carBrand = _context.Set<CarBrand>().ToList();
             carModel = _context.Set<CarModel>().ToList();
         }

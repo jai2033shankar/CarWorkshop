@@ -43,5 +43,15 @@ namespace CarWorkshop.Infrastructure.Services
             Employee emp = _mapper.Map<EmployeeDTO, Employee>(employee);
             _employeeRepository.AddEmployee(emp);
         }
+        // temp solution
+        public List<Salary> GetSalaries()
+        {
+            return _employeeRepository.GetSalaries();
+        }
+
+        public List<Position> GetPositions()
+        {
+            return _employeeRepository.GetPositions();
+        }
     }
 }

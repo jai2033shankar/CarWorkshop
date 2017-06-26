@@ -1,4 +1,4 @@
-﻿@model CarWorkshop.Infrastructure.DTO.EmployeeDTO
+﻿@model CarWorkshop.Web.Models.AddEmployeeViewModel
 
 <form method="post" asp-controller="Employee" asp-action="AddEmployee">
     <div>
@@ -35,6 +35,16 @@
         <label asp-for="EmailAddress">Email Address</label>
         <input asp-for="EmailAddress" />
         <span asp-validation-for="EmailAddress"></span>
+    </div>
+
+    <div>
+        <label asp-for="Salary">Salary</label>
+        <select asp-for="Salary" asp-items="@Model.Salaries"></select>
+    </div>
+
+    <div>
+        <label asp-for="Position">Position</label>
+        <select asp-for="Position" asp-items="@Model.Positions"></select>
     </div>
 
     <div>

@@ -47,6 +47,16 @@ namespace CarWorkshop.Infrastructure.Repositories
         public Employee GetEmployeeById(int Id)
             => employees.Single(e => e.EmployeeId == Id);
 
+        public List<Position> GetPositions()
+        {
+            return positions;
+        }
+
+        public List<Salary> GetSalaries()
+        {
+            return salaries;
+        }
+
         public void RemoveEmployee(int Id)
         {
             throw new NotImplementedException();

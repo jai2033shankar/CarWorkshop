@@ -19,5 +19,8 @@ namespace CarWorkshop.Core.Repositories
 
         void UpdateEmployee(Employee employee);
 
+        List<Salary> GetSalaries();
+        List<Position> GetPositions();
+
     }
 }

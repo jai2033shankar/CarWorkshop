@@ -7,6 +7,7 @@ using CarWorkshop.Infrastructure.Services;
 using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CarWorkshop.Web.Controllers
 {
@@ -34,15 +35,21 @@ namespace CarWorkshop.Web.Controllers
         [HttpGet]
         public IActionResult AddEmployee()
         {
-            return View();
+            var salaries = _employeeService.GetSalaries().OrderBy(v => v.Salary1).Select(x => new { Id = x.SalaryId, Salary = x.Salary1 });
+            var positions = _employeeService.GetPositions().Select(x => new { Id = x.PositionId, Position = x.Description });
+            var model = new AddEmployeeViewModel();
+            model.Salaries = new SelectList(salaries, "Id", "Salary");
+            model.Positions = new SelectList(positions, "Id", "Position");
+           
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult AddEmployee(EmployeeDTO employee)
+        public IActionResult AddEmployee(AddEmployeeViewModel employee)
         {
             if (ModelState.IsValid)
             {
-                _employeeService.AddEmployee(employee);
+                //_employeeService.AddEmployee(employee);
 
                 return RedirectToAction("Index");
             }

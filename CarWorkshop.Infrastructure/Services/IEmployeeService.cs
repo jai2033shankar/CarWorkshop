@@ -10,7 +10,7 @@ namespace CarWorkshop.Infrastructure.Services
     {
         EmployeeDTO GetEmployeeById(int Id);
         IEnumerable<EmployeeDTO> GetAllEmployees();
-        void AddEmployee(EmployeeDTO employee);
+        void AddEmployee(Employee employee);
         List<Salary> GetSalaries();
         List<Position> GetPositions();
     }

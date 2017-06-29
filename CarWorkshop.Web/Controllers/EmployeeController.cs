@@ -8,6 +8,7 @@ using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using CarWorkshop.Core.Models;
 
 namespace CarWorkshop.Web.Controllers
 {
@@ -49,11 +50,27 @@ namespace CarWorkshop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //_employeeService.AddEmployee(employee);
+                // Dirty way - change later
+                var emp = new Employee { 
+                    EmailAddress = employee.EmailAddress,
+                    EmploymentDate = DateTime.UtcNow,
+                    Position = employee.Position,
+                    Salary = employee.Salary,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    IdentityCardNumber = employee.IdentityCardNumber,
+                    Pesel = employee.PESEL,
+                    PhoneNumber = employee.PhoneNumber
+                };
+                
+                _employeeService.AddEmployee(emp);
 
+
+                // Change later to some nice screen that says stuff went well
                 return RedirectToAction("Index");
             }
 
+            // Redisplay from something failed.
             return View();
         }
     }

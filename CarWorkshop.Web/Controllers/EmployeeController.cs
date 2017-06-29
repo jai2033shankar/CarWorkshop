@@ -38,9 +38,9 @@ namespace CarWorkshop.Web.Controllers
         public async Task<IActionResult> AddEmployee()
         {
             var salaries = await _employeeService.GetSalaries();
-            //salaries.OrderBy(v => v.Salary1).Select(x => new { Id = x.SalaryId, Salary = x.Salary1 });
+
             var positions = await _employeeService.GetPositions();
-            //positions.Select(x => new { Id = x.PositionId, Position = x.Description });
+            
             var model = new AddEmployeeViewModel();
             model.Salaries = new SelectList(
                                     salaries.OrderBy(v => v.Salary1)

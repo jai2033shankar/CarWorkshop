@@ -21,7 +21,7 @@ namespace CarWorkshop.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public List<ClientDTO> GetAllClients()
+        public async Task<List<ClientDTO>> GetAllClients()
         {
             List<ClientDTO> clients = new List<ClientDTO>();
 

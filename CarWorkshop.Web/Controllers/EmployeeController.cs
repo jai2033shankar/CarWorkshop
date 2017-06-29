@@ -28,9 +28,10 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllEmployees()
+        public async Task<IActionResult> GetAllEmployees()
         {
-            return View(_employeeService.GetAllEmployees());
+
+            return View(await _employeeService.GetAllEmployees());
         }
 
         [HttpGet]

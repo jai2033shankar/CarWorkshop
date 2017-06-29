@@ -5,6 +5,7 @@ using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Core.Repositories;
 using CarWorkshop.Core.Models;
 using AutoMapper;
+using System.Threading.Tasks;
 
 namespace CarWorkshop.Infrastructure.Services
 {
@@ -19,7 +20,7 @@ namespace CarWorkshop.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<EmployeeDTO> GetAllEmployees()
+        public async Task<IEnumerable<EmployeeDTO>> GetAllEmployees()
         {
             var employees = new List<EmployeeDTO>();
 
@@ -31,25 +32,26 @@ namespace CarWorkshop.Infrastructure.Services
             return employees;
         }
 
-        public EmployeeDTO GetEmployeeById(int Id)
+        public async Task<EmployeeDTO> GetEmployeeById(int Id)
         {
             Employee employee = _employeeRepository.GetEmployeeById(Id);
 
             return _mapper.Map<Employee, EmployeeDTO>(employee);
         }
 
-        public void AddEmployee(Employee employee)
+        public async Task<Boolean> AddEmployee(Employee employee)
         {
-            //Employee emp = _mapper.Map<EmployeeDTO, Employee>(employee);
             _employeeRepository.AddEmployee(employee);
+
+            return true;
         }
-        // temp solution
-        public List<Salary> GetSalaries()
+       
+        public async Task<List<Salary>> GetSalaries()
         {
             return _employeeRepository.GetSalaries();
         }
 
-        public List<Position> GetPositions()
+        public async Task<List<Position>> GetPositions()
         {
             return _employeeRepository.GetPositions();
         }

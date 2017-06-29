@@ -34,13 +34,21 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddEmployee()
+        public async Task<IActionResult> AddEmployee()
         {
-            var salaries = _employeeService.GetSalaries().OrderBy(v => v.Salary1).Select(x => new { Id = x.SalaryId, Salary = x.Salary1 });
-            var positions = _employeeService.GetPositions().Select(x => new { Id = x.PositionId, Position = x.Description });
+            var salaries = await _employeeService.GetSalaries();
+            //salaries.OrderBy(v => v.Salary1).Select(x => new { Id = x.SalaryId, Salary = x.Salary1 });
+            var positions = await _employeeService.GetPositions();
+            //positions.Select(x => new { Id = x.PositionId, Position = x.Description });
             var model = new AddEmployeeViewModel();
-            model.Salaries = new SelectList(salaries, "Id", "Salary");
-            model.Positions = new SelectList(positions, "Id", "Position");
+            model.Salaries = new SelectList(
+                                    salaries.OrderBy(v => v.Salary1)
+                                            .Select(x => new { Id = x.SalaryId, Salary = x.Salary1 })
+                                            , "Id", "Salary");
+
+            model.Positions = new SelectList(
+                                    positions.Select(x => new { Id = x.PositionId, Position = x.Description })
+                                             , "Id", "Position");
            
             return View(model);
         }

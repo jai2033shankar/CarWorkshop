@@ -22,9 +22,7 @@ namespace CarWorkshop.Tests.Services
             var MapperMock = new Mock<IMapper>();
             var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
 
-            string email = "sajmon265@gmail.com";
-
-            await ClientService.GetClient(email);
+            await ClientService.GetClient(It.IsAny<string>());
             ClientRepositoryMock.Verify(x => x.GetClientByEmail(It.IsAny<string>()), Times.Once);
         }
 
@@ -36,9 +34,7 @@ namespace CarWorkshop.Tests.Services
 
             var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
 
-            int Id = 2;
-
-            await ClientService.GetClient(Id);
+            await ClientService.GetClient(It.IsAny<int>());
             ClientRepositoryMock.Verify(x => x.GetClientById(It.IsAny<int>()), Times.Once);
         }
 

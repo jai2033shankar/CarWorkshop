@@ -47,14 +47,21 @@ namespace CarWorkshop.Infrastructure.Services
             return _mapper.Map<Client, ClientDTO>(client);
         }
 
-        public async Task<Boolean> AddClient(ClientDTO client)
+        public async Task AddClient(ClientDTO client)
         {
             var Newclient = _mapper.Map<ClientDTO, Client>(client);
             Newclient.UserRole = "Client";
 
             _clientRepository.AddClient(Newclient);
+        }
 
-            return true;
+        public async Task UpdateClient(ClientDTO client)
+        {
+            Client clientToUpdate = await _clientRepository.GetClientById(client.ClientId);
+
+            _mapper.Map(client, clientToUpdate);
+
+             _clientRepository.UpdateClient(clientToUpdate);
         }
     }
 }

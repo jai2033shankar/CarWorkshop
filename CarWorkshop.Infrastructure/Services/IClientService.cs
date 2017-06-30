@@ -14,6 +14,8 @@ namespace CarWorkshop.Infrastructure.Services
 
         Task<List<ClientDTO>> GetAllClients();
 
-        Task<Boolean> AddClient(ClientDTO client);
+        Task AddClient(ClientDTO client);
+
+        Task UpdateClient(ClientDTO client);
     }
 }

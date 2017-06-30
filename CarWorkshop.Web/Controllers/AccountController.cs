@@ -139,6 +139,8 @@ namespace CarWorkshop.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Profile(ClientDTO client)
         {
+            await _clientService.UpdateClient(client);
+
             return View("Index");
         }
     }

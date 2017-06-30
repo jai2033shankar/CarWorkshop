@@ -13,11 +13,33 @@
         <input asp-for="LastName" />
         <span asp-validation-for="LastName"></span>
     </div>
+    
+    <div>
+        <label asp-for="IdentityCardNumber">ID number</label>
+        <input asp-for="IdentityCardNumber" />
+        <span asp-validation-for="IdentityCardNumber"></span>
+    </div>
 
     <div>
-        <label asp-for="Password">Password</label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
+        <label asp-for="Pesel">Pesel</label>
+        <input asp-for="Pesel" />
+        <span asp-validation-for="Pesel"></span>
+    </div>
+
+    <div>
+        <label asp-for="PhoneNumber">Phone Number</label>
+        <input asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <div>
+        <label asp-for="EmailAddress">Email Address</label>
+        <input asp-for="EmailAddress" />
+        <span asp-validation-for="EmailAddress"></span>
+    </div>
+
+    <div>
+        @Html.HiddenFor(m => m.ClientId)
     </div>
 
     <div>

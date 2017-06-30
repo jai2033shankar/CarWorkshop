@@ -72,7 +72,8 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public void UpdateClient(Client client)
         {
-            throw new NotImplementedException();
+            _context.Update(client);
+            _context.SaveChanges();
         }
 
         public async Task<Client> GetClientById(int Id)

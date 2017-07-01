@@ -80,5 +80,31 @@ namespace CarWorkshop.Tests.Services
             
         }
 
+        [Fact]
+        public async Task UpdateClient_should_call_GetClientById_and_UpdateClient_on_Repository()
+        {
+            var ClientRepositoryMock = new Mock<IClientRepository>();
+            var MapperMock = new Mock<IMapper>();
+
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
+
+            var client = new ClientDTO
+            {
+                ClientId = 2,
+                EmailAddress = "xxx@xxx.xyz",
+                UserRole = "Client",
+                FirstName = "xxx",
+                LastName = "yyy",
+                IdentityCardNumber = "testNumber",
+                Pesel = "testPesel",
+                Cars = new List<CarDTO>()
+            };
+
+            await ClientService.UpdateClient(client);
+
+            ClientRepositoryMock.Verify(x => x.GetClientById(It.IsAny<int>()), Times.Once);
+            ClientRepositoryMock.Verify(x => x.UpdateClient(It.IsAny<Client>()), Times.Once);
+        }
+
     }
 }

@@ -106,5 +106,19 @@ namespace CarWorkshop.Tests.Services
             ClientRepositoryMock.Verify(x => x.UpdateClient(It.IsAny<Client>()), Times.Once);
         }
 
+        [Fact]
+        public async Task RemoveClient_should_call_RemoveClient_on_repository()
+        {
+            var ClientRepositoryMock = new Mock<IClientRepository>();
+            var MapperMock = new Mock<IMapper>();
+
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
+
+            await ClientService.RemoveClient(It.IsAny<int>());
+
+            ClientRepositoryMock.Verify(x => x.RemoveClient(It.IsAny<int>()), Times.Once);
+
+        }
+
     }
 }

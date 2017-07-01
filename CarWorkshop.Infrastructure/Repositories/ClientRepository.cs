@@ -12,10 +12,10 @@ namespace CarWorkshop.Infrastructure.Repositories
     public class ClientRepository : IClientRepository
     {
         private readonly CarWorkshopContext _context;
-        private DbSet<Client> clients;
-        private List<Car> cars;
-        private List<CarBrand> carBrand;
-        private List<CarModel> carModel;
+        private readonly DbSet<Client> clients;
+        private readonly List<Car> cars;
+        private readonly List<CarBrand> carBrand;
+        private readonly List<CarModel> carModel;
 
         public ClientRepository(CarWorkshopContext context)
         {
@@ -60,9 +60,12 @@ namespace CarWorkshop.Infrastructure.Repositories
             return client;
         }
 
-        public void RemoveClient(int clientId)
+        public async Task RemoveClient(int clientId)
         {
-            throw new NotImplementedException();
+            Client clientToDelete = await clients.SingleAsync(c => c.ClientId == clientId);
+
+            _context.Remove(clientToDelete);
+            _context.SaveChanges();
         }
 
         public void SaveChanges()

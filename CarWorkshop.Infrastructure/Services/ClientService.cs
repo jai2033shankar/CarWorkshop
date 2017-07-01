@@ -66,7 +66,8 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task RemoveClient(int Id)
         {
-           await _clientRepository.RemoveClient(Id);
+            // Add error checking.
+            await _clientRepository.RemoveClient(Id);
         }
     }
 }

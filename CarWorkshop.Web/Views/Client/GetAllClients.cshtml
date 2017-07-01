@@ -14,10 +14,11 @@
                 <th>Phone Number</th>
                 <th>Car</th>
                 <th>Reg No.</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach(var client in Model)
+            @foreach (var client in Model)
             {
                 <tr>
                     <td>@Html.DisplayFor(item => client.FirstName)</td>
@@ -26,6 +27,7 @@
                     <td>@Html.DisplayFor(item => client.PhoneNumber)</td>
                     <td>@Html.DisplayFor(item => client.Cars.SingleOrDefault().Model)</td>
                     <td>@Html.DisplayFor(item => client.Cars.SingleOrDefault().RegistratrionNumber)</td>
+                    <td><input type="submit" value="Delete" onclick="location.href='@Url.Action("DeleteClient", "Client", new {Id = client.ClientId})'" /></td>
                 </tr>
             }
         </tbody>

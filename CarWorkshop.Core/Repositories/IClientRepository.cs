@@ -16,7 +16,7 @@ namespace CarWorkshop.Core.Repositories
 
         void AddClient(Client client);
 
-        void RemoveClient(int clientId);
+        Task RemoveClient(int clientId);
 
         void UpdateClient(Client client);
 

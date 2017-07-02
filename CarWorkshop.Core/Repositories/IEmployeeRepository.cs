@@ -13,15 +13,14 @@ namespace CarWorkshop.Core.Repositories
 
         IEnumerable<Employee> GetAllEmployees();
 
-        Decimal GetSalary(Employee employee);
-
-        string GetPosition(Employee employee);
-
         void AddEmployee(Employee employee);
 
         void RemoveEmployee(int Id);
 
         void UpdateEmployee(Employee employee);
+
+        List<Salary> GetSalaries();
+        List<Position> GetPositions();
 
     }
 }

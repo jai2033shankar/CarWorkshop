@@ -14,6 +14,7 @@
                 <th>Phone Number</th>
                 <th>Position</th>
                 <th>Salary</th>
+                <th>Currency</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +26,8 @@
                     <td>@Html.DisplayFor(item => employee.EmailAddress)</td>
                     <td>@Html.DisplayFor(item => employee.PhoneNumber)</td>
                     <td>@Html.DisplayFor(item => employee.Position)</td>
-                    <td>@Html.DisplayFor(item => employee.Salary)</td>
+                    <td>@Html.DisplayFor(item => employee.Salary.Salary)</td>
+                    <td>@Html.DisplayFor(item => employee.Salary.Currency)</td>
                 </tr>
             }
         </tbody>

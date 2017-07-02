@@ -77,7 +77,9 @@ namespace CarWorkshop.Web
                 LoginPath = new PathString(Configuration["Authentication:LoginPath"]),
                 AccessDeniedPath = new PathString(Configuration["Authentication:AccessDeniedPath"]),
                 AutomaticAuthenticate = true,
-                AutomaticChallenge = true
+                AutomaticChallenge = true,
+                ClaimsIssuer = "http://localhost:5000",
+                ExpireTimeSpan = TimeSpan.FromMinutes(10)
             });
 
             app.UseMvc(routes =>

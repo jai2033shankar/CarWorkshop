@@ -47,17 +47,14 @@ namespace CarWorkshop.Infrastructure.Repositories
         public Employee GetEmployeeById(int Id)
             => employees.Single(e => e.EmployeeId == Id);
 
-        public Decimal GetSalary(Employee employee)
+        public List<Position> GetPositions()
         {
-            var salary = salaries.Single(s => s.SalaryId == employee.Salary).Salary1;
-
-            return salary;
+            return positions;
         }
 
-        public string GetPosition(Employee employee)
+        public List<Salary> GetSalaries()
         {
-            var position = positions.Single(p => p.PositionId == employee.Position).Description;
-            return position;
+            return salaries;
         }
 
         public void RemoveEmployee(int Id)

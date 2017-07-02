@@ -12,8 +12,12 @@ namespace CarWorkshop.Infrastructure.Services
 
         Task<ClientDTO> GetClient(string email);
 
-        List<ClientDTO> GetAllClients();
+        Task<List<ClientDTO>> GetAllClients();
 
-        Task<Boolean> AddClient(ClientDTO client);
+        Task AddClient(ClientDTO client);
+
+        Task UpdateClient(ClientDTO client);
+
+        Task RemoveClient(int Id);
     }
 }

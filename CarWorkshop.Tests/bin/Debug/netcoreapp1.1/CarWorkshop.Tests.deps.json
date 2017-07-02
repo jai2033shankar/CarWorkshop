@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "7a78b17576a48648cf08b887df12ac98574cb8bc"
+    "signature": "85679dc07cdbd22c7ec67d88cbefb9e2923ab260"
   },
   "compilationOptions": {},
   "targets": {
@@ -11,6 +11,7 @@
           "CarWorkshop.Core": "1.0.0",
           "CarWorkshop.Infrastructure": "1.0.0",
           "Microsoft.NET.Test.Sdk": "15.0.0",
+          "Moq": "4.7.63",
           "xunit": "2.2.0",
           "xunit.runner.visualstudio": "2.2.0"
         },
@@ -25,6 +26,17 @@
         },
         "runtime": {
           "lib/netstandard1.3/AutoMapper.dll": {}
+        }
+      },
+      "castle.core/4.1.0": {
+        "dependencies": {
+          "System.Collections.Specialized": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.3.0",
+          "System.Diagnostics.TraceSource": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Castle.Core.dll": {}
         }
       },
       "microsoft.aspnetcore.hosting.abstractions/1.1.1": {
@@ -232,7 +244,7 @@
           "System.ComponentModel.EventBasedAsync": "4.0.11",
           "System.ComponentModel.TypeConverter": "4.3.0",
           "System.Diagnostics.TextWriterTraceListener": "4.0.0",
-          "System.Diagnostics.TraceSource": "4.0.0",
+          "System.Diagnostics.TraceSource": "4.3.0",
           "System.Runtime.Serialization.Json": "4.0.2",
           "System.Runtime.Serialization.Primitives": "4.1.1",
           "System.Xml.XPath.XmlDocument": "4.0.1"
@@ -453,6 +465,14 @@
           }
         }
       },
+      "moq/4.7.63": {
+        "dependencies": {
+          "Castle.Core": "4.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Moq.dll": {}
+        }
+      },
       "newtonsoft.json/9.0.1": {
         "dependencies": {
           "System.Runtime.Serialization.Primitives": "4.1.1"
@@ -546,13 +566,13 @@
       },
       "system.diagnostics.textwritertracelistener/4.0.0": {
         "dependencies": {
-          "System.Diagnostics.TraceSource": "4.0.0"
+          "System.Diagnostics.TraceSource": "4.3.0"
         },
         "runtime": {
           "lib/netstandard1.3/System.Diagnostics.TextWriterTraceListener.dll": {}
         }
       },
-      "system.diagnostics.tracesource/4.0.0": {
+      "system.diagnostics.tracesource/4.3.0": {
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/System.Diagnostics.TraceSource.dll": {
             "rid": "unix",
@@ -589,6 +609,7 @@
       "system.private.datacontractserialization/4.1.1": {
         "dependencies": {
           "System.Runtime.Serialization.Primitives": "4.1.1",
+          "System.Xml.XmlDocument": "4.3.0",
           "System.Xml.XmlSerializer": "4.0.11"
         },
         "runtime": {
@@ -630,12 +651,23 @@
           "lib/netstandard1.0/System.Text.Encodings.Web.dll": {}
         }
       },
+      "system.xml.xmldocument/4.3.0": {
+        "runtime": {
+          "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
+        }
+      },
       "system.xml.xmlserializer/4.0.11": {
+        "dependencies": {
+          "System.Xml.XmlDocument": "4.3.0"
+        },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
       "system.xml.xpath.xmldocument/4.0.1": {
+        "dependencies": {
+          "System.Xml.XmlDocument": "4.3.0"
+        },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
@@ -722,6 +754,13 @@
       "sha512": "sha512-ru/p4rBwLH2CGSdlk0Bj6UZQeFpgIDT3sQNL5EEaVhrAT1qNd4SUEOjSzFRBAZbIgIHhifrZ9MbR5BMWgP1vsQ==",
       "path": "automapper/6.1.0",
       "hashPath": "automapper.6.1.0.nupkg.sha512"
+    },
+    "castle.core/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1cUDbDJtCKE+JPkcz2H8obqkjYuReE1cuINx/ewZQ6nHPO8oEQUtlu2n8kNlBPp22Mm2oC+LOBfkc8rDEVhfQA==",
+      "path": "castle.core/4.1.0",
+      "hashPath": "castle.core.4.1.0.nupkg.sha512"
     },
     "microsoft.aspnetcore.hosting.abstractions/1.1.1": {
       "type": "package",
@@ -905,6 +944,13 @@
       "path": "microsoft.testplatform.testhost/15.0.0",
       "hashPath": "microsoft.testplatform.testhost.15.0.0.nupkg.sha512"
     },
+    "moq/4.7.63": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qrG1/S+cGL/0rk579i0hR//N7YIAMeUSHLFacJ/zNaK/Ussl+KfRfW2ZeztvWthjXSJ8M6oH55FkLHPXoSdikg==",
+      "path": "moq/4.7.63",
+      "hashPath": "moq.4.7.63.nupkg.sha512"
+    },
     "newtonsoft.json/9.0.1": {
       "type": "package",
       "serviceable": true,
@@ -996,12 +1042,12 @@
       "path": "system.diagnostics.textwritertracelistener/4.0.0",
       "hashPath": "system.diagnostics.textwritertracelistener.4.0.0.nupkg.sha512"
     },
-    "system.diagnostics.tracesource/4.0.0": {
+    "system.diagnostics.tracesource/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6WVCczFZKXwpWpzd/iJkYnsmWTSFFiU24Xx/YdHXBcu+nFI/ehTgeqdJQFbtRPzbrO3KtRNjvkhtj4t5/WwWsA==",
-      "path": "system.diagnostics.tracesource/4.0.0",
-      "hashPath": "system.diagnostics.tracesource.4.0.0.nupkg.sha512"
+      "sha512": "sha512-VnYp1NxGx8Ww731y2LJ1vpfb/DKVNKEZ8Jsh5SgQTZREL/YpWRArgh9pI8CDLmgHspZmLL697CaLvH85qQpRiw==",
+      "path": "system.diagnostics.tracesource/4.3.0",
+      "hashPath": "system.diagnostics.tracesource.4.3.0.nupkg.sha512"
     },
     "system.interactive.async/3.0.0": {
       "type": "package",
@@ -1065,6 +1111,13 @@
       "sha512": "sha512-ilLTKoirqw+Mbt+6x1MOxZKEwflasdP5WNuo5m5rKSXtAqazlEDqdyBH1XbvENuDQUtKNeP48CI1dyDNlEAeOA==",
       "path": "system.text.encodings.web/4.3.0",
       "hashPath": "system.text.encodings.web.4.3.0.nupkg.sha512"
+    },
+    "system.xml.xmldocument/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
+      "path": "system.xml.xmldocument/4.3.0",
+      "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
     },
     "system.xml.xmlserializer/4.0.11": {
       "type": "package",

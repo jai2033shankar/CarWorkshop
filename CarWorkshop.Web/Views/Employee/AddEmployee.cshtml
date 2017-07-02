@@ -1,0 +1,54 @@
+﻿@model CarWorkshop.Web.Models.AddEmployeeViewModel
+
+<form method="post" asp-controller="Employee" asp-action="AddEmployee">
+    <div>
+        <label asp-for="FirstName">First Name</label>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+
+    <div>
+        <label asp-for="LastName">Last Name</label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+
+    <div>
+        <label asp-for="IdentityCardNumber">IdentityCard Number</label>
+        <input asp-for="IdentityCardNumber" />
+        <span asp-validation-for="IdentityCardNumber"></span>
+    </div>
+
+    <div>
+        <label asp-for="PESEL">PESEL</label>
+        <input asp-for="PESEL" />
+        <span asp-validation-for="PESEL"></span>
+    </div>
+
+    <div>
+        <label asp-for="PhoneNumber">Phone Number</label>
+        <input asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <div>
+        <label asp-for="EmailAddress">Email Address</label>
+        <input asp-for="EmailAddress" />
+        <span asp-validation-for="EmailAddress"></span>
+    </div>
+
+    <div>
+        <label asp-for="Salary">Salary</label>
+        <select asp-for="Salary" asp-items="@Model.Salaries"></select>
+    </div>
+
+    <div>
+        <label asp-for="Position">Position</label>
+        <select asp-for="Position" asp-items="@Model.Positions"></select>
+    </div>
+
+    <div>
+        <input type="submit" value="Add" />
+    </div>
+
+</form>

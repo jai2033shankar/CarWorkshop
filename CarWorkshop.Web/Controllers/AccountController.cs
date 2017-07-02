@@ -22,8 +22,17 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            //test
+            if (HttpContext.User.HasClaim(x => x.Type == ClaimTypes.Name))
+            {
+                string test = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Email).Select(x => x.Value).SingleOrDefault();
+                var user = await _clientService.GetClient(test);
+                ViewData["username"] = user.FirstName;
+            }
+
+            
 
             return View();
         }
@@ -39,7 +48,7 @@ namespace CarWorkshop.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                // Change to automapper later.
                 ClientDTO client = new ClientDTO
                 {
                     EmailAddress = model.EmailAddress,
@@ -76,7 +85,8 @@ namespace CarWorkshop.Web.Controllers
 
                 var claims = new[]
                 {
-                    new Claim("TestClaim", user.EmailAddress),
+                    new Claim(ClaimTypes.Name, "TestClaim"),
+                    new Claim(ClaimTypes.Email, user.EmailAddress),
                     new Claim(ClaimTypes.Role, user.UserRole)
                 };
 
@@ -110,5 +120,28 @@ namespace CarWorkshop.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            if (HttpContext.User.Claims.SingleOrDefault(x => x.Type == ClaimTypes.Name).Value == "TestClaim" )
+            {
+                var email = HttpContext.User.Claims.SingleOrDefault(x => x.Type == ClaimTypes.Email).Value;
+
+                var user = await _clientService.GetClient(email);
+
+                return View(user);
+            }
+
+            // Something failed
+            return View("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Profile(ClientDTO client)
+        {
+            await _clientService.UpdateClient(client);
+
+            return View("Index");
+        }
     }
 }

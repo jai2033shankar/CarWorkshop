@@ -43,9 +43,16 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllClients()
+        public async Task<IActionResult> GetAllClients()
         {
-            return View(_clientService.GetAllClients());
+            return View(await _clientService.GetAllClients());
+        }
+
+        public async Task<IActionResult> DeleteClient(int Id)
+        {
+            await _clientService.RemoveClient(Id);
+
+            return RedirectToAction("GetAllClients");
         }
     }
 }

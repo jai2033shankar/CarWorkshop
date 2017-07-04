@@ -15,10 +15,19 @@ using CarWorkshop.Core.Models;
 using Microsoft.AspNetCore.Http;
 using CarWorkshop.Infrastructure.AutoMapper;
 
+using SimpleInjector;
+using SimpleInjector.Integration.AspNetCore;
+using SimpleInjector.Integration.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
+using SimpleInjector.Lifestyles;
+using AutoMapper;
+
 namespace CarWorkshop.Web
 {
     public class Startup
     {
+        private Container container = new Container();
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -34,13 +43,6 @@ namespace CarWorkshop.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IClientRepository, ClientRepository>();
-            services.AddScoped<IClientService, ClientService>();
-
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddScoped<IEmployeeService, EmployeeService>();
-
-            services.AddSingleton(AutoMapperConfig.Configure());
             // Add framework services.
             services.AddMvc();
 
@@ -51,12 +53,28 @@ namespace CarWorkshop.Web
 
             services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
+            services.AddSingleton<IControllerActivator>(
+                new SimpleInjectorControllerActivator(container));
+            services.AddSingleton<IViewComponentActivator>(
+                new SimpleInjectorViewComponentActivator(container));
+
+            services.UseSimpleInjectorAspNetRequestScoping(container);
+                
+
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            InitializeContainer(app);
+
+            // Register custom middleware here
+
+            container.Verify();
+
+            // Add custom middleware
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
@@ -88,6 +106,30 @@ namespace CarWorkshop.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private void InitializeContainer(IApplicationBuilder app)
+        {
+            container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+
+            // Add application presentation components.
+            container.RegisterMvcControllers(app);
+            container.RegisterMvcViewComponents(app);
+
+            // Add application services.
+
+            // Cross-wire asp.net service - docs advise to minimize this - check later.
+            container.Register(app.ApplicationServices.GetService<CarWorkshopContext>, Lifestyle.Singleton);
+
+            container.Register<IClientRepository, ClientRepository>(Lifestyle.Scoped);
+            container.Register<IClientService, ClientService>(Lifestyle.Scoped);
+
+            container.Register<IEmployeeRepository, EmployeeRepository>(Lifestyle.Scoped);
+            container.Register<IEmployeeService, EmployeeService>(Lifestyle.Scoped);
+
+            container.RegisterSingleton<IMapper>(AutoMapperConfig.Configure());
+
+
         }
     }
 }

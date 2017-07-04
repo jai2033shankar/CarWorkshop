@@ -8,27 +8,27 @@ namespace CarWorkshop.Web.Models
 {
     public class RegisterViewModel
     {
-        [Required, MaxLength(128)]
+        [Required(ErrorMessage = "First Name is required"), MaxLength(128)]
         public string FirstName { get; set; }
 
-        [Required, MaxLength(128)]
+        [Required(ErrorMessage = "Last Name is required"), MaxLength(128)]
         public string LastName { get; set; }
 
-        [Required, DataType(DataType.Password)]
+        [Required(ErrorMessage = "Password is required"), DataType(DataType.Password)]
         public string Password { get; set; }
 
         [DataType(DataType.Password), Compare(nameof(Password))]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "ID number is required")]
         public string IdentityCardNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pesel is required")]
         public string PESEL { get; set; }
 
         public string PhoneNumber { get; set; }
 
-        [Required, DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "Email address is required"), DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
     }
 }

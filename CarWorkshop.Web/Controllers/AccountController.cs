@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using CarWorkshop.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CarWorkshop.Infrastructure.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarWorkshop.Web.Controllers
 {
@@ -121,6 +122,8 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "TestPolicy")]
+
         public async Task<IActionResult> Profile()
         {
             if (HttpContext.User.Claims.SingleOrDefault(x => x.Type == ClaimTypes.Name).Value == "TestClaim" )
@@ -137,6 +140,8 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "TestPolicy")]
+
         public async Task<IActionResult> Profile(ClientDTO client)
         {
             await _clientService.UpdateClient(client);

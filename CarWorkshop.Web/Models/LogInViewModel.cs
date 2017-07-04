@@ -8,10 +8,10 @@ namespace CarWorkshop.Web.Models
 {
     public class LogInViewModel
     {
-        [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "Please provide valid email."), DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
 
-        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Please provide valid password."), DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

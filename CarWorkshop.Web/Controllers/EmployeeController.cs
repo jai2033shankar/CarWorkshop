@@ -34,28 +34,35 @@ namespace CarWorkshop.Web.Controllers
             return View(await _employeeService.GetAllEmployees());
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AddEmployee()
+        private async Task PopulateSelectLists(AddEmployeeViewModel model)
         {
+            // Cache this two bad boys later.
             var salaries = await _employeeService.GetSalaries();
 
             var positions = await _employeeService.GetPositions();
-            
-            var model = new AddEmployeeViewModel();
+
             model.Salaries = new SelectList(
-                                    salaries.OrderBy(v => v.Salary1)
-                                            .Select(x => new { Id = x.SalaryId, Salary = x.Salary1 })
-                                            , "Id", "Salary");
+                                   salaries.OrderBy(v => v.Salary1)
+                                           .Select(x => new { Id = x.SalaryId, Salary = x.Salary1 })
+                                           , "Id", "Salary");
 
             model.Positions = new SelectList(
                                     positions.Select(x => new { Id = x.PositionId, Position = x.Description })
                                              , "Id", "Position");
-           
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddEmployee()
+        {    
+            var model = new AddEmployeeViewModel();
+
+            await PopulateSelectLists(model);
+
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult AddEmployee(AddEmployeeViewModel employee)
+        public async Task<IActionResult> AddEmployee(AddEmployeeViewModel employee)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +87,8 @@ namespace CarWorkshop.Web.Controllers
             }
 
             // Redisplay from something failed.
-            return View();
+            await PopulateSelectLists(employee);
+            return View(employee);
         }
     }
 }

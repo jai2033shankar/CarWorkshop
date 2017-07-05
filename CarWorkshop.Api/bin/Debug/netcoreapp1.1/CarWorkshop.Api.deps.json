@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "1ea55ef7876952a6326996135c687cb32ad22ec8"
+    "signature": "8f33913d29e3cd0f89f05b9cc3c18c8d27d52161"
   },
   "compilationOptions": {
     "defines": [
@@ -1323,6 +1323,19 @@
           "lib/netstandard1.3/SimpleInjector.dll": {}
         }
       },
+      "simpleinjector.packaging/4.0.8": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "SimpleInjector": "4.0.8",
+          "System.Reflection": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.0/SimpleInjector.Packaging.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.0/SimpleInjector.Packaging.dll": {}
+        }
+      },
       "system.collections.nongeneric/4.3.0": {
         "dependencies": {
           "System.Diagnostics.Debug": "4.3.0",
@@ -1645,7 +1658,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.1",
           "Microsoft.EntityFrameworkCore.Tools": "1.1.0",
           "Microsoft.NETCore.App": "1.1.2",
-          "SimpleInjector": "4.0.8"
+          "SimpleInjector": "4.0.8",
+          "SimpleInjector.Packaging": "4.0.8"
         },
         "runtime": {
           "CarWorkshop.Infrastructure.dll": {}
@@ -3923,6 +3937,13 @@
       "sha512": "sha512-P7E2z+7lhwoZRNQyi77Z/skV6Nwir3k92JnPgQElCOJ5/3xzsDx6JFtmhCYTR7CDhKr9RdTSXBEai/NXZsv9/Q==",
       "path": "simpleinjector/4.0.8",
       "hashPath": "simpleinjector.4.0.8.nupkg.sha512"
+    },
+    "simpleinjector.packaging/4.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cXVq6sBXg5lwfouHUj9mnP9z4Jcv8hoGyMHSFpwWfB9uarzLOrvvxFIUJGqw78UeG3+OKk2yLD1i6QMJx/4X3g==",
+      "path": "simpleinjector.packaging/4.0.8",
+      "hashPath": "simpleinjector.packaging.4.0.8.nupkg.sha512"
     },
     "system.collections.nongeneric/4.3.0": {
       "type": "package",

@@ -22,12 +22,15 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using SimpleInjector.Lifestyles;
 using AutoMapper;
+using CarWorkshop.Infrastructure.Commands;
+using System.Reflection;
 
 namespace CarWorkshop.Web
 {
     public class Startup
     {
         private Container container = new Container();
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -65,7 +68,8 @@ namespace CarWorkshop.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, 
+                                IApplicationLifetime lifeTime)
         {
             InitializeContainer(app);
 
@@ -106,6 +110,8 @@ namespace CarWorkshop.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            lifeTime.ApplicationStopped.Register(() => container.Dispose());
         }
 
         private void InitializeContainer(IApplicationBuilder app)
@@ -128,6 +134,8 @@ namespace CarWorkshop.Web
             container.Register<IEmployeeService, EmployeeService>(Lifestyle.Scoped);
 
             container.RegisterSingleton<IMapper>(AutoMapperConfig.Configure());
+
+
 
 
         }

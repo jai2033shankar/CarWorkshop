@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CarWorkshop.Core.Models;
+using CarWorkshop.Infrastructure.Commands.Client;
 using CarWorkshop.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace CarWorkshop.Infrastructure.AutoMapper
                cfg.CreateMap<ClientDTO, Client>()
                     .ForMember(x => x.Password, opt => opt.Condition(y => y.Password != null))
                     .ForMember(x => x.UserRole, opt => opt.Condition(y => y.UserRole != null));
+               cfg.CreateMap<CreateClient, ClientDTO>();
 
                cfg.CreateMap<Car, CarDTO>()
                     .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Brand.BrandName))

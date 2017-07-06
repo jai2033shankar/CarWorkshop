@@ -16,9 +16,7 @@ namespace CarWorkshop.Infrastructure.IoC
                 .GetTypeInfo()
                 .Assembly},Lifestyle.Scoped);
 
-            container.Register(typeof(ICommandDispatcher), new[] { typeof(ICommandDispatcher)
-                .GetTypeInfo()
-                .Assembly}, Lifestyle.Scoped);
+            container.Register<ICommandDispatcher, CommandDispatcher>(Lifestyle.Scoped);
         }
     }
 }

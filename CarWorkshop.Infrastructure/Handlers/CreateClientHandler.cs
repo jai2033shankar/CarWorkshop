@@ -1,5 +1,7 @@
-﻿using CarWorkshop.Infrastructure.Commands;
+﻿using AutoMapper;
+using CarWorkshop.Infrastructure.Commands;
 using CarWorkshop.Infrastructure.Commands.Client;
+using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
@@ -11,17 +13,19 @@ namespace CarWorkshop.Infrastructure.Handlers
     public class CreateClientHandler : ICommandHandler<CreateClient>
     {
         private readonly IClientService _clientService;
+        private readonly IMapper _mapper;
 
-        public CreateClientHandler(IClientService clientService)
+        public CreateClientHandler(IClientService clientService, IMapper mapper)
         {
             _clientService = clientService;
+            _mapper = mapper;
         }
 
         public async Task Handle(CreateClient command)
         {
+            ClientDTO client = _mapper.Map<CreateClient, ClientDTO>(command);
 
-            // To do.
-            await Task.CompletedTask;
+            await _clientService.AddClient(client);
         }
     }
 }

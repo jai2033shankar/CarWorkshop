@@ -30,8 +30,9 @@ namespace CarWorkshop.Infrastructure.Repositories
         {
             if (client == null)
             {
-                throw new ArgumentNullException("client");
+                throw new ArgumentNullException("Client object not recived.");
             }
+
             clients.Add(client);
             _context.SaveChanges();
         }

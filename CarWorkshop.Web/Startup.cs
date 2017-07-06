@@ -24,12 +24,14 @@ using SimpleInjector.Lifestyles;
 using AutoMapper;
 using CarWorkshop.Infrastructure.Commands;
 using System.Reflection;
+using CarWorkshop.Infrastructure.IoC;
 
 namespace CarWorkshop.Web
 {
     public class Startup
     {
         private Container container = new Container();
+        private CommandConfig config = new CommandConfig();
 
         public Startup(IHostingEnvironment env)
         {
@@ -134,6 +136,9 @@ namespace CarWorkshop.Web
             container.Register<IEmployeeService, EmployeeService>(Lifestyle.Scoped);
 
             container.RegisterSingleton<IMapper>(AutoMapperConfig.Configure());
+
+
+            config.RegisterServices(container);
 
 
 

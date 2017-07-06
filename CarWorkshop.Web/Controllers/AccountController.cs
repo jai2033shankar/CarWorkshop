@@ -9,6 +9,8 @@ using CarWorkshop.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CarWorkshop.Infrastructure.DTO;
 using Microsoft.AspNetCore.Authorization;
+using CarWorkshop.Infrastructure.Commands.Client;
+using CarWorkshop.Infrastructure.Commands;
 
 namespace CarWorkshop.Web.Controllers
 {
@@ -16,10 +18,12 @@ namespace CarWorkshop.Web.Controllers
     {
 
         private readonly IClientService _clientService;
+        private readonly ICommandDispatcher _dispatcher;
 
-        public AccountController(IClientService clientService)
+        public AccountController(IClientService clientService, ICommandDispatcher dispatcher)
         {
             _clientService = clientService;
+            _dispatcher = dispatcher;
         }
 
         [HttpGet]
@@ -45,28 +49,15 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(CreateClient command)
         {
             if (ModelState.IsValid)
             {
-                // Change to automapper later.
-                ClientDTO client = new ClientDTO
-                {
-                    EmailAddress = model.EmailAddress,
-                    FirstName = model.FirstName,
-                    IdentityCardNumber = model.IdentityCardNumber,
-                    LastName = model.LastName,
-                    Password = model.Password,
-                    Pesel = model.PESEL,
-                    PhoneNumber = model.PhoneNumber,
-                    UserRole = "Client"
-                };
-
-                await _clientService.AddClient(client);
+                await _dispatcher.Dispatch(command);
 
                 return RedirectToAction("Index");
             }
-
+           
             // If we got this far something failed. Redisplay form.
             return View();
         }

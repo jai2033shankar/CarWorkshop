@@ -7,6 +7,8 @@ using CarWorkshop.Infrastructure.Services;
 using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using CarWorkshop.Infrastructure.Commands;
+using CarWorkshop.Infrastructure.Commands.Client;
 
 namespace CarWorkshop.Web.Controllers
 {
@@ -14,9 +16,11 @@ namespace CarWorkshop.Web.Controllers
     public class ClientController : Controller
     {
         private readonly IClientService _clientService;
-        public ClientController(IClientService clientService)
+        private readonly ICommandDispatcher _dispatcher;
+        public ClientController(IClientService clientService, ICommandDispatcher dispatcher)
         {
             _clientService = clientService;
+            _dispatcher = dispatcher;
         }
 
         [HttpGet]
@@ -48,9 +52,9 @@ namespace CarWorkshop.Web.Controllers
             return View(await _clientService.GetAllClients());
         }
 
-        public async Task<IActionResult> DeleteClient(int Id)
+        public async Task<IActionResult> DeleteClient(DeleteClient command)
         {
-            await _clientService.RemoveClient(Id);
+            await _dispatcher.Dispatch(command);
 
             return RedirectToAction("GetAllClients");
         }

@@ -141,8 +141,6 @@ namespace CarWorkshop.Web
             config.RegisterServices(container);
 
 
-
-
         }
     }
 }

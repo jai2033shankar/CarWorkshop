@@ -9,6 +9,8 @@ using CarWorkshop.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using CarWorkshop.Infrastructure.Commands;
 using CarWorkshop.Infrastructure.Commands.Client;
+using CarWorkshop.Infrastructure.Queries;
+using CarWorkshop.Infrastructure.Queries.Client;
 
 namespace CarWorkshop.Web.Controllers
 {
@@ -17,10 +19,16 @@ namespace CarWorkshop.Web.Controllers
     {
         private readonly IClientService _clientService;
         private readonly ICommandDispatcher _dispatcher;
-        public ClientController(IClientService clientService, ICommandDispatcher dispatcher)
+
+        private readonly IQueryHandler<FindClientsByKey, Task<ClientDTO>> _handler;
+
+        private readonly IQueryProcessor _queryProcessor;
+
+        public ClientController(IClientService clientService, ICommandDispatcher dispatcher, IQueryProcessor queryProcessor)
         {
             _clientService = clientService;
             _dispatcher = dispatcher;
+            _queryProcessor = queryProcessor;
         }
 
         [HttpGet]
@@ -32,18 +40,9 @@ namespace CarWorkshop.Web.Controllers
         [HttpGet]
         public  async Task<IActionResult> GetClient(ClientSearchViewModel clientSearch)
         {
+            var query = new FindClientsByKey { EmailAddress = clientSearch.Email, ID = clientSearch.Id };
 
-        if (!String.IsNullOrEmpty(clientSearch.Email))
-        {
-            return View(await _clientService.GetClient(clientSearch.Email));
-        }
-
-        if (clientSearch.Id > 0)
-        {
-            return View(await _clientService.GetClient(clientSearch.Id));
-        }
-
-            return View();
+            return View(await _queryProcessor.Process(query));
         }
 
         [HttpGet]

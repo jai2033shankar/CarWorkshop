@@ -5,6 +5,10 @@ using SimpleInjector;
 using SimpleInjector.Packaging;
 using CarWorkshop.Infrastructure.Commands;
 using System.Reflection;
+using CarWorkshop.Infrastructure.Queries;
+using CarWorkshop.Infrastructure.Queries.Client;
+using System.Threading.Tasks;
+using CarWorkshop.Infrastructure.DTO;
 
 namespace CarWorkshop.Infrastructure.IoC
 {
@@ -17,6 +21,10 @@ namespace CarWorkshop.Infrastructure.IoC
                 .Assembly},Lifestyle.Scoped);
 
             container.Register<ICommandDispatcher, CommandDispatcher>(Lifestyle.Scoped);
+
+            container.Register<IQueryProcessor, QueryProcessor>(Lifestyle.Scoped);
+
+            container.Register<IQueryHandler<FindClientsByKey, Task<ClientDTO>>, FindClientsByKeyHandler>(Lifestyle.Scoped);
         }
     }
 }

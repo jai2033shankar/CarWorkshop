@@ -24,7 +24,7 @@ namespace CarWorkshop.Infrastructure.IoC
 
             container.Register<IQueryProcessor, QueryProcessor>(Lifestyle.Scoped);
 
-            container.Register<IQueryHandler<FindClientsByKey, Task<ClientDTO>>, FindClientsByKeyHandler>(Lifestyle.Scoped);
+            container.Register(typeof(IQueryHandler<,>), new[] { typeof(IQueryHandler<,>).GetTypeInfo().Assembly }, Lifestyle.Scoped);
         }
     }
 }

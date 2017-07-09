@@ -29,15 +29,13 @@ namespace CarWorkshop.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //test
+            
             if (HttpContext.User.HasClaim(x => x.Type == ClaimTypes.Name))
             {
                 string test = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Email).Select(x => x.Value).SingleOrDefault();
                 var user = await _clientService.GetClient(test);
                 ViewData["username"] = user.FirstName;
             }
-
-            
 
             return View();
         }

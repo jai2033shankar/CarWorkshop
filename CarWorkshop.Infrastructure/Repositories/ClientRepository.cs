@@ -45,6 +45,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         private List<Car> GetCars(Client client)
         {
             var clientCars = cars.Where(c => c.ClientId == client.ClientId).ToList();
+
             foreach (var car in clientCars)
             {
                 car.Brand = carBrand.Single(b => b.BrandId == car.BrandId);
@@ -57,6 +58,12 @@ namespace CarWorkshop.Infrastructure.Repositories
         public async Task<Client> GetClientByEmail(string email)
         {
             var client = await clients.SingleAsync(c => c.EmailAddress.Contains(email));
+
+            if (client == null)
+            {
+                throw new Exception($"Client with email address: {email}, could not be found.");
+            }
+
             client.Car = GetCars(client);
             return client;
         }
@@ -65,12 +72,12 @@ namespace CarWorkshop.Infrastructure.Repositories
         {
             Client clientToDelete = await clients.SingleAsync(c => c.ClientId == clientId);
 
-            _context.Remove(clientToDelete);
-            _context.SaveChanges();
-        }
+            if (clientToDelete == null)
+            {
+                throw new Exception($"Client with id: {clientId}, could not be found.");
+            }
 
-        public void SaveChanges()
-        {
+            _context.Remove(clientToDelete);
             _context.SaveChanges();
         }
 
@@ -81,8 +88,15 @@ namespace CarWorkshop.Infrastructure.Repositories
         }
 
         public async Task<Client> GetClientById(int Id)
-        { 
-            return await clients.SingleAsync(c => c.ClientId == Id);
+        {
+            var client = await clients.SingleAsync(c => c.ClientId == Id);
+
+            if (client == null)
+            {
+                throw new Exception($"Client with id: {Id}, could not be found.");
+            }
+
+            return client;
         }
     }
 }

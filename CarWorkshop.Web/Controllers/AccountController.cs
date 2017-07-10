@@ -77,7 +77,7 @@ namespace CarWorkshop.Web.Controllers
                 {
                     new Claim(ClaimTypes.Name, "TestClaim"),
                     new Claim(ClaimTypes.Email, user.EmailAddress),
-                    new Claim(ClaimTypes.Role, user.UserRole)
+                    new Claim(ClaimTypes.Role, user.UserRole),
                 };
 
                 var principal = new ClaimsPrincipal(

@@ -15,6 +15,7 @@ namespace CarWorkshop.Core.Models
         public virtual DbSet<Position> Position { get; set; }
         public virtual DbSet<Repair> Repair { get; set; }
         public virtual DbSet<Salary> Salary { get; set; }
+        public virtual DbSet<UserRole> UserRole { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -115,7 +116,11 @@ namespace CarWorkshop.Core.Models
 
                 entity.Property(e => e.PhoneNumber).HasColumnType("varchar(11)");
 
-                entity.Property(e => e.UserRole).HasColumnType("varchar(32)");
+                entity.HasOne(d => d.UserRoleNavigation)
+                    .WithMany(p => p.Client)
+                    .HasForeignKey(d => d.UserRole)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK__Client__UserRole__6A30C649");
             });
 
             modelBuilder.Entity<Discount>(entity =>
@@ -147,12 +152,19 @@ namespace CarWorkshop.Core.Models
                     .IsRequired()
                     .HasMaxLength(32);
 
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnType("char(64)")
+                    .HasDefaultValueSql("''");
+
                 entity.Property(e => e.Pesel)
                     .IsRequired()
                     .HasColumnName("PESEL")
                     .HasColumnType("varchar(11)");
 
                 entity.Property(e => e.PhoneNumber).HasColumnType("varchar(11)");
+
+                entity.Property(e => e.UserRole).HasDefaultValueSql("2");
 
                 entity.HasOne(d => d.PositionNavigation)
                     .WithMany(p => p.Employee)
@@ -165,6 +177,12 @@ namespace CarWorkshop.Core.Models
                     .HasForeignKey(d => d.Salary)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK__Employee__Salary__35BCFE0A");
+
+                entity.HasOne(d => d.UserRoleNavigation)
+                    .WithMany(p => p.Employee)
+                    .HasForeignKey(d => d.UserRole)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK__Employee__UserRo__6B24EA82");
             });
 
             modelBuilder.Entity<Position>(entity =>
@@ -190,6 +208,21 @@ namespace CarWorkshop.Core.Models
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
 
+                entity.Property(e => e.Payment).HasColumnType("money");
+
+                entity.Property(e => e.Price).HasColumnType("money");
+
+                entity.HasOne(d => d.Car)
+                    .WithMany(p => p.Repair)
+                    .HasForeignKey(d => d.CarId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK__Repair__CarID__656C112C");
+
+                entity.HasOne(d => d.DiscountNavigation)
+                    .WithMany(p => p.Repair)
+                    .HasForeignKey(d => d.Discount)
+                    .HasConstraintName("FK__Repair__Discount__6D0D32F4");
+
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Repair)
                     .HasForeignKey(d => d.EmployeeId)
@@ -208,6 +241,20 @@ namespace CarWorkshop.Core.Models
                 entity.Property(e => e.Salary1)
                     .HasColumnName("Salary")
                     .HasColumnType("smallmoney");
+            });
+
+            modelBuilder.Entity<UserRole>(entity =>
+            {
+                entity.HasKey(e => e.RoleId)
+                    .HasName("PK__UserRole__8AFACE3A5F18E033");
+
+                entity.Property(e => e.RoleId)
+                    .HasColumnName("RoleID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnType("varchar(32)");
             });
         }
     }

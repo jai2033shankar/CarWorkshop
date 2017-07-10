@@ -1,0 +1,8 @@
+﻿@model List<CarWorkshop.Infrastructure.DTO.ClientDTO>
+
+<ul>
+    @foreach (var client in Model)
+    {
+        <li>@client.FirstName</li>
+    }
+</ul>

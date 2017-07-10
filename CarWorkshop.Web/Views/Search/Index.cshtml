@@ -1,4 +1,6 @@
-﻿<form>
+﻿
+
+<form method="get">
 
     <div class="form-group">
         <input type="text" class="form-control" name="query" id="searchText" placeholder="Search..." />
@@ -6,7 +8,7 @@
 
     <div class="form-check">
         <label class="form-check-label">Clients</label>
-        <input class="form-check-input" name="option" type="radio" id="clients" value="clients" checked />
+        <input class="form-check-input" name="option" type="radio" id="clients" value="clients" />
 
         <label class="form-check-label">Employees</label>
         <input class="form-check-input" name="option" type="radio" id="employees" value="employees" />
@@ -24,11 +26,11 @@
     </div>
 
     <div>
-        <button class="btn btn-success" name="xD">xD</button>
+        <button class="btn btn-success" name="search">Search</button>
     </div>
 
 </form>
 
 <div>
-    Here'll be table with the results some time in the future
+@await Component.InvokeAsync("ClientList", new { query = "test", inactive = false })
 </div>

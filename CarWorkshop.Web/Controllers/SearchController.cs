@@ -18,10 +18,31 @@ namespace CarWorkshop.Web.Controllers
             _employee = employee;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index(string query, string option, bool inactive)
         {
-            var test1 = await _client.GetAllClients();
-            var test2 = await _employee.GetAllEmployees();
+            switch(option)
+            {
+                case "clients":
+                    ViewData["test"] = "clients";
+                    break;
+
+                case "employees":
+                    ViewData["test"] = "employees";
+                    break;
+
+                case "cars":
+                    ViewData["test"] = "cars";
+                    break;
+
+                case "repairs":
+                    ViewData["test"] = "repairs";
+                    break;
+
+                default:
+                    ViewData["test"] = "default";
+                    break;
+            }
 
             return View();
         }

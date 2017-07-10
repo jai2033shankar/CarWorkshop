@@ -18,12 +18,14 @@ namespace CarWorkshop.Web.Controllers
     {
 
         private readonly IClientService _clientService;
+        private readonly IEmployeeService _employeService;
         private readonly ICommandDispatcher _dispatcher;
 
-        public AccountController(IClientService clientService, ICommandDispatcher dispatcher)
+        public AccountController(IClientService clientService, ICommandDispatcher dispatcher, IEmployeeService employeService)
         {
             _clientService = clientService;
             _dispatcher = dispatcher;
+            _employeService = employeService;
         }
 
         [HttpGet]
@@ -71,7 +73,7 @@ namespace CarWorkshop.Web.Controllers
         {
             if(ModelState.IsValid)
             {
-                ClientDTO user = await _clientService.GetClient(model.EmailAddress);
+                var user = await _clientService.GetClient(model.EmailAddress);
 
                 var claims = new[]
                 {

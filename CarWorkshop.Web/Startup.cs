@@ -25,6 +25,7 @@ using AutoMapper;
 using CarWorkshop.Infrastructure.Commands;
 using System.Reflection;
 using CarWorkshop.Infrastructure.IoC;
+using System.Security.Claims;
 
 namespace CarWorkshop.Web
 {
@@ -53,7 +54,7 @@ namespace CarWorkshop.Web
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("TestPolicy", policy => policy.RequireRole("1"));
+                options.AddPolicy("TestPolicy", policy => policy.RequireClaim(ClaimTypes.Name, "TestClaim"));
             });
 
             services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));

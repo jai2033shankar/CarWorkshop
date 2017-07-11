@@ -37,20 +37,6 @@ namespace CarWorkshop.Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        public  async Task<IActionResult> GetClient(ClientSearchViewModel clientSearch)
-        {
-            var query = new FindClientsByKey { EmailAddress = clientSearch.Email, ID = clientSearch.Id };
-
-            return View(await _queryProcessor.Process(query));
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllClients()
-        {
-            return View(await _clientService.GetAllClients());
-        }
-
         public async Task<IActionResult> DeleteClient(DeleteClient command)
         {
             await _dispatcher.Dispatch(command);

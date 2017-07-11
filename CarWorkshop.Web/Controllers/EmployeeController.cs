@@ -27,13 +27,6 @@ namespace CarWorkshop.Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllEmployees()
-        {
-
-            return View(await _employeeService.GetAllEmployees());
-        }
-
         private async Task PopulateSelectLists(AddEmployeeViewModel model)
         {
             // Cache this two bad boys later.

@@ -13,18 +13,18 @@ namespace CarWorkshop.Infrastructure.Repositories
     {
         private readonly CarWorkshopContext _context;
         private readonly DbSet<Client> clients;
-        private readonly List<Car> cars;
-        private readonly List<CarBrand> carBrand;
-        private readonly List<CarModel> carModel;
+        private readonly DbSet<Car> cars;
+        private readonly DbSet<CarBrand> carBrand;
+        private readonly DbSet<CarModel> carModel;
 
         public ClientRepository(CarWorkshopContext context)
         {
             _context = context;
             clients = _context.Set<Client>();
-            // TODO: Change implementation of this stuff with .ToList() - throws exception
-            cars = _context.Set<Car>().ToList();
-            carBrand = _context.Set<CarBrand>().ToList();
-            carModel = _context.Set<CarModel>().ToList();
+
+            cars = _context.Set<Car>();
+            carBrand = _context.Set<CarBrand>();
+            carModel = _context.Set<CarModel>();
         }
 
         public void AddClient(Client client)
@@ -43,19 +43,6 @@ namespace CarWorkshop.Infrastructure.Repositories
             return clients.AsEnumerable();
         }
 
-        private List<Car> GetCars(Client client)
-        {
-            var clientCars = cars.Where(c => c.ClientId == client.ClientId).ToList();
-
-            foreach (var car in clientCars)
-            {
-                car.Brand = carBrand.Single(b => b.BrandId == car.BrandId);
-                car.Model = carModel.Single(m => m.ModelId == car.ModelId);
-            }
-            return clientCars;
-        
-        }
-
         public async Task<Client> GetClientByEmail(string email)
         {
             var client = await clients.SingleAsync(c => c.EmailAddress.Contains(email));
@@ -65,7 +52,8 @@ namespace CarWorkshop.Infrastructure.Repositories
                 throw new Exception($"Client with email address: {email}, could not be found.");
             }
 
-            client.Car = GetCars(client);
+            client.Car = cars.Include(x => x.Brand).Include(x => x.Model).ToList();
+
             return client;
         }
 

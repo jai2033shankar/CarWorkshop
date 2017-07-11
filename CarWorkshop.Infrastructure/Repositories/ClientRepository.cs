@@ -21,6 +21,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         {
             _context = context;
             clients = _context.Set<Client>();
+            // TODO: Change implementation of this stuff with .ToList() - throws exception
             cars = _context.Set<Car>().ToList();
             carBrand = _context.Set<CarBrand>().ToList();
             carModel = _context.Set<CarModel>().ToList();

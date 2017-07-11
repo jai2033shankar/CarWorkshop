@@ -1,5 +1,4 @@
 ﻿
-
 <form method="get">
 
     <div class="form-group">
@@ -8,16 +7,16 @@
 
     <div class="form-check">
         <label class="form-check-label">Clients</label>
-        <input class="form-check-input" name="option" type="radio" id="clients" value="clients" />
+        <input class="form-check-input" name="option" type="radio" id="clients" value="ClientList" />
 
         <label class="form-check-label">Employees</label>
-        <input class="form-check-input" name="option" type="radio" id="employees" value="employees" />
+        <input class="form-check-input" name="option" type="radio" id="employees" value="EmployeeList" />
 
         <label class="radio-check-label">Cars</label>
-        <input class="form-check-input" name="option" type="radio" id="cars" value="cars" />
+        <input class="form-check-input" name="option" type="radio" id="cars" value="CarList" />
 
         <label class="form-check-label">Repairs</label>
-        <input class="form-check-input" name="option" type="radio" id="repairs" value="repairs" />
+        <input class="form-check-input" name="option" type="radio" id="repairs" value="RepairList" />
     </div>
 
     <div>
@@ -26,13 +25,16 @@
     </div>
 
     <div>
-        <button class="btn btn-success" name="search">Search</button>
+        <input type="submit" value="search" class="btn btn-success" />
     </div>
 
 </form>
 
-<div>
-@await Component.InvokeAsync("ClientList", new { query = "test", inactive = false })
+<div id="container">
 
-@await Component.InvokeAsync("EmployeeList", new {})
+    @if (ViewData["ViewComponent"] != null)
+    {
+       @await Component.InvokeAsync((string)ViewData["ViewComponent"])
+    }
+
 </div>

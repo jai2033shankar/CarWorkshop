@@ -76,7 +76,8 @@ namespace CarWorkshop.Web.Controllers
                     LastName = employee.LastName,
                     IdentityCardNumber = employee.IdentityCardNumber,
                     Pesel = employee.PESEL,
-                    PhoneNumber = employee.PhoneNumber
+                    PhoneNumber = employee.PhoneNumber,
+                    UserRole = 2
                 };
                 
                 _employeeService.AddEmployee(emp);

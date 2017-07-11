@@ -32,27 +32,20 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    
                     @if (User.IsInRole("1"))
                     {
                         <li><a asp-area="" asp-controller="Search" asp-action="Index">Search</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Client<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-controller="Client" asp-action="Index">Find Client</a></li>
-                            <li><a asp-controller="Client" asp-action="GetAllClients">Get All Clients</a></li>
-                        </ul>
-                    </li>
 
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Employee<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-controller="Employee" asp-action="GetAllEmployees">Get All Employees</a></li>
-                            <li><a asp-controller="Employee" asp-action="AddEmployee">Add Employee</a></li>
-                        </ul>
-                    </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Employee<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="Employee" asp-action="AddEmployee">Add Employee</a></li>
+                            </ul>
+                        </li>
                     }
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)

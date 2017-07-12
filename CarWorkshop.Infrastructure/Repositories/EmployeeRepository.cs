@@ -12,14 +12,12 @@ namespace CarWorkshop.Infrastructure.Repositories
     {
         private readonly CarWorkshopContext _context;
         private DbSet<Employee> employees;
-        private readonly DbSet<Salary> salaries;
         private readonly DbSet<Position> positions;
 
         public EmployeeRepository(CarWorkshopContext context)
         {
             _context = context;
             employees = _context.Set<Employee>();
-            salaries = _context.Set<Salary>();
             positions = _context.Set<Position>();
         }
 
@@ -36,7 +34,7 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public IEnumerable<Employee> GetAllEmployees()
         {
-            return employees.Include(x => x.SalaryNavigation).Include(x => x.PositionNavigation).AsEnumerable();
+            return employees.Include(x => x.PositionNavigation).AsEnumerable();
         }
 
         public Employee GetEmployeeByEmail(string email)
@@ -50,11 +48,6 @@ namespace CarWorkshop.Infrastructure.Repositories
         public List<Position> GetPositions()
         {
             return positions.ToList();
-        }
-
-        public List<Salary> GetSalaries()
-        {
-            return salaries.ToList();
         }
 
         public void RemoveEmployee(int Id)

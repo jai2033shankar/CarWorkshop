@@ -30,14 +30,7 @@ namespace CarWorkshop.Web.Controllers
         private async Task PopulateSelectLists(AddEmployeeViewModel model)
         {
             // Cache this two bad boys later.
-            var salaries = await _employeeService.GetSalaries();
-
             var positions = await _employeeService.GetPositions();
-
-            model.Salaries = new SelectList(
-                                   salaries.OrderBy(v => v.Salary1)
-                                           .Select(x => new { Id = x.SalaryId, Salary = x.Salary1 })
-                                           , "Id", "Salary");
 
             model.Positions = new SelectList(
                                     positions.Select(x => new { Id = x.PositionId, Position = x.Description })
@@ -70,7 +63,8 @@ namespace CarWorkshop.Web.Controllers
                     IdentityCardNumber = employee.IdentityCardNumber,
                     Pesel = employee.PESEL,
                     PhoneNumber = employee.PhoneNumber,
-                    UserRole = 2
+                    UserRole = 2,
+                    Currency = "PLN"
                 };
                 
                 _employeeService.AddEmployee(emp);

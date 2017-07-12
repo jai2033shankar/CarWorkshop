@@ -53,18 +53,18 @@ namespace CarWorkshop.Tests.Services
             EmployeeRepositoryMock.Verify(x => x.AddEmployee(It.IsAny<Employee>()), Times.Once);
         }
 
-        [Fact]
-        public async Task GetSalaries_should_call_GetSalaries_on_repository()
-        {
-            var EmployeeRepositoryMock = new Mock<IEmployeeRepository>();
-            var MapperMock = new Mock<IMapper>();
+        //[Fact]
+        //public async Task GetSalaries_should_call_GetSalaries_on_repository()
+        //{
+        //    var EmployeeRepositoryMock = new Mock<IEmployeeRepository>();
+        //    var MapperMock = new Mock<IMapper>();
 
-            var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object);
+        //    var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object);
 
-            await EmployeeService.GetSalaries();
+        //    await EmployeeService.GetSalaries();
 
-            EmployeeRepositoryMock.Verify(x => x.GetSalaries(), Times.Once);
-        }
+        //    EmployeeRepositoryMock.Verify(x => x.GetSalaries(), Times.Once);
+        //}
 
         [Fact]
         public async Task GetPositions_should_call_GetPositions_on_repository()

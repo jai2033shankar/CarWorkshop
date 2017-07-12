@@ -14,8 +14,6 @@ namespace CarWorkshop.Infrastructure.Repositories
         private readonly CarWorkshopContext _context;
         private readonly DbSet<Client> clients;
         private readonly DbSet<Car> cars;
-        private readonly DbSet<CarBrand> carBrand;
-        private readonly DbSet<CarModel> carModel;
 
         public ClientRepository(CarWorkshopContext context)
         {
@@ -23,8 +21,6 @@ namespace CarWorkshop.Infrastructure.Repositories
             clients = _context.Set<Client>();
 
             cars = _context.Set<Car>();
-            carBrand = _context.Set<CarBrand>();
-            carModel = _context.Set<CarModel>();
         }
 
         public void AddClient(Client client)
@@ -40,19 +36,18 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public  IEnumerable<Client> GetAllClients()
         {
-            return clients.AsEnumerable();
+            
+            return clients.Include(x => x.Car).AsEnumerable();
         }
 
         public async Task<Client> GetClientByEmail(string email)
         {
-            var client = await clients.SingleAsync(c => c.EmailAddress.Contains(email));
+            var client = await clients.Include(x => x.Car).SingleAsync(c => c.EmailAddress.Contains(email));
 
             if (client == null)
             {
                 throw new Exception($"Client with email address: {email}, could not be found.");
             }
-
-            client.Car = cars.Include(x => x.Brand).Include(x => x.Model).ToList();
 
             return client;
         }

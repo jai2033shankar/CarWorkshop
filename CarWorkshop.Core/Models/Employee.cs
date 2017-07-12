@@ -22,10 +22,10 @@ namespace CarWorkshop.Core.Models
         public int Position { get; set; }
         public string Password { get; set; }
         public int UserRole { get; set; }
+        public string Currency { get; set; }
 
         public virtual ICollection<Repair> Repair { get; set; }
         public virtual Position PositionNavigation { get; set; }
-        public virtual Salary SalaryNavigation { get; set; }
         public virtual UserRole UserRoleNavigation { get; set; }
     }
 }

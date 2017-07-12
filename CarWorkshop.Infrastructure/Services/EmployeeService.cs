@@ -46,11 +46,6 @@ namespace CarWorkshop.Infrastructure.Services
             return true;
         }
        
-        public async Task<List<Salary>> GetSalaries()
-        {
-            return _employeeRepository.GetSalaries();
-        }
-
         public async Task<List<Position>> GetPositions()
         {
             return _employeeRepository.GetPositions();

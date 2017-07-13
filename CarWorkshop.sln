@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWorkshop.Core", "CarWorkshop.Core\CarWorkshop.Core.csproj", "{6E4E6F6E-5FF1-4331-9368-72B7D83E65B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarWorkshop.Core", "CarWorkshop.Core\CarWorkshop.Core.csproj", "{6E4E6F6E-5FF1-4331-9368-72B7D83E65B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWorkshop.Infrastructure", "CarWorkshop.Infrastructure\CarWorkshop.Infrastructure.csproj", "{81AD7774-C507-4CAD-9B24-D739BC519D8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarWorkshop.Infrastructure", "CarWorkshop.Infrastructure\CarWorkshop.Infrastructure.csproj", "{81AD7774-C507-4CAD-9B24-D739BC519D8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWorkshop.Api", "CarWorkshop.Api\CarWorkshop.Api.csproj", "{B472F024-924E-463A-8A70-455155385F5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarWorkshop.Api", "CarWorkshop.Api\CarWorkshop.Api.csproj", "{B472F024-924E-463A-8A70-455155385F5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWorkshop.Tests", "CarWorkshop.Tests\CarWorkshop.Tests.csproj", "{5BD5973C-0CD1-4E21-B256-38545446094F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarWorkshop.Tests", "CarWorkshop.Tests\CarWorkshop.Tests.csproj", "{5BD5973C-0CD1-4E21-B256-38545446094F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWorkshop.Web", "CarWorkshop.Web\CarWorkshop.Web.csproj", "{A6D27643-8C91-4404-A632-B3FA06F9EF6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarWorkshop.Web", "CarWorkshop.Web\CarWorkshop.Web.csproj", "{A6D27643-8C91-4404-A632-B3FA06F9EF6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWorkshop.Employee", "CarWorkshop.Employee\CarWorkshop.Employee.csproj", "{DF8014AB-92F7-4CAE-A836-8FED53B7D49A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{A6D27643-8C91-4404-A632-B3FA06F9EF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6D27643-8C91-4404-A632-B3FA06F9EF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6D27643-8C91-4404-A632-B3FA06F9EF6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF8014AB-92F7-4CAE-A836-8FED53B7D49A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF8014AB-92F7-4CAE-A836-8FED53B7D49A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF8014AB-92F7-4CAE-A836-8FED53B7D49A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF8014AB-92F7-4CAE-A836-8FED53B7D49A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

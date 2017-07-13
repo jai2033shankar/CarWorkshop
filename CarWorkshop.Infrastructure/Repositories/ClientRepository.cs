@@ -42,12 +42,12 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public async Task<Client> GetClientByEmail(string email)
         {
-            var client = await clients.Include(x => x.Car).SingleAsync(c => c.EmailAddress.Contains(email));
+            var client = await clients.Include(x => x.Car).SingleOrDefaultAsync(c => c.EmailAddress.Contains(email));
 
-            if (client == null)
-            {
-                throw new Exception($"Client with email address: {email}, could not be found.");
-            }
+            //if (client == null)
+            //{
+            //    throw new Exception($"Client with email address: {email}, could not be found.");
+            //}
 
             return client;
         }

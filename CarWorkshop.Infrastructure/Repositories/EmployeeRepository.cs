@@ -37,12 +37,12 @@ namespace CarWorkshop.Infrastructure.Repositories
             return employees.Include(x => x.PositionNavigation).AsEnumerable();
         }
 
-        public Employee GetEmployeeByEmail(string email)
+        public Employee GetEmployee(string email)
         {
-            throw new NotImplementedException();
+            return employees.Include(x => x.PositionNavigation).Single(x => x.EmailAddress == email);
         }
 
-        public Employee GetEmployeeById(int Id)
+        public Employee GetEmployee(int Id)
             => employees.Single(e => e.EmployeeId == Id);
 
         public List<Position> GetPositions()

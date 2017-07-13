@@ -18,14 +18,14 @@ namespace CarWorkshop.Web.Controllers
     {
 
         private readonly IClientService _clientService;
-        private readonly IEmployeeService _employeService;
+        private readonly IEmployeeService _employeeService;
         private readonly ICommandDispatcher _dispatcher;
 
-        public AccountController(IClientService clientService, ICommandDispatcher dispatcher, IEmployeeService employeService)
+        public AccountController(IClientService clientService, ICommandDispatcher dispatcher, IEmployeeService employeeService)
         {
             _clientService = clientService;
             _dispatcher = dispatcher;
-            _employeService = employeService;
+            _employeeService = employeeService;
         }
 
         [HttpGet]
@@ -36,7 +36,10 @@ namespace CarWorkshop.Web.Controllers
             {
                 string test = HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Email).Select(x => x.Value).SingleOrDefault();
                 var user = await _clientService.GetClient(test);
-                ViewData["username"] = user.FirstName;
+                if (user == null)
+                    ViewData["username"] = "XXX";
+                else
+                    ViewData["username"] = user.FirstName;
             }
 
             return View();
@@ -73,20 +76,6 @@ namespace CarWorkshop.Web.Controllers
         {
             if(ModelState.IsValid)
             {
-                var user = await _clientService.GetClient(model.EmailAddress);
-
-                var claims = new[]
-                {
-                    new Claim(ClaimTypes.Name, "TestClaim"),
-                    new Claim(ClaimTypes.Email, user.EmailAddress),
-                    new Claim(ClaimTypes.Role, user.UserRole),
-                };
-
-                var principal = new ClaimsPrincipal(
-                    new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme));
-
-                await HttpContext.Authentication.SignInAsync("CookieAuthMiddleware", principal);
-
 
                 return RedirectToAction("Index");
             }
@@ -114,7 +103,6 @@ namespace CarWorkshop.Web.Controllers
 
         [HttpGet]
         [Authorize(Policy = "TestPolicy")]
-
         public async Task<IActionResult> Profile()
         {
             if (HttpContext.User.Claims.SingleOrDefault(x => x.Type == ClaimTypes.Name).Value == "TestClaim" )

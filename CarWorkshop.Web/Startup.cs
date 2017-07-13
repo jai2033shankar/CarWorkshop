@@ -26,6 +26,7 @@ using CarWorkshop.Infrastructure.Commands;
 using System.Reflection;
 using CarWorkshop.Infrastructure.IoC;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Session;
 
 namespace CarWorkshop.Web
 {
@@ -58,6 +59,14 @@ namespace CarWorkshop.Web
             });
 
             services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(30);
+                options.CookieHttpOnly = true;
+            });
 
             services.AddSingleton<IControllerActivator>(
                 new SimpleInjectorControllerActivator(container));
@@ -103,6 +112,8 @@ namespace CarWorkshop.Web
                 ClaimsIssuer = "http://localhost:61357",
                 ExpireTimeSpan = TimeSpan.FromMinutes(10)
             });
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

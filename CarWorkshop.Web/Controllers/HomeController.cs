@@ -9,6 +9,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CarWorkshop.Infrastructure.Commands.Client;
 using CarWorkshop.Infrastructure.Commands;
+using Microsoft.AspNetCore.Http;
 
 namespace CarWorkshop.Web.Controllers
 {
@@ -51,6 +52,8 @@ namespace CarWorkshop.Web.Controllers
 
                 var principal = new ClaimsPrincipal(
                 new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme));
+
+                HttpContext.Session.SetInt32("ClientId", client.ClientId);
 
                 await HttpContext.Authentication.SignInAsync("CookieAuthMiddleware", principal);
             }

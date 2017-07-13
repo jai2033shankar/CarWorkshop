@@ -27,7 +27,7 @@ namespace CarWorkshop.Web.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> LogIn(LogInViewModel model)
         {

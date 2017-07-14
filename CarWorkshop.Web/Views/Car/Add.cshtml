@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model CarWorkshop.Infrastructure.DTO.CarDTO
+
+<form method="post" asp-controller="Car" asp-action="Add">
+
+    <div class="form-group">
+        <label asp-for="Brand">Brand</label>
+        <input class="form-control" asp-for="Brand" />
+        <span asp-validation-for="Brand"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CarModel">Model</label>
+        <input class="form-control" asp-for="CarModel" />
+        <span asp-validation-for="CarModel"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="RegistrationNumber">Registration Number</label>
+        <input class="form-control" asp-for="RegistrationNumber" />
+        <span asp-validation-for="RegistrationNumber"></span>
+    </div>
+
+    <div>
+        <input class="btn btn-success" type="submit" value="Add car"/>
+    </div>
+
+</form>

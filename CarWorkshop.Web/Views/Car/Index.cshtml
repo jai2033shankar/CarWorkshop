@@ -1,6 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Http
+
 <h1>Dem cars doe</h1>
 
-<h3>Show my cars @Context.Session.GetInt32("ClientId")</h3>
-<h3>Add new car</h3>
-<h3>Edit Car</h3>
+<form asp-controller="Car" asp-action="Get" method="get">
+
+    <input name="clientId" value="@Context.Session.GetInt32("ClientId")" type="hidden" />
+
+    <input class="btn btn-default" type="submit" value="Show my cars" /> 
+</form>
+
+<a class="btn btn-default" asp-controller="Car" asp-action="Add">Add new car</a>
+

@@ -19,5 +19,7 @@ namespace CarWorkshop.Infrastructure.Services
         Task UpdateClient(ClientDTO client);
 
         Task RemoveClient(int Id);
+
+        Task AddCar(CarDTO car);
     }
 }

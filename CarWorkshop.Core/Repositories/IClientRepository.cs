@@ -20,6 +20,7 @@ namespace CarWorkshop.Core.Repositories
 
         void UpdateClient(Client client);
 
-        void SaveChanges();
+        Task AddCar(Car car);
+
     }
 }

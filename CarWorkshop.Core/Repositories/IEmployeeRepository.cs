@@ -7,9 +7,9 @@ namespace CarWorkshop.Core.Repositories
 {
     public interface IEmployeeRepository
     {
-        Employee GetEmployeeById(int Id);
+        Employee GetEmployee(int Id);
 
-        Employee GetEmployeeByEmail(string email);
+        Employee GetEmployee(string email);
 
         IEnumerable<Employee> GetAllEmployees();
 
@@ -19,7 +19,6 @@ namespace CarWorkshop.Core.Repositories
 
         void UpdateEmployee(Employee employee);
 
-        List<Salary> GetSalaries();
         List<Position> GetPositions();
 
     }

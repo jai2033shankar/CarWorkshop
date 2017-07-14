@@ -26,7 +26,7 @@ namespace CarWorkshop.Api.Controllers
 
         [HttpGet("{id}")]
         public async Task<EmployeeDTO> Get(int id)
-            => await _employeeService.GetEmployeeById(id);
+            => await _employeeService.GetEmployee(id);
 
     }
 }

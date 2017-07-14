@@ -21,15 +21,13 @@ namespace CarWorkshop.Infrastructure.AutoMapper
                cfg.CreateMap<CreateClient, ClientDTO>();
 
                cfg.CreateMap<Car, CarDTO>()
-                    .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Brand.BrandName))
-                    .ForMember(dest => dest.Model, opt => opt.MapFrom(src => src.Model.ModelName))
-                    .ForMember(dest => dest.RegistratrionNumber, opt => opt.MapFrom(src => src.RegistrationNumber));
+                    .ForMember(x => x.CarModel, opt => opt.MapFrom(src => src.Model));
                cfg.CreateMap<Employee, EmployeeDTO>()
-                    .ForMember(dest => dest.Salary, opt => opt.MapFrom(src => src.SalaryNavigation))
                     .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.PositionNavigation.Description));
                cfg.CreateMap<EmployeeDTO, Employee>();
-               cfg.CreateMap<Salary, SalaryDTO>()
-                .ForMember(dest => dest.Salary, opt => opt.MapFrom(src => src.Salary1));
+
+               cfg.CreateMap<CarDTO, Car>()
+                    .ForMember(x => x.Model, opt => opt.MapFrom(src => src.CarModel));
            }).CreateMapper();
         
     }

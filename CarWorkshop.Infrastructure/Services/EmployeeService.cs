@@ -32,9 +32,9 @@ namespace CarWorkshop.Infrastructure.Services
             return employees;
         }
 
-        public async Task<EmployeeDTO> GetEmployeeById(int Id)
+        public async Task<EmployeeDTO> GetEmployee(int Id)
         {
-            Employee employee = _employeeRepository.GetEmployeeById(Id);
+            Employee employee = _employeeRepository.GetEmployee(Id);
 
             return _mapper.Map<Employee, EmployeeDTO>(employee);
         }
@@ -46,14 +46,16 @@ namespace CarWorkshop.Infrastructure.Services
             return true;
         }
        
-        public async Task<List<Salary>> GetSalaries()
-        {
-            return _employeeRepository.GetSalaries();
-        }
-
         public async Task<List<Position>> GetPositions()
         {
             return _employeeRepository.GetPositions();
+        }
+
+        public async Task<EmployeeDTO> GetEmployee(string email)
+        {
+            Employee employee = _employeeRepository.GetEmployee(email);
+
+            return _mapper.Map<Employee, EmployeeDTO>(employee);
         }
     }
 }

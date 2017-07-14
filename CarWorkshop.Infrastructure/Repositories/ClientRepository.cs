@@ -13,17 +13,16 @@ namespace CarWorkshop.Infrastructure.Repositories
     {
         private readonly CarWorkshopContext _context;
         private readonly DbSet<Client> clients;
-        private readonly List<Car> cars;
-        private readonly List<CarBrand> carBrand;
-        private readonly List<CarModel> carModel;
+        private readonly DbSet<Car> cars;
 
         public ClientRepository(CarWorkshopContext context)
         {
             _context = context;
             clients = _context.Set<Client>();
-            cars = _context.Set<Car>().ToList();
-            carBrand = _context.Set<CarBrand>().ToList();
-            carModel = _context.Set<CarModel>().ToList();
+
+            cars = _context.Set<Car>();
+            // ???
+            cars.Include(c => c.Repair);
         }
 
         public void AddClient(Client client)
@@ -39,25 +38,19 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public  IEnumerable<Client> GetAllClients()
         {
-            return clients.AsEnumerable();
-        }
-
-        private List<Car> GetCars(Client client)
-        {
-            var clientCars = cars.Where(c => c.ClientId == client.ClientId).ToList();
-            foreach (var car in clientCars)
-            {
-                car.Brand = carBrand.Single(b => b.BrandId == car.BrandId);
-                car.Model = carModel.Single(m => m.ModelId == car.ModelId);
-            }
-            return clientCars;
-        
+            
+            return clients.Include(x => x.Car).AsEnumerable();
         }
 
         public async Task<Client> GetClientByEmail(string email)
         {
-            var client = await clients.SingleAsync(c => c.EmailAddress.Contains(email));
-            client.Car = GetCars(client);
+            var client = await clients.Include(x => x.Car).SingleOrDefaultAsync(c => c.EmailAddress.Contains(email));
+
+            //if (client == null)
+            //{
+            //    throw new Exception($"Client with email address: {email}, could not be found.");
+            //}
+
             return client;
         }
 
@@ -65,12 +58,12 @@ namespace CarWorkshop.Infrastructure.Repositories
         {
             Client clientToDelete = await clients.SingleAsync(c => c.ClientId == clientId);
 
-            _context.Remove(clientToDelete);
-            _context.SaveChanges();
-        }
+            if (clientToDelete == null)
+            {
+                throw new Exception($"Client with id: {clientId}, could not be found.");
+            }
 
-        public void SaveChanges()
-        {
+            _context.Remove(clientToDelete);
             _context.SaveChanges();
         }
 
@@ -81,8 +74,26 @@ namespace CarWorkshop.Infrastructure.Repositories
         }
 
         public async Task<Client> GetClientById(int Id)
-        { 
-            return await clients.SingleAsync(c => c.ClientId == Id);
+        {
+            var client = await clients.SingleAsync(c => c.ClientId == Id);
+
+            if (client == null)
+            {
+                throw new Exception($"Client with id: {Id}, could not be found.");
+            }
+
+            return client;
+        }
+
+        public async Task AddCar(Car car)
+        {
+            if (car == null)
+            {
+                throw new ArgumentNullException("Car is null");
+            }
+
+            await cars.AddAsync(car);
+            await _context.SaveChangesAsync();
         }
     }
 }

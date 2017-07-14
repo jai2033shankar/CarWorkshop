@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarWorkshop.Web.Models
 {
-    public class RegisterViewModel
+    public class CreateAccountViewModel
     {
         [Required(ErrorMessage = "First Name is required"), MaxLength(128)]
         public string FirstName { get; set; }

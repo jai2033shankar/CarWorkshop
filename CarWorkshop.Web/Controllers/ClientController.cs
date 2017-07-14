@@ -7,6 +7,10 @@ using CarWorkshop.Infrastructure.Services;
 using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using CarWorkshop.Infrastructure.Commands;
+using CarWorkshop.Infrastructure.Commands.Client;
+using CarWorkshop.Infrastructure.Queries;
+using CarWorkshop.Infrastructure.Queries.Client;
 
 namespace CarWorkshop.Web.Controllers
 {
@@ -14,9 +18,17 @@ namespace CarWorkshop.Web.Controllers
     public class ClientController : Controller
     {
         private readonly IClientService _clientService;
-        public ClientController(IClientService clientService)
+        private readonly ICommandDispatcher _dispatcher;
+
+        private readonly IQueryHandler<FindClientsByKey, Task<ClientDTO>> _handler;
+
+        private readonly IQueryProcessor _queryProcessor;
+
+        public ClientController(IClientService clientService, ICommandDispatcher dispatcher, IQueryProcessor queryProcessor)
         {
             _clientService = clientService;
+            _dispatcher = dispatcher;
+            _queryProcessor = queryProcessor;
         }
 
         [HttpGet]
@@ -25,32 +37,9 @@ namespace CarWorkshop.Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        public  async Task<IActionResult> GetClient(ClientSearchViewModel clientSearch)
+        public async Task<IActionResult> DeleteClient(DeleteClient command)
         {
-
-        if (!String.IsNullOrEmpty(clientSearch.Email))
-        {
-            return View(await _clientService.GetClient(clientSearch.Email));
-        }
-
-        if (clientSearch.Id > 0)
-        {
-            return View(await _clientService.GetClient(clientSearch.Id));
-        }
-
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllClients()
-        {
-            return View(await _clientService.GetAllClients());
-        }
-
-        public async Task<IActionResult> DeleteClient(int Id)
-        {
-            await _clientService.RemoveClient(Id);
+            await _dispatcher.Dispatch(command);
 
             return RedirectToAction("GetAllClients");
         }

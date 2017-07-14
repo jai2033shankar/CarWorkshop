@@ -50,7 +50,7 @@ namespace CarWorkshop.Infrastructure.Services
         public async Task AddClient(ClientDTO client)
         {
             var Newclient = _mapper.Map<ClientDTO, Client>(client);
-            Newclient.UserRole = "Client";
+            Newclient.UserRole = 3;
 
             _clientRepository.AddClient(Newclient);
         }
@@ -68,6 +68,13 @@ namespace CarWorkshop.Infrastructure.Services
         {
             // Add error checking.
             await _clientRepository.RemoveClient(Id);
+        }
+
+        public async Task AddCar(CarDTO car)
+        {
+            var NewCar = _mapper.Map<CarDTO, Car>(car);
+
+            await _clientRepository.AddCar(NewCar);
         }
     }
 }

@@ -25,6 +25,8 @@ using AutoMapper;
 using CarWorkshop.Infrastructure.Commands;
 using System.Reflection;
 using CarWorkshop.Infrastructure.IoC;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Session;
 
 namespace CarWorkshop.Web
 {
@@ -53,10 +55,18 @@ namespace CarWorkshop.Web
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("TestPolicy", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("TestPolicy", policy => policy.RequireClaim(ClaimTypes.Name, "TestClaim"));
             });
 
             services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(30);
+                options.CookieHttpOnly = true;
+            });
 
             services.AddSingleton<IControllerActivator>(
                 new SimpleInjectorControllerActivator(container));
@@ -64,9 +74,6 @@ namespace CarWorkshop.Web
                 new SimpleInjectorViewComponentActivator(container));
 
             services.UseSimpleInjectorAspNetRequestScoping(container);
-                
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,9 +109,11 @@ namespace CarWorkshop.Web
                 AccessDeniedPath = new PathString(Configuration["Authentication:AccessDeniedPath"]),
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
-                ClaimsIssuer = "http://localhost:5000",
+                ClaimsIssuer = "http://localhost:61357",
                 ExpireTimeSpan = TimeSpan.FromMinutes(10)
             });
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
@@ -139,8 +148,6 @@ namespace CarWorkshop.Web
 
 
             config.RegisterServices(container);
-
-
 
 
         }

@@ -1,0 +1,25 @@
+﻿@model List<CarWorkshop.Infrastructure.DTO.CarDTO>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Registration Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var car in Model)
+            {
+                <tr>
+                    <td>@car.Brand</td>
+                    <td>@car.CarModel</td>
+                    <td>@car.RegistrationNumber</td>
+                    <td><input type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Car", new {carId = car.CarId})'" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

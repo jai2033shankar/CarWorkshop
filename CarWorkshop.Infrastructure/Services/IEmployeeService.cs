@@ -9,10 +9,10 @@ namespace CarWorkshop.Infrastructure.Services
 {
     public interface IEmployeeService
     {
-        Task<EmployeeDTO> GetEmployeeById(int Id);
+        Task<EmployeeDTO> GetEmployee(int Id);
+        Task<EmployeeDTO> GetEmployee(string email);
         Task<IEnumerable<EmployeeDTO>> GetAllEmployees();
         Task<Boolean> AddEmployee(Employee employee);
-        Task<List<Salary>> GetSalaries();
         Task<List<Position>> GetPositions();
     }
 }

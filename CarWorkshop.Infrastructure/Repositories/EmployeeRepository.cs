@@ -12,15 +12,13 @@ namespace CarWorkshop.Infrastructure.Repositories
     {
         private readonly CarWorkshopContext _context;
         private DbSet<Employee> employees;
-        private readonly List<Salary> salaries;
-        private readonly List<Position> positions;
+        private readonly DbSet<Position> positions;
 
         public EmployeeRepository(CarWorkshopContext context)
         {
             _context = context;
             employees = _context.Set<Employee>();
-            salaries = _context.Set<Salary>().ToList();
-            positions = _context.Set<Position>().ToList();
+            positions = _context.Set<Position>();
         }
 
         public void AddEmployee(Employee employee)
@@ -36,25 +34,20 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public IEnumerable<Employee> GetAllEmployees()
         {
-            return employees.AsEnumerable();
+            return employees.Include(x => x.PositionNavigation).AsEnumerable();
         }
 
-        public Employee GetEmployeeByEmail(string email)
+        public Employee GetEmployee(string email)
         {
-            throw new NotImplementedException();
+            return employees.Include(x => x.PositionNavigation).Single(x => x.EmailAddress == email);
         }
 
-        public Employee GetEmployeeById(int Id)
+        public Employee GetEmployee(int Id)
             => employees.Single(e => e.EmployeeId == Id);
 
         public List<Position> GetPositions()
         {
-            return positions;
-        }
-
-        public List<Salary> GetSalaries()
-        {
-            return salaries;
+            return positions.ToList();
         }
 
         public void RemoveEmployee(int Id)

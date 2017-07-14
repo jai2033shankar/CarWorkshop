@@ -40,7 +40,8 @@
 
     <div class="form-group">
         <label asp-for="Salary">Salary</label>
-        <select asp-for="Salary" asp-items="@Model.Salaries"></select>
+        <input class="form-control" asp-for="Salary" />
+        <span asp-validation-for="Salary"></span>
     </div>
 
     <div class="form-group">

@@ -21,8 +21,6 @@ namespace CarWorkshop.Infrastructure.Repositories
             clients = _context.Set<Client>();
 
             cars = _context.Set<Car>();
-            // ???
-            cars.Include(c => c.Repair);
         }
 
         public void AddClient(Client client)
@@ -94,6 +92,25 @@ namespace CarWorkshop.Infrastructure.Repositories
 
             await cars.AddAsync(car);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task EditCar(Car car)
+        {
+            if (car == null)
+            {
+                throw new ArgumentNullException("Car is null");
+            }
+
+            _context.Update(car);
+
+           await _context.SaveChangesAsync();
+        }
+
+        public async Task<Car> GetCar(int carId)
+        {
+            var result = await cars.SingleOrDefaultAsync(c => c.CarId == carId);
+
+            return result;
         }
     }
 }

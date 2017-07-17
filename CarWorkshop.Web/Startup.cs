@@ -58,13 +58,13 @@ namespace CarWorkshop.Web
                 options.AddPolicy("TestPolicy", policy => policy.RequireClaim(ClaimTypes.Name, "TestClaim"));
             });
 
-            services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+            services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]), ServiceLifetime.Scoped);
 
             services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(30);
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
                 options.CookieHttpOnly = true;
             });
 

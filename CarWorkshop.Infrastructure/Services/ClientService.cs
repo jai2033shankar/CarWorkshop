@@ -76,5 +76,14 @@ namespace CarWorkshop.Infrastructure.Services
 
             await _clientRepository.AddCar(NewCar);
         }
+
+        public async Task EditCar(CarDTO updatedCar)
+        {
+            Car carToUpdate = await _clientRepository.GetCar(updatedCar.CarId);
+
+            _mapper.Map(updatedCar, carToUpdate);
+
+            await _clientRepository.EditCar(carToUpdate);   
+        }
     }
 }

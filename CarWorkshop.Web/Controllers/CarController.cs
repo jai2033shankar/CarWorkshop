@@ -62,17 +62,20 @@ namespace CarWorkshop.Web.Controllers
             var client = await _service.GetClient(id);
             var car = client.Cars.SingleOrDefault(c => c.CarId == carId);
 
-
-
             return View(car);
         }
 
         [HttpPost]
-        public IActionResult Edit(CarDTO model)
+        public async Task<IActionResult> Edit(CarDTO model)
         {
             if (ModelState.IsValid)
             {
-                // UpdateCar
+                // Check
+                int id = (int)HttpContext.Session.GetInt32("ClientId");
+                model.ClientId = id;
+
+                await _service.EditCar(model);
+
                 return RedirectToAction("Index");
             }
 

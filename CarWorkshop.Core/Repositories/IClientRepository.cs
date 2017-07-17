@@ -22,5 +22,9 @@ namespace CarWorkshop.Core.Repositories
 
         Task AddCar(Car car);
 
+        Task EditCar(Car car);
+
+        Task<Car> GetCar(int carId);
+
     }
 }

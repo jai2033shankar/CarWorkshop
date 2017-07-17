@@ -38,9 +38,11 @@ namespace CarWorkshop.Web.Controllers
             {
                 var client = await _clientService.GetClient(model.EmailAddress);
 
-                if (client == null || client.Password != model.Password)
+                // Weird bug here - client.Password has a lot of white space.
+                if (client == null || client.Password.Trim() != model.Password)
                 {
                     // Show error
+                    throw new Exception("Stuff went very wrong");
                 }
 
                 var claims = new[]

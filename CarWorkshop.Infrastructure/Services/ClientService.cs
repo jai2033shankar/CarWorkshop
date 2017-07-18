@@ -52,7 +52,7 @@ namespace CarWorkshop.Infrastructure.Services
             Client Newclient = _mapper.Map<ClientDTO, Client>(client);
             Newclient.UserRole = 3;
 
-            _clientRepository.AddClient(Newclient);
+            await _clientRepository.AddClient(Newclient);
         }
 
         public async Task UpdateClient(ClientDTO client)

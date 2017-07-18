@@ -24,7 +24,7 @@ namespace CarWorkshop.Infrastructure.Services
         {
             var employees = new List<EmployeeDTO>();
 
-            foreach(var employee in _employeeRepository.GetAllEmployees())
+            foreach(var employee in await _employeeRepository.GetAllEmployees())
             {
                 employees.Add(_mapper.Map<Employee, EmployeeDTO>(employee)); 
             }
@@ -34,7 +34,7 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task<EmployeeDTO> GetEmployee(int Id)
         {
-            Employee employee = _employeeRepository.GetEmployee(Id);
+            Employee employee = await _employeeRepository.GetEmployee(Id);
 
             return _mapper.Map<Employee, EmployeeDTO>(employee);
         }
@@ -48,12 +48,12 @@ namespace CarWorkshop.Infrastructure.Services
        
         public async Task<List<Position>> GetPositions()
         {
-            return _employeeRepository.GetPositions();
+            return await _employeeRepository.GetPositions();
         }
 
         public async Task<EmployeeDTO> GetEmployee(string email)
         {
-            Employee employee = _employeeRepository.GetEmployee(email);
+            Employee employee = await _employeeRepository.GetEmployee(email);
 
             return _mapper.Map<Employee, EmployeeDTO>(employee);
         }

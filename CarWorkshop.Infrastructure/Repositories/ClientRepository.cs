@@ -31,7 +31,7 @@ namespace CarWorkshop.Infrastructure.Repositories
             }
 
             await clients.AddAsync(client);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Client>> GetAllClients()
@@ -82,10 +82,10 @@ namespace CarWorkshop.Infrastructure.Repositories
             }
 
             clients.Remove(clientToDelete);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateClient(Client client)
+        public async Task UpdateClient(Client client)
         {
             if (client == null)
             {
@@ -93,7 +93,7 @@ namespace CarWorkshop.Infrastructure.Repositories
             }
 
             clients.Update(client);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddCar(Car car)

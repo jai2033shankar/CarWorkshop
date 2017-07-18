@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System.Text;
 using CarWorkshop.Core.Models;
+using System.Threading.Tasks;
 
 namespace CarWorkshop.Core.Repositories
 {
     public interface IEmployeeRepository
     {
-        Employee GetEmployee(int Id);
+        Task<Employee> GetEmployee(int Id);
 
-        Employee GetEmployee(string email);
+        Task<Employee> GetEmployee(string email);
 
-        IEnumerable<Employee> GetAllEmployees();
+        Task<IEnumerable<Employee>> GetAllEmployees();
 
-        void AddEmployee(Employee employee);
+        Task AddEmployee(Employee employee);
 
-        void RemoveEmployee(int Id);
+        Task RemoveEmployee(int Id);
 
-        void UpdateEmployee(Employee employee);
+        Task UpdateEmployee(Employee employee);
 
-        List<Position> GetPositions();
-
+        Task<List<Position>> GetPositions();
     }
 }

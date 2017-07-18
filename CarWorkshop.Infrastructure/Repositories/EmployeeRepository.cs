@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq;
 using CarWorkshop.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace CarWorkshop.Infrastructure.Repositories
 {
@@ -21,43 +22,70 @@ namespace CarWorkshop.Infrastructure.Repositories
             positions = _context.Set<Position>();
         }
 
-        public void AddEmployee(Employee employee)
+        public async Task AddEmployee(Employee employee)
         {
             if (employee == null)
             {
-                throw new ArgumentNullException("employee");
+                throw new ArgumentNullException("AddEmployee received null Employee object.");
             }
 
-            employees.Add(employee);
-            _context.SaveChanges();
+            await employees.AddAsync(employee);
+            await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<Employee> GetAllEmployees()
+        public async Task<IEnumerable<Employee>> GetAllEmployees()
         {
-            return employees.Include(x => x.PositionNavigation).AsEnumerable();
+            IEnumerable<Employee> allEmployees = await employees.Include(x => x.PositionNavigation).ToListAsync();
+
+            if (allEmployees == null)
+            {
+                throw new Exception("Could not retrieve employees from database");
+            }
+
+            return allEmployees;
         }
 
-        public Employee GetEmployee(string email)
+        public async Task<Employee> GetEmployee(string email)
         {
-            return employees.Include(x => x.PositionNavigation).Single(x => x.EmailAddress == email);
+            Employee employee = await employees.Include(x => x.PositionNavigation)
+                                               .SingleOrDefaultAsync(x => x.EmailAddress == email);
+
+            if (employee == null)
+            {
+                throw new Exception($"Employee with given email address: ${email} could not be found.");
+            }
+
+            return employee;
         }
 
-        public Employee GetEmployee(int Id)
-            => employees.Single(e => e.EmployeeId == Id);
-
-        public List<Position> GetPositions()
+        public async Task<Employee> GetEmployee(int employeeId)
         {
-            return positions.ToList();
+            Employee employee = await employees.Include(x => x.PositionNavigation)
+                                               .SingleOrDefaultAsync(e => e.EmployeeId == employeeId);
+
+            if (employee == null)
+            {
+                throw new Exception($"Employee with given id: {employeeId} could not be found.");
+            }
+
+            return employee;
         }
 
-        public void RemoveEmployee(int Id)
+
+        public async Task RemoveEmployee(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateEmployee(Employee employee)
+        public async Task UpdateEmployee(Employee employee)
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<Position>> GetPositions()
+        {
+            return await positions.ToListAsync();
+        }
+
     }
 }

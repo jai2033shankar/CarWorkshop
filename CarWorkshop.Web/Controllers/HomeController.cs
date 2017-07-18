@@ -100,6 +100,12 @@ namespace CarWorkshop.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Forbidden()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();

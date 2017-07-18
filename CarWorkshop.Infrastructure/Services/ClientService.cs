@@ -25,7 +25,7 @@ namespace CarWorkshop.Infrastructure.Services
         {
             List<ClientDTO> clients = new List<ClientDTO>();
 
-            foreach (var client in _clientRepository.GetAllClients())
+            foreach (var client in await _clientRepository.GetAllClients())
             {
                 clients.Add(_mapper.Map<Client, ClientDTO>(client));
             }
@@ -35,14 +35,14 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task<ClientDTO> GetClient(int Id)
         {
-            Client client = await _clientRepository.GetClientById(Id);
+            Client client = await _clientRepository.GetClient(Id);
 
             return _mapper.Map<Client, ClientDTO>(client);
         }
 
         public async Task<ClientDTO> GetClient(string email)
         {
-            Client client = await _clientRepository.GetClientByEmail(email);
+            Client client = await _clientRepository.GetClient(email);
 
             return _mapper.Map<Client, ClientDTO>(client);
         }
@@ -57,7 +57,7 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task UpdateClient(ClientDTO client)
         {
-            Client clientToUpdate = await _clientRepository.GetClientById(client.ClientId);
+            Client clientToUpdate = await _clientRepository.GetClient(client.ClientId);
 
             _mapper.Map(client, clientToUpdate);
 

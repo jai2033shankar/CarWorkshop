@@ -28,6 +28,8 @@ namespace CarWorkshop.Infrastructure.AutoMapper
 
                cfg.CreateMap<CarDTO, Car>()
                     .ForMember(x => x.Model, opt => opt.MapFrom(src => src.CarModel));
+
+               cfg.CreateMap<Repair, RepairDTO>();
            }).CreateMapper();
         
     }

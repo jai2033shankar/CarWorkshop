@@ -42,7 +42,9 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public async Task<Client> GetClientByEmail(string email)
         {
-            var client = await clients.Include(x => x.Car).SingleOrDefaultAsync(c => c.EmailAddress.Contains(email));
+            var client = await clients.Include(x => x.Car)
+                            .ThenInclude(car => car.Repair)
+                            .SingleOrDefaultAsync(c => c.EmailAddress.Contains(email));
 
             //if (client == null)
             //{

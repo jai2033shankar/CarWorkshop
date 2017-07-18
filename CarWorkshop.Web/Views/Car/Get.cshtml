@@ -8,6 +8,7 @@
                 <th>Model</th>
                 <th>Registration Number</th>
                 <th>Actions</th>
+                <th>TestRepair</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,10 @@
                     <td>@car.CarModel</td>
                     <td>@car.RegistrationNumber</td>
                     <td><input type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Car", new {carId = car.CarId})'" /></td>
+                    @if (car.Repair.SingleOrDefault() != null)
+                    {
+                        <td>@car.Repair.SingleOrDefault().Description</td>
+                    }
                 </tr>
             }
         </tbody>

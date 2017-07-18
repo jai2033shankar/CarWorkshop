@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using CarWorkshop.Infrastructure.Commands.Client;
 using CarWorkshop.Infrastructure.Commands;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarWorkshop.Web.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly IClientService _clientService;

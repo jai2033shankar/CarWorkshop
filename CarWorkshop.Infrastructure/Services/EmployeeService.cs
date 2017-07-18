@@ -22,7 +22,7 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task<IEnumerable<EmployeeDTO>> GetAllEmployees()
         {
-            var employees = new List<EmployeeDTO>();
+            List<EmployeeDTO> employees = new List<EmployeeDTO>();
 
             foreach(var employee in await _employeeRepository.GetAllEmployees())
             {
@@ -39,11 +39,10 @@ namespace CarWorkshop.Infrastructure.Services
             return _mapper.Map<Employee, EmployeeDTO>(employee);
         }
 
-        public async Task<Boolean> AddEmployee(Employee employee)
+        public async Task AddEmployee(Employee employee)
         {
-            _employeeRepository.AddEmployee(employee);
+            await _employeeRepository.AddEmployee(employee);
 
-            return true;
         }
        
         public async Task<List<Position>> GetPositions()

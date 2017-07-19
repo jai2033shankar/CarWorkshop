@@ -3,6 +3,8 @@
     ViewData["Title"] = "CarWorkshop";
 }
 
+@if (!Context.User.Identity.IsAuthenticated)
+{
 <div class="jumbotron text-center">
     <h1>Hello</h1>
     <p>Please Log In</p>
@@ -29,3 +31,4 @@
 
     </form>
 </div>
+}

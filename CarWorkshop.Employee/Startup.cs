@@ -8,6 +8,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using CarWorkshop.Infrastructure.Services;
+using CarWorkshop.Core.Repositories;
+using CarWorkshop.Infrastructure.Repositories;
+using CarWorkshop.Core.Models;
+
+using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using CarWorkshop.Infrastructure.AutoMapper;
+
 namespace CarWorkshop.Employee
 {
     public class Startup
@@ -27,6 +38,10 @@ namespace CarWorkshop.Employee
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]), ServiceLifetime.Scoped);
+            services.AddSingleton<IMapper>(x => AutoMapperConfig.Configure());
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
             // Add framework services.
             services.AddMvc();
         }
@@ -48,6 +63,15 @@ namespace CarWorkshop.Employee
             }
 
             app.UseStaticFiles();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = "EmployeeAuthCookieMiddleware",
+                LoginPath = new PathString("/Home/Index"),
+                AccessDeniedPath = new PathString("/Home/Forbidden"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
 
             app.UseMvc(routes =>
             {

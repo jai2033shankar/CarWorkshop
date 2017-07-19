@@ -60,6 +60,9 @@ namespace CarWorkshop.Web.Controllers
                 HttpContext.Session.SetInt32("ClientId", client.ClientId);
 
                 await HttpContext.Authentication.SignInAsync("CookieAuthMiddleware", principal);
+
+                //here should be some redirect.
+                return RedirectToAction("Index");
             }
 
             // If we got this far something failed. Redisplay form.

@@ -27,6 +27,8 @@ using System.Reflection;
 using CarWorkshop.Infrastructure.IoC;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace CarWorkshop.Web
 {
@@ -51,20 +53,26 @@ namespace CarWorkshop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc( config => 
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
 
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("TestPolicy", policy => policy.RequireClaim(ClaimTypes.Name, "TestClaim"));
             });
 
-            services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+            services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]), ServiceLifetime.Scoped);
 
             services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(30);
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
                 options.CookieHttpOnly = true;
             });
 

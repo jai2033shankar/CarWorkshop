@@ -22,9 +22,9 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task<IEnumerable<EmployeeDTO>> GetAllEmployees()
         {
-            var employees = new List<EmployeeDTO>();
+            List<EmployeeDTO> employees = new List<EmployeeDTO>();
 
-            foreach(var employee in _employeeRepository.GetAllEmployees())
+            foreach(var employee in await _employeeRepository.GetAllEmployees())
             {
                 employees.Add(_mapper.Map<Employee, EmployeeDTO>(employee)); 
             }
@@ -34,26 +34,25 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task<EmployeeDTO> GetEmployee(int Id)
         {
-            Employee employee = _employeeRepository.GetEmployee(Id);
+            Employee employee = await _employeeRepository.GetEmployee(Id);
 
             return _mapper.Map<Employee, EmployeeDTO>(employee);
         }
 
-        public async Task<Boolean> AddEmployee(Employee employee)
+        public async Task AddEmployee(Employee employee)
         {
-            _employeeRepository.AddEmployee(employee);
+            await _employeeRepository.AddEmployee(employee);
 
-            return true;
         }
        
         public async Task<List<Position>> GetPositions()
         {
-            return _employeeRepository.GetPositions();
+            return await _employeeRepository.GetPositions();
         }
 
         public async Task<EmployeeDTO> GetEmployee(string email)
         {
-            Employee employee = _employeeRepository.GetEmployee(email);
+            Employee employee = await _employeeRepository.GetEmployee(email);
 
             return _mapper.Map<Employee, EmployeeDTO>(employee);
         }

@@ -23,7 +23,7 @@ namespace CarWorkshop.Tests.Services
             var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
 
             await ClientService.GetClient(It.IsAny<string>());
-            ClientRepositoryMock.Verify(x => x.GetClientByEmail(It.IsAny<string>()), Times.Once);
+            ClientRepositoryMock.Verify(x => x.GetClient(It.IsAny<string>()), Times.Once);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace CarWorkshop.Tests.Services
             var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
 
             await ClientService.GetClient(It.IsAny<int>());
-            ClientRepositoryMock.Verify(x => x.GetClientById(It.IsAny<int>()), Times.Once);
+            ClientRepositoryMock.Verify(x => x.GetClient(It.IsAny<int>()), Times.Once);
         }
 
         [Fact]
@@ -102,7 +102,7 @@ namespace CarWorkshop.Tests.Services
 
             await ClientService.UpdateClient(client);
 
-            ClientRepositoryMock.Verify(x => x.GetClientById(It.IsAny<int>()), Times.Once);
+            ClientRepositoryMock.Verify(x => x.GetClient(It.IsAny<int>()), Times.Once);
             ClientRepositoryMock.Verify(x => x.UpdateClient(It.IsAny<Client>()), Times.Once);
         }
 

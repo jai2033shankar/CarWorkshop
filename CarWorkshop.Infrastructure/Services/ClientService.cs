@@ -25,7 +25,7 @@ namespace CarWorkshop.Infrastructure.Services
         {
             List<ClientDTO> clients = new List<ClientDTO>();
 
-            foreach (var client in _clientRepository.GetAllClients())
+            foreach (var client in await _clientRepository.GetAllClients())
             {
                 clients.Add(_mapper.Map<Client, ClientDTO>(client));
             }
@@ -35,33 +35,33 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task<ClientDTO> GetClient(int Id)
         {
-            Client client = await _clientRepository.GetClientById(Id);
+            Client client = await _clientRepository.GetClient(Id);
 
             return _mapper.Map<Client, ClientDTO>(client);
         }
 
         public async Task<ClientDTO> GetClient(string email)
         {
-            Client client = await _clientRepository.GetClientByEmail(email);
+            Client client = await _clientRepository.GetClient(email);
 
             return _mapper.Map<Client, ClientDTO>(client);
         }
 
         public async Task AddClient(ClientDTO client)
         {
-            var Newclient = _mapper.Map<ClientDTO, Client>(client);
+            Client Newclient = _mapper.Map<ClientDTO, Client>(client);
             Newclient.UserRole = 3;
 
-            _clientRepository.AddClient(Newclient);
+            await _clientRepository.AddClient(Newclient);
         }
 
         public async Task UpdateClient(ClientDTO client)
         {
-            Client clientToUpdate = await _clientRepository.GetClientById(client.ClientId);
+            Client clientToUpdate = await _clientRepository.GetClient(client.ClientId);
 
             _mapper.Map(client, clientToUpdate);
 
-             _clientRepository.UpdateClient(clientToUpdate);
+             await _clientRepository.UpdateClient(clientToUpdate);
         }
 
         public async Task RemoveClient(int Id)
@@ -72,9 +72,29 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task AddCar(CarDTO car)
         {
-            var NewCar = _mapper.Map<CarDTO, Car>(car);
+            Car NewCar = _mapper.Map<CarDTO, Car>(car);
 
             await _clientRepository.AddCar(NewCar);
+        }
+
+        public async Task EditCar(CarDTO updatedCar)
+        {
+            Car carToUpdate = await _clientRepository.GetCar(updatedCar.CarId);
+
+            _mapper.Map(updatedCar, carToUpdate);
+
+            await _clientRepository.EditCar(carToUpdate);   
+        }
+
+        public async Task<IEnumerable<RepairDTO>> GetRepairs(int carId)
+        {
+            Car car = await _clientRepository.GetCar(carId);
+
+            List<RepairDTO> repairs = new List<RepairDTO>(); 
+
+            _mapper.Map(car.Repair, repairs);
+
+            return repairs;
         }
     }
 }

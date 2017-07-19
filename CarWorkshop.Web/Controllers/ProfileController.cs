@@ -49,8 +49,10 @@ namespace CarWorkshop.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int clientId)
+        public async Task<IActionResult> Delete(int clientId)
         {
+            await _service.RemoveClient(clientId);
+
             return View();
         }
     }

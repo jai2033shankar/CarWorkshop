@@ -21,35 +21,53 @@ namespace CarWorkshop.Infrastructure.Repositories
             clients = _context.Set<Client>();
 
             cars = _context.Set<Car>();
-            // ???
-            cars.Include(c => c.Repair);
         }
 
-        public void AddClient(Client client)
+        public async Task AddClient(Client client)
         {
             if (client == null)
             {
                 throw new ArgumentNullException("Client object not recived.");
             }
 
-            clients.Add(client);
-            _context.SaveChanges();
+            await clients.AddAsync(client);
+            await _context.SaveChangesAsync();
         }
 
-        public  IEnumerable<Client> GetAllClients()
+        public async Task<IEnumerable<Client>> GetAllClients()
         {
-            
-            return clients.Include(x => x.Car).AsEnumerable();
+            IEnumerable<Client> allClients = await clients.Include(x => x.Car).ToListAsync();
+
+            if (allClients == null)
+            {
+                throw new Exception("Could not load any clients from database");
+            }
+
+            return allClients;
         }
 
-        public async Task<Client> GetClientByEmail(string email)
+        public async Task<Client> GetClient(string email)
         {
-            var client = await clients.Include(x => x.Car).SingleOrDefaultAsync(c => c.EmailAddress.Contains(email));
+            Client client = await clients.Include(x => x.Car)
+                            .ThenInclude(car => car.Repair)
+                            .SingleOrDefaultAsync(c => c.EmailAddress.Contains(email));
 
-            //if (client == null)
-            //{
-            //    throw new Exception($"Client with email address: {email}, could not be found.");
-            //}
+            if (client == null)
+            {
+                throw new Exception($"Client with email address: {email}, could not be found.");
+            }
+
+            return client;
+        }
+
+        public async Task<Client> GetClient(int Id)
+        {
+            Client client = await clients.SingleAsync(c => c.ClientId == Id);
+
+            if (client == null)
+            {
+                throw new ArgumentNullException($"Client with id: {Id}, could not be found.");
+            }
 
             return client;
         }
@@ -60,40 +78,57 @@ namespace CarWorkshop.Infrastructure.Repositories
 
             if (clientToDelete == null)
             {
-                throw new Exception($"Client with id: {clientId}, could not be found.");
+                throw new ArgumentNullException($"Client with id: {clientId}, could not be found.");
             }
 
-            _context.Remove(clientToDelete);
-            _context.SaveChanges();
+            clients.Remove(clientToDelete);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateClient(Client client)
+        public async Task UpdateClient(Client client)
         {
-            _context.Update(client);
-            _context.SaveChanges();
-        }
-
-        public async Task<Client> GetClientById(int Id)
-        {
-            var client = await clients.SingleAsync(c => c.ClientId == Id);
-
             if (client == null)
             {
-                throw new Exception($"Client with id: {Id}, could not be found.");
+                throw new ArgumentNullException("UpdateClient method received null Client object.");
             }
 
-            return client;
+            clients.Update(client);
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddCar(Car car)
         {
             if (car == null)
             {
-                throw new ArgumentNullException("Car is null");
+                throw new ArgumentNullException("AddCar method received null Car object.");
             }
 
             await cars.AddAsync(car);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task EditCar(Car car)
+        {
+            if (car == null)
+            {
+                throw new ArgumentNullException("EditCar method received null Car object.");
+            }
+
+            cars.Update(car);
+
+           await _context.SaveChangesAsync();
+        }
+
+        public async Task<Car> GetCar(int carId)
+        {
+            Car result = await cars.SingleOrDefaultAsync(c => c.CarId == carId);
+
+            if (result == null)
+            {
+                throw new ArgumentNullException($"Car with id: {carId} was not found in database.");
+            }
+
+            return result;
         }
     }
 }

@@ -21,5 +21,9 @@ namespace CarWorkshop.Infrastructure.Services
         Task RemoveClient(int Id);
 
         Task AddCar(CarDTO car);
+
+        Task EditCar(CarDTO updatedCar);
+
+        Task<IEnumerable<RepairDTO>> GetRepairs(int carId);
     }
 }

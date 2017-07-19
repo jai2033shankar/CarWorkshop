@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using CarWorkshop.Infrastructure.Commands.Client;
 using CarWorkshop.Infrastructure.Commands;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarWorkshop.Web.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly IClientService _clientService;
@@ -38,9 +40,11 @@ namespace CarWorkshop.Web.Controllers
             {
                 var client = await _clientService.GetClient(model.EmailAddress);
 
-                if (client == null || client.Password != model.Password)
+                // Weird bug here - client.Password has a lot of white space.
+                if (client == null || client.Password.Trim() != model.Password)
                 {
                     // Show error
+                    throw new Exception("Stuff went very wrong");
                 }
 
                 var claims = new[]
@@ -93,6 +97,12 @@ namespace CarWorkshop.Web.Controllers
         {
             ViewData["Message"] = "Your application description page.";
 
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Forbidden()
+        {
             return View();
         }
 

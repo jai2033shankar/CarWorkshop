@@ -8,21 +8,25 @@ namespace CarWorkshop.Employee.Controllers
 {
     public class HomeController : Controller
     {
+
+        // GET: Login
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public IActionResult LogIn(Object model)
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
-        public IActionResult Contact()
+
+        public IActionResult About()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Your application description page.";
 
             return View();
         }

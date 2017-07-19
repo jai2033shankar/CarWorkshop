@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CarWorkshop</title>
+    <title>@ViewData["Title"] - Admin Panel</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -31,41 +31,14 @@
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">CarWorkshop</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-
-                    @if (User.IsInRole("1"))
-                    {
-                        <li><a asp-area="" asp-controller="Search" asp-action="Index">Search</a></li>
-
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Employee<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a asp-controller="Employee" asp-action="AddEmployee">Add Employee</a></li>
-                            </ul>
-                        </li>
-                    }
-
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li><a asp-area="" asp-controller="Profile" asp-action="Index">Profile</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="LogOut">Sign out</a></li>
-                    }
-                    else
-                    {
-                        <li><a asp-area="" asp-controller="Home" asp-action="CreateAccount">Sign up</a></li>
-                    }
-                </ul>
             </div>
         </div>
     </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2017 - Szymon Kalista</p>
+        <footer class="panel-footer navbar-fixed-bottom">
+            <p style="text-align:center">&copy; @DateTime.Today.Year - Szymon Kalista</p>
         </footer>
     </div>
 
@@ -91,5 +64,6 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

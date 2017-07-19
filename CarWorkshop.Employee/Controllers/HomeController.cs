@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using CarWorkshop.Employee.Models;
 
 namespace CarWorkshop.Employee.Controllers
 {
@@ -18,9 +19,17 @@ namespace CarWorkshop.Employee.Controllers
         }
 
         [HttpPost]
-        public IActionResult LogIn(Object model)
+        public IActionResult LogIn(LogInViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                // LogIn user
+
+                return RedirectToAction("Index");
+            }
+
+            // Something went wrong, redisplay form.
+            return RedirectToAction("Index");
         }
 
 

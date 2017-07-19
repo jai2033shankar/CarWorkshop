@@ -8,7 +8,6 @@
                 <th>Model</th>
                 <th>Registration Number</th>
                 <th>Actions</th>
-                <th>TestRepair</th>
             </tr>
         </thead>
         <tbody>
@@ -18,11 +17,10 @@
                     <td>@car.Brand</td>
                     <td>@car.CarModel</td>
                     <td>@car.RegistrationNumber</td>
-                    <td><input type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Car", new {carId = car.CarId})'" /></td>
-                    @if (car.Repair.SingleOrDefault() != null)
-                    {
-                        <td>@car.Repair.SingleOrDefault().Description</td>
-                    }
+                    <td>
+                        <input class="btn btn-default" type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Car", new {carId = car.CarId})'" />
+                        <input class="btn btn-default" type="button" value="Repairs" onclick="location.href='@Url.Action("Repairs", "Car", new {carId = car.CarId})'"/>
+                    </td>
                 </tr>
             }
         </tbody>

@@ -61,7 +61,7 @@ namespace CarWorkshop.Infrastructure.Services
 
             _mapper.Map(client, clientToUpdate);
 
-             _clientRepository.UpdateClient(clientToUpdate);
+             await _clientRepository.UpdateClient(clientToUpdate);
         }
 
         public async Task RemoveClient(int Id)
@@ -84,6 +84,17 @@ namespace CarWorkshop.Infrastructure.Services
             _mapper.Map(updatedCar, carToUpdate);
 
             await _clientRepository.EditCar(carToUpdate);   
+        }
+
+        public async Task<IEnumerable<RepairDTO>> GetRepairs(int carId)
+        {
+            Car car = await _clientRepository.GetCar(carId);
+
+            List<RepairDTO> repairs = new List<RepairDTO>(); 
+
+            _mapper.Map(car.Repair, repairs);
+
+            return repairs;
         }
     }
 }

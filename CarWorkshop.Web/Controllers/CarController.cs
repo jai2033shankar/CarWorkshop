@@ -81,5 +81,19 @@ namespace CarWorkshop.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Repairs(int carId)
+        {
+            var repairs = await _service.GetRepairs(carId);
+
+            if (repairs.Count() == 0)
+            {
+                ViewData["Repairs"] = "This car has not undergone any repairs.";
+                return View();
+            }
+
+            return View(repairs);
+        }
     }
 }

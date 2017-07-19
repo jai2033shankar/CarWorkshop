@@ -1,0 +1,32 @@
+﻿@model List<CarWorkshop.Infrastructure.DTO.RepairDTO>
+
+@if (ViewData["Repairs"] != null)
+{
+    <h1>@ViewData["Repairs"]</h1>
+}
+else
+{
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Begin Date</th>
+                    <th>End Date</th>
+                    <th>Description</th>
+                    <th>Payment</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var repair in Model)
+                {
+                    <tr>
+                        <td>@repair.BeginDate</td>
+                        <td>@repair.EndDate</td>
+                        <td>@repair.Description</td>
+                        <td>@repair.Payment</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

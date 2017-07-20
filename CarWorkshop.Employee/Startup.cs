@@ -18,6 +18,8 @@ using CarWorkshop.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using CarWorkshop.Infrastructure.AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace CarWorkshop.Employee
 {
@@ -43,7 +45,13 @@ namespace CarWorkshop.Employee
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IEmployeeService, EmployeeService>();
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(config => 
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

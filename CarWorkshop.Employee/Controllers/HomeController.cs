@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace CarWorkshop.Employee.Controllers
 {
-
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly IEmployeeService _service;
@@ -21,14 +21,12 @@ namespace CarWorkshop.Employee.Controllers
         }
 
         // GET: Login
-        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> LogIn(LogInViewModel model)
         {

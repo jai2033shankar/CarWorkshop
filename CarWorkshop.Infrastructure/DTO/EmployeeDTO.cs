@@ -17,6 +17,7 @@ namespace CarWorkshop.Infrastructure.DTO
         public string Currency { get; set; }
         public string Position { get; set; }
         public string UserRole { get; set; }
+        public string Password { get; set; }
 
     }
 }

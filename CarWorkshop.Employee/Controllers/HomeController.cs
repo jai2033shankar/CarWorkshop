@@ -41,7 +41,10 @@ namespace CarWorkshop.Employee.Controllers
                     throw new Exception("Dayuum niBBa");
                 }
 
-                // Add passwordChecking
+                if (model.Password != employee.Password.Trim())
+                {
+                    return RedirectToAction("Index");
+                }
                 
                 var claims = new[]
                 {

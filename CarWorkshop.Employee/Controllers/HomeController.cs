@@ -38,7 +38,7 @@ namespace CarWorkshop.Employee.Controllers
                 
                 if (employee == null)
                 {
-                    throw new Exception("Dayuum niBBa");
+                    throw new Exception("No such employee");
                 }
 
                 if (model.Password != employee.Password.Trim())

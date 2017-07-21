@@ -9,28 +9,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewComponents\**" />
     <Compile Remove="Views\Account\**" />
     <Compile Remove="Views\Client\**" />
     <Compile Remove="Views\Employee\**" />
-    <Content Remove="ViewComponents\**" />
     <Content Remove="Views\Account\**" />
     <Content Remove="Views\Client\**" />
     <Content Remove="Views\Employee\**" />
-    <EmbeddedResource Remove="ViewComponents\**" />
     <EmbeddedResource Remove="Views\Account\**" />
     <EmbeddedResource Remove="Views\Client\**" />
     <EmbeddedResource Remove="Views\Employee\**" />
-    <None Remove="ViewComponents\**" />
     <None Remove="Views\Account\**" />
     <None Remove="Views\Client\**" />
     <None Remove="Views\Employee\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientListViewComponent.cs" />
     <Compile Remove="Controllers\AccountController.cs" />
     <Compile Remove="Controllers\ClientController.cs" />
     <Compile Remove="Controllers\EmployeeController.cs" />
+    <Compile Remove="EmployeeListViewComponent.cs" />
     <Compile Remove="Models\AccountModel.cs" />
     <Compile Remove="Models\AddEmployeeViewModel.cs" />
     <Compile Remove="Models\ClientSearchViewModel.cs" />

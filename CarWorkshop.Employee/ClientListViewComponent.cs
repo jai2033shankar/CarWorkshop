@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarWorkshop.Employee.ViewComponents
+namespace CarWorkshop.Web.ViewComponents
 {
     public class ClientListViewComponent : ViewComponent
     {

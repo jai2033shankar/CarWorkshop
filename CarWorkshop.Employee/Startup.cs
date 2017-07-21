@@ -44,6 +44,10 @@ namespace CarWorkshop.Employee
             services.AddSingleton<IMapper>(x => AutoMapperConfig.Configure());
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+
+            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IClientService, ClientService>();
+
             // Add framework services.
             services.AddMvc(config => 
             {

@@ -8,9 +8,16 @@ namespace CarWorkshop.Employee.Controllers
 {
     public class SearchController : Controller
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(string query, string option, bool inactive)
         {
+            if (!String.IsNullOrEmpty(option))
+            {
+                ViewData["ViewComponent"] = option;
+                ViewData["Query"] = query;
+                ViewData["Inactive"] = inactive;
+            }
+
             return View();
         }
     }

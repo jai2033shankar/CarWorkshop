@@ -26,9 +26,9 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public async Task<IEnumerable<Repair>> GetAllRepairs()
         {
-            _repairs.Include(c => c.Car).Include(c => c.Employee);
+            var result = await _repairs.Include(c => c.Car).Include(c => c.Employee).ToListAsync();
 
-            return await _repairs.ToListAsync();
+            return result;
         }
 
         public async Task UpdateRepair(Repair updatedRepair)

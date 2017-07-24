@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using CarWorkshop.Core.Models;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -15,12 +16,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         public CarRepository(CarWorkshopContext context)
         {
             _context = context;
-            cars = _context.Set<Car>();
-
-            var test = _context.Car.Include(car => car.Brand)
-                                   .Include(x => x.Model)
-                                   .Include(x => x.Client);
-            
+            cars = _context.Set<Car>();            
         }
 
         public Task AddCar(Car car)
@@ -33,24 +29,33 @@ namespace CarWorkshop.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Car>> GetAllCars()
+        public async Task<IEnumerable<Car>> GetAllCars()
         {
-            throw new NotImplementedException();
+            List<Car> allCars = await cars.Include(c => c.Repair).Include(c => c.Client).ToListAsync();
+
+            return allCars;
         }
 
-        public Task<IEnumerable<Car>> GetAllCarsForClient(int clientId)
+        public async Task<IEnumerable<Car>> GetAllCarsForClient(int clientId)
         {
-            throw new NotImplementedException();
+            List<Car> clientCars = await cars.Include(c => c.Repair)
+                                             .Include(c => c.Repair)
+                                             .Where(c => c.ClientId == clientId)
+                                             .ToListAsync();
+
+            return clientCars;
         }
 
-        public Task<Car> GetCar(int carId)
+        public async Task<Car> GetCar(int carId)
         {
-            throw new NotImplementedException();
+            Car car = await cars.SingleOrDefaultAsync(c => c.CarId == carId);
+
+            return car;
         }
 
-        public Task UpdateCar(Car car)
+        public async Task UpdateCar(Car car)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

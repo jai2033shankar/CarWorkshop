@@ -68,7 +68,7 @@ namespace CarWorkshop.Employee.Controllers
         {
             await HttpContext.Authentication.SignOutAsync("EmployeeAuthCookieMiddleware");
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

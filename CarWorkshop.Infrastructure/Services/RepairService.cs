@@ -21,7 +21,9 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task AddRepair(RepairDTO repair)
         {
-            
+            Repair newRepair = _mapper.Map<RepairDTO, Repair>(repair);
+
+            await _repository.AddRepair(newRepair);
         }
 
         public async Task<IEnumerable<RepairDTO>> GetAllRepairs()

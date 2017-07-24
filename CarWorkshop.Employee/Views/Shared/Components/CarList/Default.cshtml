@@ -19,7 +19,7 @@
                     <td>@Html.DisplayFor(item => car.CarModel)</td>
                     <td>@Html.DisplayFor(item => car.RegistrationNumber)</td>
                     <td>@Html.DisplayFor(item => car.ClientId)</td>
-                    <td><input type="submit" value="Delete" onclick="location.href='@Url.Action("DeleteClient", "Client", new {Id = car.CarId})'" /></td>
+                    <td><input type="submit" value="Delete" onclick="location.href='@Url.Action("Home", "Index", new {Id = car.CarId})'" /></td>
                 </tr>
             }
         </tbody>

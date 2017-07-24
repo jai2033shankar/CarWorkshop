@@ -152,6 +152,9 @@ namespace CarWorkshop.Web
             container.Register<IEmployeeRepository, EmployeeRepository>(Lifestyle.Scoped);
             container.Register<IEmployeeService, EmployeeService>(Lifestyle.Scoped);
 
+            container.Register<ICarRepository, CarRepository>(Lifestyle.Scoped);
+            container.Register<ICarService, CarService>(Lifestyle.Scoped);
+
             container.RegisterSingleton<IMapper>(AutoMapperConfig.Configure());
 
 

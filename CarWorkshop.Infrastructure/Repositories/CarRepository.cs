@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using CarWorkshop.Core.Models;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -15,42 +16,56 @@ namespace CarWorkshop.Infrastructure.Repositories
         public CarRepository(CarWorkshopContext context)
         {
             _context = context;
-            cars = _context.Set<Car>();
-
-            var test = _context.Car.Include(car => car.Brand)
-                                   .Include(x => x.Model)
-                                   .Include(x => x.Client);
-            
+            cars = _context.Set<Car>();            
         }
 
-        public Task AddCar(Car car)
+        public async Task AddCar(Car car)
         {
-            throw new NotImplementedException();
+            if (car == null)
+            {
+                throw new ArgumentNullException("AddCar method received null Car object.");
+            }
+
+            await cars.AddAsync(car);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteCar(int Id)
+        public async Task DeleteCar(int Id)
         {
-            throw new NotImplementedException();
+            Car car = await GetCar(Id);
+
+            if ( car == null )
+            {
+                throw new Exception($"Car with Id: {Id} could not be found");
+            }
+
+            cars.Remove(car);
         }
 
-        public Task<IEnumerable<Car>> GetAllCars()
+        public async Task<IEnumerable<Car>> GetAllCars()
         {
-            throw new NotImplementedException();
+            List<Car> allCars = await cars.Include(c => c.Repair).Include(c => c.Client).ToListAsync();
+
+            return allCars;
         }
 
-        public Task<IEnumerable<Car>> GetAllCarsForClient(int clientId)
+        public async Task<Car> GetCar(int carId)
         {
-            throw new NotImplementedException();
+            Car result = await cars.Include(c => c.Repair).Include(c => c.Client).SingleOrDefaultAsync(c => c.CarId == carId);
+
+            if (result == null)
+            {
+                throw new ArgumentNullException($"Car with id: {carId} was not found in database.");
+            }
+
+            return result;
         }
 
-        public Task<Car> GetCar(int carId)
+        public async Task UpdateCar(Car car)
         {
-            throw new NotImplementedException();
-        }
+            cars.Update(car);
 
-        public Task UpdateCar(Car car)
-        {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
     }
 }

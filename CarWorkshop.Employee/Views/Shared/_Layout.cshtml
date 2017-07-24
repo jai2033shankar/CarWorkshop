@@ -29,8 +29,24 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand">CarWorkshop</a>
+                <ul class="nav navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.Partial("./NavbarPartials/AdminBarPartial.cshtml")
+                    }
+                </ul>
             </div>
             <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.Partial("./NavbarPartials/UserBarPartial.cshtml")
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Home" asp-action="CreateAccount">Sign up</a></li>
+                    }
+                </ul>
             </div>
         </div>
     </nav>

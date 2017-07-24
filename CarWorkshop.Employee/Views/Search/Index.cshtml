@@ -1,5 +1,5 @@
 ﻿
-<form method="get">
+<form method="get" asp-controller="Search" asp-action="Index">
 
     <div class="form-group">
         <input type="text" class="form-control" name="query" id="searchText" placeholder="Search..." />
@@ -31,10 +31,8 @@
 </form>
 
 <div id="container">
-
     @if (ViewData["ViewComponent"] != null)
     {
-       @await Component.InvokeAsync((string)ViewData["ViewComponent"])
+        @await Component.InvokeAsync(ViewData["ViewComponent"].ToString(), new { query = ViewData["Query"], inactive = ViewData["Inactive"] })
     }
-
 </div>

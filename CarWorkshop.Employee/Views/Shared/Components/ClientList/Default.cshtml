@@ -1,10 +1,6 @@
 ﻿@model List<CarWorkshop.Infrastructure.DTO.ClientDTO>
-@{
-    ViewData["Title"] = "Test Client Page";
-}
 
 <div class="container">
-    <h1>Clients</h1>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -25,12 +21,11 @@
                     <td>@Html.DisplayFor(item => client.LastName)</td>
                     <td>@Html.DisplayFor(item => client.EmailAddress)</td>
                     <td>@Html.DisplayFor(item => client.PhoneNumber)</td>
-                    <td>@Html.DisplayFor(item => client.Cars.SingleOrDefault().Model)</td>
-                    <td>@Html.DisplayFor(item => client.Cars.SingleOrDefault().RegistratrionNumber)</td>
+                    <td>PlaceHolder</td>
+                    <td>PlaceHolder</td>
                     <td><input type="submit" value="Delete" onclick="location.href='@Url.Action("DeleteClient", "Client", new {Id = client.ClientId})'" /></td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-

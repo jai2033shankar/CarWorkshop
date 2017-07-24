@@ -13,12 +13,14 @@ namespace CarWorkshop.Infrastructure.Services
     {
 
         private readonly IClientRepository  _clientRepository;
+        private readonly ICarRepository _carRepository;
         private readonly IMapper _mapper;
 
-        public ClientService(IClientRepository clientRepository, IMapper mapper)
+        public ClientService(IClientRepository clientRepository, IMapper mapper, ICarRepository carRepository)
         {
             _clientRepository = clientRepository;
             _mapper = mapper;
+            _carRepository = carRepository;
         }
 
         public async Task<List<ClientDTO>> GetAllClients()
@@ -79,16 +81,16 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task EditCar(CarDTO updatedCar)
         {
-            Car carToUpdate = await _clientRepository.GetCar(updatedCar.CarId);
+            Car carToUpdate = await _carRepository.GetCar(updatedCar.CarId);
 
             _mapper.Map(updatedCar, carToUpdate);
 
-            await _clientRepository.EditCar(carToUpdate);   
+            await _carRepository.UpdateCar(carToUpdate);
         }
 
         public async Task<IEnumerable<RepairDTO>> GetRepairs(int carId)
         {
-            Car car = await _clientRepository.GetCar(carId);
+            Car car = await _carRepository.GetCar(carId);
 
             List<RepairDTO> repairs = new List<RepairDTO>(); 
 

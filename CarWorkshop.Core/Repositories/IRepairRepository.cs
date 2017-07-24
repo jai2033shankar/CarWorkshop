@@ -10,7 +10,7 @@ namespace CarWorkshop.Core.Repositories
     {
         Task<IEnumerable<Repair>> GetAllRepairs();
 
-        Task AddRepair(int carId, int employeeId);
+        Task AddRepair(Repair repair);
 
         Task UpdateRepair(Repair updatedRepair);
     }

@@ -18,9 +18,10 @@ namespace CarWorkshop.Infrastructure.Repositories
             repairs = _context.Set<Repair>();
         }
 
-        public Task AddRepair(int carId, int employeeId)
+        public async Task AddRepair(Repair repair)
         {
-            throw new NotImplementedException();
+            await repairs.AddAsync(repair);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Repair>> GetAllRepairs()
@@ -30,9 +31,11 @@ namespace CarWorkshop.Infrastructure.Repositories
             return await repairs.ToListAsync();
         }
 
-        public Task UpdateRepair(Repair updatedRepair)
+        public async Task UpdateRepair(Repair updatedRepair)
         {
-            throw new NotImplementedException();
+            repairs.Update(updatedRepair);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

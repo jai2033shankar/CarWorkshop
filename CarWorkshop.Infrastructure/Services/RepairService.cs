@@ -19,6 +19,11 @@ namespace CarWorkshop.Infrastructure.Services
             _mapper = mapper;
         }
 
+        public async Task AddRepair(RepairDTO repair)
+        {
+            
+        }
+
         public async Task<IEnumerable<RepairDTO>> GetAllRepairs()
         {
             var repairs = await _repository.GetAllRepairs();
@@ -26,6 +31,15 @@ namespace CarWorkshop.Infrastructure.Services
             IEnumerable<RepairDTO> result = _mapper.Map<IEnumerable<Repair>, IEnumerable<RepairDTO>>(repairs);
 
             return result;
+        }
+
+        public async Task UpdateRepair(RepairDTO updatedRepair)
+        {
+            Repair repairToUpdate = await _repository.GetRepair(updatedRepair.RepairId);
+
+            _mapper.Map(updatedRepair, repairToUpdate);
+
+            await _repository.UpdateRepair(repairToUpdate);
         }
     }
 }

@@ -11,31 +11,43 @@ namespace CarWorkshop.Infrastructure.Repositories
     public class RepairRepository : IRepairRepository
     {
         private readonly CarWorkshopContext _context;
-        private readonly DbSet<Repair> repairs;
+        private readonly DbSet<Repair> _repairs;
         public RepairRepository(CarWorkshopContext context)
         {
             _context = context;
-            repairs = _context.Set<Repair>();
+            _repairs = _context.Set<Repair>();
         }
 
         public async Task AddRepair(Repair repair)
         {
-            await repairs.AddAsync(repair);
+            await _repairs.AddAsync(repair);
             await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Repair>> GetAllRepairs()
         {
-            repairs.Include(c => c.Car).Include(c => c.Employee);
+            _repairs.Include(c => c.Car).Include(c => c.Employee);
 
-            return await repairs.ToListAsync();
+            return await _repairs.ToListAsync();
         }
 
         public async Task UpdateRepair(Repair updatedRepair)
         {
-            repairs.Update(updatedRepair);
+            _repairs.Update(updatedRepair);
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Repair> GetRepair(int repairId)
+        {
+            Repair repair = await _repairs.SingleOrDefaultAsync(c => c.RepairId == repairId);
+
+            if (repair == null)
+            {
+                throw new Exception($"Repair with Id:{repairId} could not be found.");
+            }
+
+            return repair;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarWorkshop.Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,17 @@ namespace CarWorkshop.Employee.ViewComponents
 {
     public class RepairListViewComponent : ViewComponent
     {
+        private readonly IRepairService _service; 
+        public RepairListViewComponent(IRepairService service)
+        {
+            _service = service;
+        }
+
         public async Task<IViewComponentResult> InvokeAsync(string query, bool inactive)
         {
-            //TODO
-            return View();
+            var repairs = await _service.GetAllRepairs();
+
+            return View(repairs);
         }
     }
 }

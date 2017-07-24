@@ -1,1 +1,27 @@
-﻿<h1>Repairs</h1>
+﻿@model List<CarWorkshop.Infrastructure.DTO.RepairDTO>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Begin</th>
+                <th>End</th>
+                <th>Description</th>
+                <th>Payment</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var repair in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(item => repair.BeginDate)</td>
+                    <td>@Html.DisplayFor(item => repair.EndDate)</td>
+                    <td>@Html.DisplayFor(item => repair.Description)</td>
+                    <td>@Html.DisplayFor(item => repair.Payment)</td>
+                    <td><input type="submit" value="Delete" onclick="location.href='@Url.Action("Home", "Index", new {Id = 0})'" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

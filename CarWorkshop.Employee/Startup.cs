@@ -51,6 +51,9 @@ namespace CarWorkshop.Employee
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ICarService, CarService>();
 
+            services.AddScoped<IRepairRepository, RepairRepository>();
+            services.AddScoped<IRepairService, RepairService>();
+
             // Add framework services.
             services.AddMvc(config => 
             {

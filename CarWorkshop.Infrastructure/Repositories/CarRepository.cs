@@ -51,7 +51,7 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public async Task<Car> GetCar(int carId)
         {
-            Car result = await cars.SingleOrDefaultAsync(c => c.CarId == carId);
+            Car result = await cars.Include(c => c.Repair).Include(c => c.Client).SingleOrDefaultAsync(c => c.CarId == carId);
 
             if (result == null)
             {

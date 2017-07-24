@@ -18,9 +18,10 @@ namespace CarWorkshop.Tests.Services
         public async Task GetClient_with_email_should_call_GetClientByEmail_on_repository()
         {
             var ClientRepositoryMock = new Mock<IClientRepository>();
+            var CarRepositoryMock = new Mock<ICarRepository>();
 
             var MapperMock = new Mock<IMapper>();
-            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object, CarRepositoryMock.Object);
 
             await ClientService.GetClient(It.IsAny<string>());
             ClientRepositoryMock.Verify(x => x.GetClient(It.IsAny<string>()), Times.Once);
@@ -30,9 +31,10 @@ namespace CarWorkshop.Tests.Services
         public async Task GetClient_with_Id_should_call_GetClientById_on_repository()
         {
             var ClientRepositoryMock = new Mock<IClientRepository>();
+            var CarRepositoryMock = new Mock<ICarRepository>();
             var MapperMock = new Mock<IMapper>();
 
-            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object, CarRepositoryMock.Object);
 
             await ClientService.GetClient(It.IsAny<int>());
             ClientRepositoryMock.Verify(x => x.GetClient(It.IsAny<int>()), Times.Once);
@@ -42,9 +44,10 @@ namespace CarWorkshop.Tests.Services
         public async Task GetAllClients_should_call_GetAllClients_on_repository()
         {
             var ClientRepostioryMock = new Mock<IClientRepository>();
+            var CarRepositoryMock = new Mock<ICarRepository>();
             var MapperMock = new Mock<IMapper>();
 
-            var ClientService = new ClientService(ClientRepostioryMock.Object, MapperMock.Object);
+            var ClientService = new ClientService(ClientRepostioryMock.Object, MapperMock.Object, CarRepositoryMock.Object);
 
             await ClientService.GetAllClients();
 
@@ -55,6 +58,7 @@ namespace CarWorkshop.Tests.Services
         public async Task AddClient_should_call_AddClient_on_repository()
         {
             var ClientRepositoryMock = new Mock<IClientRepository>();
+            var CarRepositoryMock = new Mock<ICarRepository>();
             var MapperMock = new Mock<IMapper>();
 
             MapperMock.Setup(x => x.Map<ClientDTO, Client>(It.IsAny<ClientDTO>()))
@@ -71,22 +75,23 @@ namespace CarWorkshop.Tests.Services
                 Cars = new List<CarDTO>()
             };
 
-            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object, CarRepositoryMock.Object);
 
             await ClientService.AddClient(client);
 
             MapperMock.Verify(x => x.Map<ClientDTO, Client>(It.IsAny<ClientDTO>()), Times.Once);
             ClientRepositoryMock.Verify(x => x.AddClient(It.IsAny<Client>()), Times.Once);
-            
+
         }
 
         [Fact]
         public async Task UpdateClient_should_call_GetClientById_and_UpdateClient_on_Repository()
         {
             var ClientRepositoryMock = new Mock<IClientRepository>();
+            var CarRepositoryMock = new Mock<ICarRepository>();
             var MapperMock = new Mock<IMapper>();
 
-            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object, CarRepositoryMock.Object);
 
             var client = new ClientDTO
             {
@@ -110,9 +115,10 @@ namespace CarWorkshop.Tests.Services
         public async Task RemoveClient_should_call_RemoveClient_on_repository()
         {
             var ClientRepositoryMock = new Mock<IClientRepository>();
+            var CarRepositoryMock = new Mock<ICarRepository>();
             var MapperMock = new Mock<IMapper>();
 
-            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object);
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object, CarRepositoryMock.Object);
 
             await ClientService.RemoveClient(It.IsAny<int>());
 

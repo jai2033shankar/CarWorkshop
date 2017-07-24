@@ -12,8 +12,6 @@ namespace CarWorkshop.Core.Repositories
 
         Task<IEnumerable<Car>> GetAllCars();
 
-        Task<IEnumerable<Car>> GetAllCarsForClient(int clientId);
-
         Task AddCar(Car car);
 
         Task DeleteCar(int Id);

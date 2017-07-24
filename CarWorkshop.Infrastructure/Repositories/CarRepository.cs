@@ -19,14 +19,27 @@ namespace CarWorkshop.Infrastructure.Repositories
             cars = _context.Set<Car>();            
         }
 
-        public Task AddCar(Car car)
+        public async Task AddCar(Car car)
         {
-            throw new NotImplementedException();
+            if (car == null)
+            {
+                throw new ArgumentNullException("AddCar method received null Car object.");
+            }
+
+            await cars.AddAsync(car);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteCar(int Id)
+        public async Task DeleteCar(int Id)
         {
-            throw new NotImplementedException();
+            Car car = await GetCar(Id);
+
+            if ( car == null )
+            {
+                throw new Exception($"Car with Id: {Id} could not be found");
+            }
+
+            cars.Remove(car);
         }
 
         public async Task<IEnumerable<Car>> GetAllCars()
@@ -36,26 +49,23 @@ namespace CarWorkshop.Infrastructure.Repositories
             return allCars;
         }
 
-        public async Task<IEnumerable<Car>> GetAllCarsForClient(int clientId)
-        {
-            List<Car> clientCars = await cars.Include(c => c.Repair)
-                                             .Include(c => c.Repair)
-                                             .Where(c => c.ClientId == clientId)
-                                             .ToListAsync();
-
-            return clientCars;
-        }
-
         public async Task<Car> GetCar(int carId)
         {
-            Car car = await cars.SingleOrDefaultAsync(c => c.CarId == carId);
+            Car result = await cars.SingleOrDefaultAsync(c => c.CarId == carId);
 
-            return car;
+            if (result == null)
+            {
+                throw new ArgumentNullException($"Car with id: {carId} was not found in database.");
+            }
+
+            return result;
         }
 
         public async Task UpdateCar(Car car)
         {
-            
+            cars.Update(car);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

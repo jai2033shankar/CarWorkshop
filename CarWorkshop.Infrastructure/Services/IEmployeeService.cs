@@ -14,5 +14,6 @@ namespace CarWorkshop.Infrastructure.Services
         Task<IEnumerable<EmployeeDTO>> GetAllEmployees();
         Task AddEmployee(EmployeeDTO employee);
         Task<List<Position>> GetPositions();
+        Task UpdateEmployee(EmployeeDTO updatedEmployee);
     }
 }

@@ -12,7 +12,7 @@ namespace CarWorkshop.Infrastructure.Repositories
     public class EmployeeRepository : IEmployeeRepository
     {
         private readonly CarWorkshopContext _context;
-        private DbSet<Employee> employees;
+        private readonly DbSet<Employee> employees;
         private readonly DbSet<Position> positions;
 
         public EmployeeRepository(CarWorkshopContext context)
@@ -79,7 +79,14 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public async Task UpdateEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            if (employee == null)
+            {
+                throw new ArgumentNullException("We got null here.");
+            }
+
+            _context.Update(employee);
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<Position>> GetPositions()

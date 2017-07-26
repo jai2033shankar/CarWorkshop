@@ -34,7 +34,7 @@ namespace CarWorkshop.Employee.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.AddEmployee(model);
+                await _service.AddEmployee(model);
 
                 return RedirectToAction("Index");
             }
@@ -52,12 +52,21 @@ namespace CarWorkshop.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            return View();
+            EmployeeDTO employee = await _service.GetEmployee(Id);
+
+            return View(employee);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(EmployeeDTO model)
         {
+            if (ModelState.IsValid)
+            {
+                await _service.UpdateEmployee(model);
+
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
     }

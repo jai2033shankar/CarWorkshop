@@ -24,7 +24,8 @@ namespace CarWorkshop.Infrastructure.AutoMapper
                     .ForMember(x => x.CarModel, opt => opt.MapFrom(src => src.Model));
                cfg.CreateMap<Employee, EmployeeDTO>()
                     .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.PositionNavigation.Description));
-               cfg.CreateMap<EmployeeDTO, Employee>();
+               cfg.CreateMap<EmployeeDTO, Employee>()
+                    .ForMember(x => x.Password, opt => opt.Condition(y => y.Password != null));
 
                cfg.CreateMap<CarDTO, Car>()
                     .ForMember(x => x.Model, opt => opt.MapFrom(src => src.CarModel))

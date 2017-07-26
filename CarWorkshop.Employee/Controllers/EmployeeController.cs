@@ -32,6 +32,14 @@ namespace CarWorkshop.Employee.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(EmployeeDTO model)
         {
+            if (ModelState.IsValid)
+            {
+                _service.AddEmployee(model);
+
+                return RedirectToAction("Index");
+            }
+
+            // Something failed redisplay form.
             return View();
         }
 

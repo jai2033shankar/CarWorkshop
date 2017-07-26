@@ -12,7 +12,7 @@ namespace CarWorkshop.Infrastructure.Services
         Task<EmployeeDTO> GetEmployee(int Id);
         Task<EmployeeDTO> GetEmployee(string email);
         Task<IEnumerable<EmployeeDTO>> GetAllEmployees();
-        Task AddEmployee(Employee employee);
+        Task AddEmployee(EmployeeDTO employee);
         Task<List<Position>> GetPositions();
     }
 }

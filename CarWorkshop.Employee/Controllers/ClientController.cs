@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CarWorkshop.Infrastructure.DTO;
+using CarWorkshop.Infrastructure.Services;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,6 +12,13 @@ namespace CarWorkshop.Employee.Controllers
 {
     public class ClientController : Controller
     {
+        private readonly IClientService _service;
+
+        public ClientController(IClientService service)
+        {
+            _service = service;
+        }
+
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -32,12 +40,21 @@ namespace CarWorkshop.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            return View();
+            ClientDTO client = await _service.GetClient(Id);
+
+            return View(client);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(ClientDTO model)
         {
+            if (ModelState.IsValid)
+            {
+                await _service.UpdateClient(model);
+
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
 

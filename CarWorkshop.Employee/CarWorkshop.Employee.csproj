@@ -10,19 +10,14 @@
 
   <ItemGroup>
     <Compile Remove="Views\Account\**" />
-    <Compile Remove="Views\Client\**" />
     <Content Remove="Views\Account\**" />
-    <Content Remove="Views\Client\**" />
     <EmbeddedResource Remove="Views\Account\**" />
-    <EmbeddedResource Remove="Views\Client\**" />
     <None Remove="Views\Account\**" />
-    <None Remove="Views\Client\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="ClientListViewComponent.cs" />
     <Compile Remove="Controllers\AccountController.cs" />
-    <Compile Remove="Controllers\ClientController.cs" />
     <Compile Remove="EmployeeListViewComponent.cs" />
     <Compile Remove="Models\AccountModel.cs" />
     <Compile Remove="Models\AddEmployeeViewModel.cs" />

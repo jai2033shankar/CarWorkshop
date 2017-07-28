@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Infrastructure.Services;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace CarWorkshop.Employee.Controllers
 {
     public class ClientController : Controller
@@ -34,6 +32,13 @@ namespace CarWorkshop.Employee.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ClientDTO model)
         {
+            if (ModelState.IsValid)
+            {
+                await _service.AddClient(model);
+
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
 

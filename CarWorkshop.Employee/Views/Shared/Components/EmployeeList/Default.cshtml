@@ -26,8 +26,8 @@
                     <td>@Html.DisplayFor(item => employee.Salary)</td>
                     <td>@Html.DisplayFor(item => employee.Currency)</td>
                     <td>
-                        <input class="btn-default" type="submit" value="Delete" onclick="location.href='@Url.Action("Delete", "Employee", new {Id = employee.EmployeeId})'" />
-                        <input class="btn-default" type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Employee", new {Id = employee.EmployeeId})'" />
+                        <input class="btn btn-default" type="submit" value="Delete" onclick="location.href='@Url.Action("Delete", "Employee", new {Id = employee.EmployeeId})'" />
+                        <input class="btn btn-default" type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Employee", new {Id = employee.EmployeeId})'" />
                     </td>
                 </tr>
             }

@@ -4,11 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CarWorkshop.Infrastructure.DTO;
+using CarWorkshop.Infrastructure.Services;
 
 namespace CarWorkshop.Employee.Controllers
 {
     public class RepairController : Controller
     {
+        private readonly IRepairService _service;
+
+        public RepairController(IRepairService service)
+        {
+            _service = service;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -35,8 +43,9 @@ namespace CarWorkshop.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            // ...
-            return View();
+            RepairDTO repair = await _service.GetRepair(Id);
+
+            return View(repair);
         }
 
         [HttpPost]
@@ -44,7 +53,8 @@ namespace CarWorkshop.Employee.Controllers
         {
             if (ModelState.IsValid)
             {
-                // ... 
+                await _service.UpdateRepair(model);
+                
                 return RedirectToAction("Index");
             }
 

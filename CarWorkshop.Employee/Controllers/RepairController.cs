@@ -33,7 +33,8 @@ namespace CarWorkshop.Employee.Controllers
         {
             if (ModelState.IsValid)
             {
-                // ... 
+                await _service.AddRepair(model);
+
                 return RedirectToAction("Index");
             }
 

@@ -19,6 +19,7 @@ namespace CarWorkshop.Employee.Controllers
             _service = service;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             // Add error checking.
@@ -27,6 +28,19 @@ namespace CarWorkshop.Employee.Controllers
             EmployeeDTO employee = await _service.GetEmployee(email);
 
             return View(employee);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EmployeeDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.UpdateEmployee(model);
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 }

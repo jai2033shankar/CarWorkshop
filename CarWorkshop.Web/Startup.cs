@@ -143,7 +143,7 @@ namespace CarWorkshop.Web
 
             // Add application services.
 
-            // Cross-wire asp.net service - docs advise to minimize this - check later.
+            // Cross-wire asp.net service.
             container.Register(app.ApplicationServices.GetService<CarWorkshopContext>, Lifestyle.Singleton);
 
             container.Register<IClientRepository, ClientRepository>(Lifestyle.Scoped);

@@ -20,11 +20,19 @@ using AutoMapper;
 using CarWorkshop.Infrastructure.AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Security.Claims;
+using SimpleInjector;
+using SimpleInjector.Lifestyles;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using SimpleInjector.Integration.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 namespace CarWorkshop.Employee
 {
     public class Startup
     {
+        private Container container = new Container();
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -41,18 +49,6 @@ namespace CarWorkshop.Employee
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CarWorkshopContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]), ServiceLifetime.Scoped);
-            services.AddSingleton<IMapper>(x => AutoMapperConfig.Configure());
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddScoped<IEmployeeService, EmployeeService>();
-
-            services.AddScoped<IClientRepository, ClientRepository>();
-            services.AddScoped<IClientService, ClientService>();
-
-            services.AddScoped<ICarRepository, CarRepository>();
-            services.AddScoped<ICarService, CarService>();
-
-            services.AddScoped<IRepairRepository, RepairRepository>();
-            services.AddScoped<IRepairService, RepairService>();
 
             // Add framework services.
             services.AddMvc(config => 
@@ -62,11 +58,23 @@ namespace CarWorkshop.Employee
                 .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
+
+            services.AddSingleton<IControllerActivator>(
+                new SimpleInjectorControllerActivator(container));
+
+            services.AddSingleton<IViewComponentActivator>(
+                new SimpleInjectorViewComponentActivator(container));
+
+            services.UseSimpleInjectorAspNetRequestScoping(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            InitializeContainer(app);
+
+            container.Verify();
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
@@ -97,6 +105,33 @@ namespace CarWorkshop.Employee
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private void InitializeContainer(IApplicationBuilder app)
+        {
+            container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+
+            // Add aplication presentation components.
+            container.RegisterMvcControllers(app);
+            container.RegisterMvcViewComponents(app);
+
+            // Cross-wire DbContext.
+            container.Register(app.ApplicationServices.GetService<CarWorkshopContext>, Lifestyle.Singleton);
+
+            container.Register<IEmployeeRepository, EmployeeRepository>(Lifestyle.Scoped);
+            container.Register<IEmployeeService, EmployeeService>(Lifestyle.Scoped);
+
+            container.Register<IClientRepository, ClientRepository>(Lifestyle.Scoped);
+            container.Register<IClientService, ClientService>(Lifestyle.Scoped);
+
+            container.Register<ICarRepository, CarRepository>(Lifestyle.Scoped);
+            container.Register<ICarService, CarService>(Lifestyle.Scoped);
+
+            container.Register<IRepairRepository, RepairRepository>(Lifestyle.Scoped);
+            container.Register<IRepairService, RepairService>(Lifestyle.Scoped);
+
+            container.RegisterSingleton<IMapper>(AutoMapperConfig.Configure());
+
         }
     }
 }

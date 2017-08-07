@@ -20,7 +20,6 @@
     <Compile Remove="Controllers\AccountController.cs" />
     <Compile Remove="EmployeeListViewComponent.cs" />
     <Compile Remove="Models\AccountModel.cs" />
-    <Compile Remove="Models\AddEmployeeViewModel.cs" />
     <Compile Remove="Models\ClientSearchViewModel.cs" />
   </ItemGroup>
 

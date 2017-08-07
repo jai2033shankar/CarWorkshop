@@ -14,12 +14,14 @@ namespace CarWorkshop.Infrastructure.Repositories
         private readonly CarWorkshopContext _context;
         private readonly DbSet<Employee> employees;
         private readonly DbSet<Position> positions;
+        private readonly DbSet<UserRole> roles;
 
         public EmployeeRepository(CarWorkshopContext context)
         {
             _context = context;
             employees = _context.Set<Employee>();
             positions = _context.Set<Position>();
+            roles = _context.Set<UserRole>();
         }
 
         public async Task AddEmployee(Employee employee)
@@ -92,6 +94,11 @@ namespace CarWorkshop.Infrastructure.Repositories
         public async Task<List<Position>> GetPositions()
         {
             return await positions.ToListAsync();
+        }
+
+        public async Task<List<UserRole>> GetRoles()
+        {
+            return await roles.ToListAsync();
         }
 
     }

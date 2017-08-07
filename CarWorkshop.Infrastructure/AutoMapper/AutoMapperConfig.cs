@@ -33,6 +33,7 @@ namespace CarWorkshop.Infrastructure.AutoMapper
 
                cfg.CreateMap<Repair, RepairDTO>();
                cfg.CreateMap<RepairDTO, Repair>();
+
            }).CreateMapper();
         
     }

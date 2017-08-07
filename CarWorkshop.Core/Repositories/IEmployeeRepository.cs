@@ -21,5 +21,6 @@ namespace CarWorkshop.Core.Repositories
         Task UpdateEmployee(Employee employee);
 
         Task<List<Position>> GetPositions();
+        Task<List<UserRole>> GetRoles();
     }
 }

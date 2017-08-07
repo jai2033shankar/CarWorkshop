@@ -43,6 +43,8 @@ namespace CarWorkshop.Infrastructure.Services
         {
             Employee newEmployee = _mapper.Map<EmployeeDTO, Employee>(employee);
 
+            newEmployee.EmploymentDate = DateTime.UtcNow;
+
             await _employeeRepository.AddEmployee(newEmployee);
 
         }
@@ -50,6 +52,11 @@ namespace CarWorkshop.Infrastructure.Services
         public async Task<List<Position>> GetPositions()
         {
             return await _employeeRepository.GetPositions();
+        }
+
+        public async Task<List<UserRole>> GetRoles()
+        {
+            return await _employeeRepository.GetRoles();
         }
 
         public async Task<EmployeeDTO> GetEmployee(string email)

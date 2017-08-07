@@ -11,12 +11,31 @@ namespace CarWorkshop.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string query, string option, bool inactive)
         {
-            if (!String.IsNullOrEmpty(option))
+            switch(option)
             {
-                ViewData["ViewComponent"] = option;
-                ViewData["Query"] = query;
-                ViewData["Inactive"] = inactive;
+                case "ClientList":
+                    ViewData["ViewComponent"] = option;
+                    break;
+
+                case "EmployeeList":
+                    ViewData["ViewComponent"] = option;
+                    break;
+
+                case "CarList":
+                    ViewData["ViewComponent"] = option;
+                    break;
+
+                case "RepairList":
+                    ViewData["ViewComponent"] = option;
+                    break;
+
+                default:
+                    ViewData["WrongOption"] = "Please select valid option";
+                    break;
             }
+
+            ViewData["Query"] = query;
+            ViewData["Inactive"] = inactive;
 
             return View();
         }

@@ -66,9 +66,10 @@ namespace CarWorkshop.Infrastructure.Services
             return _mapper.Map<Employee, EmployeeDTO>(employee);
         }
 
-        public async Task UpdateEmployee(EmployeeDTO updatedEmployee)
+        public async Task UpdateEmployee(EmployeeDTO updatedEmployee) 
         {
-            Employee EmployeeToUpdate = await _employeeRepository.GetEmployee(updatedEmployee.EmployeeId);
+            Employee EmployeeToUpdate = await _employeeRepository
+                .GetEmployee(updatedEmployee.EmployeeId);
 
             _mapper.Map(updatedEmployee, EmployeeToUpdate);
 

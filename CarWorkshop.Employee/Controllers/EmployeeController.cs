@@ -31,7 +31,7 @@ namespace CarWorkshop.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            AddEmployeeViewModel model = new AddEmployeeViewModel();
+            EmployeeViewModel model = new EmployeeViewModel();
 
             model.Positions = new SelectList(await _service.GetPositions(), "PositionId", "Description");
             model.Roles = new SelectList(await _service.GetRoles(), "RoleId", "Name");
@@ -40,7 +40,7 @@ namespace CarWorkshop.Employee.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddEmployeeViewModel model)
+        public async Task<IActionResult> Add(EmployeeViewModel model)
         {
             if (ModelState.IsValid)
             {

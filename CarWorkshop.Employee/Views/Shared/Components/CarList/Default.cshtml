@@ -22,6 +22,7 @@
                     <td>
                     <input class="btn btn-default" type="submit" value="Delete" onclick="location.href='@Url.Action("Delete", "Car", new {Id = car.CarId})'" />
                     <input class="btn btn-default" type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Car", new {Id = car.CarId})'" />
+                    <input class="btn btn-default" type="submit" value="Add Repair" onclick="location.href='@Url.Action("Add", "Repair", new {CarId = car.CarId})'" />
                     </td>
                 </tr>
             }

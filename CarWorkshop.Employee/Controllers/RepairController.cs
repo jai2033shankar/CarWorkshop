@@ -23,9 +23,13 @@ namespace CarWorkshop.Employee.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add(int CarId)
         {
-            return View();
+            RepairDTO newRepair = new RepairDTO();
+
+            newRepair.CarId = CarId;
+
+            return View(newRepair);
         }
 
         [HttpPost]

@@ -55,6 +55,7 @@ namespace CarWorkshop.Employee
             {
                 var policy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
+                .RequireClaim(ClaimTypes.Role, "1")
                 .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             });

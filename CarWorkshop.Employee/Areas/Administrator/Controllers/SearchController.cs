@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarWorkshop.Employee.Controllers
 {
+    [Area("Administrator")]
     public class SearchController : Controller
     {
         [HttpGet]

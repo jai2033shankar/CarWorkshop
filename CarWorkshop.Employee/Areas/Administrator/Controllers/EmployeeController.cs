@@ -13,6 +13,7 @@ using AutoMapper;
 
 namespace CarWorkshop.Employee.Controllers
 {
+    [Area("Administrator")]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _service;

@@ -8,11 +8,11 @@ using CarWorkshop.Infrastructure.Services;
 
 namespace CarWorkshop.Employee.Controllers
 {
-    public class ClientController : Controller
+    [Area("Administrator")]
+    public class CarController : Controller
     {
-        private readonly IClientService _service;
-
-        public ClientController(IClientService service)
+        private readonly ICarService _service;
+        public CarController(ICarService service)
         {
             _service = service;
         }
@@ -24,17 +24,20 @@ namespace CarWorkshop.Employee.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add(int clientId)
         {
-            return View();
+            CarDTO newCar = new CarDTO();
+            newCar.ClientId = clientId;
+
+            return View(newCar);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(ClientDTO model)
+        public async Task<IActionResult> Add(CarDTO model)
         {
             if (ModelState.IsValid)
             {
-                await _service.AddClient(model);
+                await _service.AddCar(model);
 
                 return RedirectToAction("Index");
             }
@@ -45,27 +48,21 @@ namespace CarWorkshop.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            ClientDTO client = await _service.GetClient(Id);
+            CarDTO car = await _service.GetCar(Id);
 
-            return View(client);
+            return View(car);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ClientDTO model)
+        public async Task<IActionResult> Edit(CarDTO model)
         {
             if (ModelState.IsValid)
             {
-                await _service.UpdateClient(model);
+                await _service.UpdateCar(model);
 
                 return RedirectToAction("Index");
             }
 
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Delete(int Id)
-        {
             return View();
         }
     }

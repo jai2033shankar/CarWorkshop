@@ -8,36 +8,34 @@ using CarWorkshop.Infrastructure.Services;
 
 namespace CarWorkshop.Employee.Controllers
 {
-    public class RepairController : Controller
+    [Area("Administrator")]
+    public class ClientController : Controller
     {
-        private readonly IRepairService _service;
+        private readonly IClientService _service;
 
-        public RepairController(IRepairService service)
+        public ClientController(IClientService service)
         {
             _service = service;
         }
 
+        // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult Add(int CarId)
+        public IActionResult Add()
         {
-            RepairDTO newRepair = new RepairDTO();
-
-            newRepair.CarId = CarId;
-
-            return View(newRepair);
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(RepairDTO model)
+        public async Task<IActionResult> Add(ClientDTO model)
         {
             if (ModelState.IsValid)
             {
-                await _service.AddRepair(model);
+                await _service.AddClient(model);
 
                 return RedirectToAction("Index");
             }
@@ -48,21 +46,27 @@ namespace CarWorkshop.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            RepairDTO repair = await _service.GetRepair(Id);
+            ClientDTO client = await _service.GetClient(Id);
 
-            return View(repair);
+            return View(client);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(RepairDTO model)
+        public async Task<IActionResult> Edit(ClientDTO model)
         {
             if (ModelState.IsValid)
             {
-                await _service.UpdateRepair(model);
-                
+                await _service.UpdateClient(model);
+
                 return RedirectToAction("Index");
             }
 
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int Id)
+        {
             return View();
         }
     }

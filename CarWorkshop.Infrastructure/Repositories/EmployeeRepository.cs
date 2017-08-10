@@ -37,7 +37,8 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public async Task<IEnumerable<Employee>> GetAllEmployees()
         {
-            IEnumerable<Employee> allEmployees = await employees.Include(x => x.PositionNavigation).ToListAsync();
+            IEnumerable<Employee> allEmployees = await employees.Include(x => x.PositionNavigation)
+                .Include(x => x.UserRoleNavigation).ToListAsync();
 
             if (allEmployees == null)
             {
@@ -50,6 +51,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         public async Task<Employee> GetEmployee(string email)
         {
             Employee employee = await employees.Include(x => x.PositionNavigation)
+                                                .Include(x => x.UserRoleNavigation)
                                                .SingleOrDefaultAsync(x => x.EmailAddress == email);
 
             if (employee == null)
@@ -63,6 +65,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         public async Task<Employee> GetEmployee(int employeeId)
         {
             Employee employee = await employees.Include(x => x.PositionNavigation)
+                .Include(x => x.UserRoleNavigation)
                                                .SingleOrDefaultAsync(e => e.EmployeeId == employeeId);
 
             if (employee == null)

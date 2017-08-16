@@ -19,7 +19,10 @@
                     <td>@Html.DisplayFor(item => repair.EndDate)</td>
                     <td>@Html.DisplayFor(item => repair.Description)</td>
                     <td>@Html.DisplayFor(item => repair.Payment)</td>
-                    <td><input type="submit" value="Delete" onclick="location.href='@Url.Action("Home", "Index", new {Id = 0})'" /></td>
+                    <td>
+                    <input class="btn btn-default" type="submit" value="Delete" onclick="location.href='@Url.Action("Delete", "Repair", new {Id = repair.RepairId})'" />
+                    <input class="btn btn-default" type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Repair", new {Id = repair.RepairId})'" />
+                    </td>
                 </tr>
             }
         </tbody>

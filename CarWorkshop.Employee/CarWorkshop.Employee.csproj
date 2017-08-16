@@ -10,27 +10,16 @@
 
   <ItemGroup>
     <Compile Remove="Views\Account\**" />
-    <Compile Remove="Views\Client\**" />
-    <Compile Remove="Views\Employee\**" />
     <Content Remove="Views\Account\**" />
-    <Content Remove="Views\Client\**" />
-    <Content Remove="Views\Employee\**" />
     <EmbeddedResource Remove="Views\Account\**" />
-    <EmbeddedResource Remove="Views\Client\**" />
-    <EmbeddedResource Remove="Views\Employee\**" />
     <None Remove="Views\Account\**" />
-    <None Remove="Views\Client\**" />
-    <None Remove="Views\Employee\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="ClientListViewComponent.cs" />
     <Compile Remove="Controllers\AccountController.cs" />
-    <Compile Remove="Controllers\ClientController.cs" />
-    <Compile Remove="Controllers\EmployeeController.cs" />
     <Compile Remove="EmployeeListViewComponent.cs" />
     <Compile Remove="Models\AccountModel.cs" />
-    <Compile Remove="Models\AddEmployeeViewModel.cs" />
     <Compile Remove="Models\ClientSearchViewModel.cs" />
   </ItemGroup>
 
@@ -38,7 +27,7 @@
     <Content Remove="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
@@ -47,6 +36,9 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
+    <PackageReference Include="SimpleInjector" Version="4.0.8" />
+    <PackageReference Include="SimpleInjector.Integration.AspNetCore" Version="4.0.10" />
+    <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc" Version="4.0.10" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />

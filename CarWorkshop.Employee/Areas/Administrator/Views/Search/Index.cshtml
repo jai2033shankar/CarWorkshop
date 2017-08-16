@@ -35,4 +35,8 @@
     {
         @await Component.InvokeAsync(ViewData["ViewComponent"].ToString(), new { query = ViewData["Query"], inactive = ViewData["Inactive"] })
     }
+    @if (ViewData["WrongOption"] != null)
+    {
+        <h1>@ViewData["WrongOption"]</h1>
+    }
 </div>

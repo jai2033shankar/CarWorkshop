@@ -43,5 +43,12 @@ namespace CarWorkshop.Infrastructure.Services
 
             await _repository.UpdateRepair(repairToUpdate);
         }
+
+        public async Task<RepairDTO> GetRepair(int repairId)
+        {
+            RepairDTO repair = _mapper.Map<Repair,RepairDTO>(await _repository.GetRepair(repairId));
+
+            return repair;
+        }
     }
 }

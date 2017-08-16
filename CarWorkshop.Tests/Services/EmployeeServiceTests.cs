@@ -48,7 +48,7 @@ namespace CarWorkshop.Tests.Services
 
             var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object);
 
-            await EmployeeService.AddEmployee(It.IsAny<Employee>());
+            await EmployeeService.AddEmployee(It.IsAny<EmployeeDTO>());
 
             EmployeeRepositoryMock.Verify(x => x.AddEmployee(It.IsAny<Employee>()), Times.Once);
         }

@@ -23,7 +23,11 @@
                     <td>@Html.DisplayFor(item => client.PhoneNumber)</td>
                     <td>PlaceHolder</td>
                     <td>PlaceHolder</td>
-                    <td><input type="submit" value="Delete" onclick="location.href='@Url.Action("DeleteClient", "Client", new {Id = client.ClientId})'" /></td>
+                    <td>
+                    <input class="btn btn-default" type="submit" value="Delete" onclick="location.href='@Url.Action("Delete", "Client", new {Id = client.ClientId})'" />
+                    <input class="btn btn-default" type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Client", new {Id = client.ClientId})'" />
+                    <input class="btn btn-default" type="submit" value="Add Car" onclick="location.href='@Url.Action("Add", "Car", new {clientId = client.ClientId})'" />
+                    </td>
                 </tr>
             }
         </tbody>

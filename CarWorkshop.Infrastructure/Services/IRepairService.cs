@@ -14,5 +14,7 @@ namespace CarWorkshop.Infrastructure.Services
 
         Task UpdateRepair(RepairDTO updatedRepair);
 
+        Task<RepairDTO> GetRepair(int repairId);
+
     }
 }

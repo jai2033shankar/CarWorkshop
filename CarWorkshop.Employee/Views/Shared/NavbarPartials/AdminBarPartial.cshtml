@@ -1,4 +1,4 @@
-﻿<li><a asp-controller="Search" asp-action="Index">Search</a></li>
+﻿<li><a asp-area="Administrator" asp-controller="Search" asp-action="Index">Search</a></li>
 <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
         Employee
@@ -6,8 +6,7 @@
     </a>
 
     <ul class="dropdown-menu">
-        <li><a href="#">Add Employee</a></li>
-        <li><a href="#">Edit Employee</a></li>
+        <li><a asp-controller="Employee" asp-action="Add">Add Employee</a></li>
         <li><a href="#">PlaceHolder</a></li>
     </ul>
 </li>
@@ -19,34 +18,7 @@
     </a>
 
     <ul class="dropdown-menu">
-        <li><a href="#">Add Client</a></li>
-        <li><a href="#">Edit Client</a></li>
-        <li><a href="#">PlaceHolder</a></li>
-    </ul>
-</li>
-
-<li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        Car
-        <span class="caret"></span>
-    </a>
-
-    <ul class="dropdown-menu">
-        <li><a href="#">Add Car</a></li>
-        <li><a href="#">Edit Car</a></li>
-        <li><a href="#">PlaceHolder</a></li>
-    </ul>
-</li>
-
-<li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        Repair
-        <span class="caret"></span>
-    </a>
-
-    <ul class="dropdown-menu">
-        <li><a href="#">Add Repair</a></li>
-        <li><a href="#">Edit Repair</a></li>
+        <li><a asp-controller="Client" asp-action="Add">Add Client</a></li>
         <li><a href="#">PlaceHolder</a></li>
     </ul>
 </li>

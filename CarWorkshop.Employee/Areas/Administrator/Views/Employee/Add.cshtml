@@ -1,0 +1,61 @@
+﻿@model CarWorkshop.Employee.Models.EmployeeViewModel
+
+<form method="post" asp-controller="Employee" asp-action="Add">
+
+    <div class="form-group">
+        <label asp-for="FirstName">First Name</label>
+        <input class="form-control" asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName">Last Name</label>
+        <input class="form-control" asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdentityCardNumber">IdentityCard Number</label>
+        <input class="form-control" asp-for="IdentityCardNumber" />
+        <span asp-validation-for="IdentityCardNumber"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PESEL">PESEL</label>
+        <input class="form-control" asp-for="PESEL" />
+        <span asp-validation-for="PESEL"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNumber">Phone Number</label>
+        <input class="form-control" asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EmailAddress">Email Address</label>
+        <input class="form-control" asp-for="EmailAddress" />
+        <span asp-validation-for="EmailAddress"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Salary">Salary</label>
+        <input class="form-control" asp-for="Salary" />
+        <span asp-validation-for="Salary"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Position">Position</label>
+        <select asp-for="Position" asp-items="@Model.Positions"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UserRole">Role</label>
+        <select asp-for="UserRole" asp-items="@Model.Roles"></select>
+    </div>
+
+    <div>
+        <input class="btn btn-success" type="submit" value="Add" />
+    </div>
+
+</form>

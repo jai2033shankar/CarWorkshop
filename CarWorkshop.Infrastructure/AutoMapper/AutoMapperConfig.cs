@@ -23,8 +23,12 @@ namespace CarWorkshop.Infrastructure.AutoMapper
                cfg.CreateMap<Car, CarDTO>()
                     .ForMember(x => x.CarModel, opt => opt.MapFrom(src => src.Model));
                cfg.CreateMap<Employee, EmployeeDTO>()
-                    .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.PositionNavigation.Description));
-               cfg.CreateMap<EmployeeDTO, Employee>();
+                    .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.PositionNavigation.Description))
+                    .ForMember(dest => dest.UserRole, opt => opt.MapFrom(src => src.UserRoleNavigation.Name));
+               cfg.CreateMap<EmployeeDTO, Employee>()
+                    .ForMember(x => x.Password, opt => opt.Condition(y => y.Password != null))
+                    .ForMember(x => x.Position, opt => opt.Ignore())
+                    .ForMember(x => x.UserRole, opt => opt.Ignore());
 
                cfg.CreateMap<CarDTO, Car>()
                     .ForMember(x => x.Model, opt => opt.MapFrom(src => src.CarModel))
@@ -32,6 +36,7 @@ namespace CarWorkshop.Infrastructure.AutoMapper
 
                cfg.CreateMap<Repair, RepairDTO>();
                cfg.CreateMap<RepairDTO, Repair>();
+
            }).CreateMapper();
         
     }

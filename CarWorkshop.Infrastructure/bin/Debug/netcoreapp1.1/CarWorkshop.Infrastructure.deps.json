@@ -1,14 +1,14 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "ef7c223197c219f40cc57e4269461c9dae8f79b2"
+    "signature": "4d9dd830e374c77201694fb2459bc99d36372aaf"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v1.1": {
       "carworkshop.infrastructure/1.0.0": {
         "dependencies": {
-          "AutoMapper": "6.1.0",
+          "AutoMapper": "6.1.1",
           "CarWorkshop.Core": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "1.1.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "1.1.2",
@@ -21,7 +21,7 @@
           "CarWorkshop.Infrastructure.dll": {}
         }
       },
-      "automapper/6.1.0": {
+      "automapper/6.1.1": {
         "dependencies": {
           "System.Collections.Specialized": "4.3.0",
           "System.ComponentModel.TypeConverter": "4.3.0"
@@ -365,12 +365,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "automapper/6.1.0": {
+    "automapper/6.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ru/p4rBwLH2CGSdlk0Bj6UZQeFpgIDT3sQNL5EEaVhrAT1qNd4SUEOjSzFRBAZbIgIHhifrZ9MbR5BMWgP1vsQ==",
-      "path": "automapper/6.1.0",
-      "hashPath": "automapper.6.1.0.nupkg.sha512"
+      "sha512": "sha512-A+6PAblvzmkXPS20nFBQJvlNSW5oEdyfN5+cxT/Du35fTNyuP5pNDXT64KT/jBgxt7CPduOM0Y7oLnNe0E5IXg==",
+      "path": "automapper/6.1.1",
+      "hashPath": "automapper.6.1.1.nupkg.sha512"
     },
     "microsoft.aspnetcore.hosting.abstractions/1.1.1": {
       "type": "package",

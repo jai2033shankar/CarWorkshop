@@ -39,9 +39,13 @@ namespace CarWorkshop.Infrastructure.Services
             return _mapper.Map<Employee, EmployeeDTO>(employee);
         }
 
-        public async Task AddEmployee(Employee employee)
+        public async Task AddEmployee(EmployeeDTO employee)
         {
-            await _employeeRepository.AddEmployee(employee);
+            Employee newEmployee = _mapper.Map<EmployeeDTO, Employee>(employee);
+
+            newEmployee.EmploymentDate = DateTime.UtcNow;
+
+            await _employeeRepository.AddEmployee(newEmployee);
 
         }
        
@@ -50,11 +54,26 @@ namespace CarWorkshop.Infrastructure.Services
             return await _employeeRepository.GetPositions();
         }
 
+        public async Task<List<UserRole>> GetRoles()
+        {
+            return await _employeeRepository.GetRoles();
+        }
+
         public async Task<EmployeeDTO> GetEmployee(string email)
         {
             Employee employee = await _employeeRepository.GetEmployee(email);
 
             return _mapper.Map<Employee, EmployeeDTO>(employee);
+        }
+
+        public async Task UpdateEmployee(EmployeeDTO updatedEmployee) 
+        {
+            Employee EmployeeToUpdate = await _employeeRepository
+                .GetEmployee(updatedEmployee.EmployeeId);
+
+            _mapper.Map(updatedEmployee, EmployeeToUpdate);
+
+            await _employeeRepository.UpdateEmployee(EmployeeToUpdate);
         }
     }
 }

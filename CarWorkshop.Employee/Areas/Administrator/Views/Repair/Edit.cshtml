@@ -1,0 +1,41 @@
+﻿@model CarWorkshop.Infrastructure.DTO.RepairDTO
+
+<form method="post" asp-controller="Repair" asp-action="Edit">
+
+    <div class="form-group">
+        <label asp-for="BeginDate">Begin Date</label>
+        <input class="form-control" asp-for="BeginDate" />
+        <span asp-validation-for="BeginDate"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDate">End Date</label>
+        <input class="form-control" asp-for="EndDate" />
+        <span asp-validation-for="EndDate"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input class="form-control" asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Payment">Payment</label>
+        <input class="form-control" asp-for="Payment" />
+        <span asp-validation-for="Payment"></span>
+    </div>
+
+    <div>
+        <input type="hidden" asp-for="RepairId" />
+    </div>
+
+    <div>
+        <input type="hidden" asp-for="CarId" />
+    </div>
+
+    <div>
+        <input class="btn btn-success" type="submit" value="Update Information" />
+    </div>
+
+</form>

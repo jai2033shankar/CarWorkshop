@@ -47,8 +47,5 @@
     <ProjectReference Include="..\CarWorkshop.Core\CarWorkshop.Core.csproj" />
     <ProjectReference Include="..\CarWorkshop.Infrastructure\CarWorkshop.Infrastructure.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Employee\" />
-  </ItemGroup>
 
 </Project>

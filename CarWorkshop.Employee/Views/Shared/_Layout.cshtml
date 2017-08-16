@@ -36,6 +36,10 @@
                     {
                         @Html.Partial("./NavbarPartials/AdminBarPartial.cshtml")
                     }
+                    @if (User.HasClaim(ClaimTypes.Role, "Employee"))
+                    {
+                        @Html.Partial("./NavbarPartials/EmployeeBarPartial.cshtml")
+                    }
                 </ul>
             </div>
             <div class="navbar-collapse collapse">

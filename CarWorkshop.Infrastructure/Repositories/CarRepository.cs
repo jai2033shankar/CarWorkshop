@@ -32,14 +32,15 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public async Task DeleteCar(int Id)
         {
-            Car car = await GetCar(Id);
+            Car carToDelete = await GetCar(Id);
 
-            if ( car == null )
+            if (carToDelete == null )
             {
                 throw new Exception($"Car with Id: {Id} could not be found");
             }
 
-            cars.Remove(car);
+            _context.Remove(carToDelete);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Car>> GetAllCars()

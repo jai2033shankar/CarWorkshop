@@ -75,5 +75,10 @@ namespace CarWorkshop.Infrastructure.Services
 
             await _employeeRepository.UpdateEmployee(EmployeeToUpdate);
         }
+
+        public async Task RemoveEmployee(int Id)
+        {
+            await _employeeRepository.RemoveEmployee(Id);
+        }
     }
 }

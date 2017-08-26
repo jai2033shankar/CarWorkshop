@@ -79,7 +79,16 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public async Task RemoveEmployee(int Id)
         {
-            throw new NotImplementedException();
+            Employee employeeToDelete = await employees.SingleOrDefaultAsync(x => x.EmployeeId == Id);
+
+
+            if (employeeToDelete == null)
+            {
+                throw new Exception("Employee not found");
+            }
+
+            _context.Remove(employeeToDelete);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateEmployee(Employee employee)

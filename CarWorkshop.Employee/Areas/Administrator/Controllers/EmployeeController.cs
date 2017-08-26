@@ -9,8 +9,6 @@ using CarWorkshop.Employee.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AutoMapper;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace CarWorkshop.Employee.Controllers
 {
     [Area("Administrator")]
@@ -73,7 +71,8 @@ namespace CarWorkshop.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int Id)
         {
-            return View();
+            await _service.RemoveEmployee(Id);
+            return View("Index");
         }
 
         [HttpGet]

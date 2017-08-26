@@ -16,5 +16,6 @@ namespace CarWorkshop.Infrastructure.Services
         Task<List<Position>> GetPositions();
         Task<List<UserRole>> GetRoles();
         Task UpdateEmployee(EmployeeDTO updatedEmployee);
+        Task RemoveEmployee(int Id);
     }
 }

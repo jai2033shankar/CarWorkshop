@@ -66,5 +66,13 @@ namespace CarWorkshop.Employee.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            await _service.RemoveRepair(Id);
+
+            return View("Index");
+        }
     }
 }

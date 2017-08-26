@@ -50,5 +50,10 @@ namespace CarWorkshop.Infrastructure.Services
 
             return repair;
         }
+
+        public async Task RemoveRepair(int Id)
+        {
+            await _repository.RemoveRepair(Id);
+        }
     }
 }

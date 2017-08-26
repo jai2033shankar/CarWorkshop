@@ -49,5 +49,19 @@ namespace CarWorkshop.Infrastructure.Repositories
 
             return repair;
         }
+
+        public async Task RemoveRepair(int Id)
+        {
+            Repair repairToDelete = await _repairs.SingleOrDefaultAsync(x => x.RepairId == Id);
+
+            if (repairToDelete == null)
+            {
+                throw new Exception("Repair not found");
+            }
+
+            _context.Remove(repairToDelete);
+            await _context.SaveChangesAsync();
+
+        }
     }
 }

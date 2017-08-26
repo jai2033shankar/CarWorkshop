@@ -15,5 +15,7 @@ namespace CarWorkshop.Core.Repositories
         Task UpdateRepair(Repair updatedRepair);
 
         Task<Repair> GetRepair(int repairId);
+
+        Task RemoveRepair(int Id);
     }
 }

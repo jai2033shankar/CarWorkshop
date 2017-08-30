@@ -30,6 +30,14 @@ namespace CarWorkshop.Employee.Controllers
             return View(employee);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int employeeId)
+        {
+            var employee = await _service.GetEmployee(employeeId);
+
+            return View(employee);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Edit(EmployeeDTO model)
         {

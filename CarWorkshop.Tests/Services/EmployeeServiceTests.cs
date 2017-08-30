@@ -60,7 +60,7 @@ namespace CarWorkshop.Tests.Services
         }
 
         [Fact]
-        public async Task GetToles_should_call_GetRoles_on_repository()
+        public async Task GetRoles_should_call_GetRoles_on_repository()
         {
             var EmployeeRepositoryMock = new Mock<IEmployeeRepository>();
             var MapperMock = new Mock<IMapper>();

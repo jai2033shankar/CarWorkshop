@@ -134,6 +134,8 @@ namespace CarWorkshop.Employee
             container.Register<IRepairRepository, RepairRepository>(Lifestyle.Scoped);
             container.Register<IRepairService, RepairService>(Lifestyle.Scoped);
 
+            container.Register<IValidationService, ValidationService>(Lifestyle.Scoped);
+
             container.RegisterSingleton<IMapper>(AutoMapperConfig.Configure());
 
         }

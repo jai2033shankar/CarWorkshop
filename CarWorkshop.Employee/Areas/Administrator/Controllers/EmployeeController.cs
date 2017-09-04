@@ -16,6 +16,7 @@ namespace CarWorkshop.Employee.Controllers
     {
         private readonly IEmployeeService _service;
         private readonly IMapper _mapper;
+
         public EmployeeController(IEmployeeService service, IMapper mapper)
         {
             _service = service;
@@ -54,9 +55,9 @@ namespace CarWorkshop.Employee.Controllers
                     LastName = model.LastName,
                     PESEL = model.PESEL,
                     PhoneNumber = model.PhoneNumber,
-                    Position = model.Position.ToString(),
+                    PositionId = model.Position,
                     Salary = model.Salary,
-                    UserRole = model.UserRole.ToString()
+                    UserRoleId = model.UserRole
                 };
 
                 await _service.AddEmployee(emp);

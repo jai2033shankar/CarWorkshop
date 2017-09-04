@@ -31,7 +31,7 @@ namespace CarWorkshop.Infrastructure.Repositories
                 throw new ArgumentNullException("AddEmployee received null Employee object.");
             }
 
-            await employees.AddAsync(employee);
+            await _context.AddAsync(employee);
             await _context.SaveChangesAsync();
         }
 

@@ -43,7 +43,7 @@ namespace CarWorkshop.Employee.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                
+
                 var claims = new[]
                 {
                     new Claim(ClaimTypes.Name, "EmployeeAuthClaim"),

@@ -15,7 +15,9 @@ namespace CarWorkshop.Infrastructure.DTO
         public string EmailAddress { get; set; }
         public decimal Salary { get; set; }
         public string Currency { get; set; }
+        public int PositionId { get; set; }
         public string Position { get; set; }
+        public int UserRoleId { get; set; }
         public string UserRole { get; set; }
         public string Password { get; set; }
         public int EmployeeId { get; set; }

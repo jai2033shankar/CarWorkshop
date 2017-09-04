@@ -13,11 +13,14 @@ namespace CarWorkshop.Infrastructure.Services
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMapper _mapper;
+        private readonly IValidationService _validator;
 
-        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper)
+        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper,
+            IValidationService validator)
         {
             _employeeRepository = employeeRepository;
             _mapper = mapper;
+            _validator = validator;
         }
 
         public async Task<IEnumerable<EmployeeDTO>> GetAllEmployees()
@@ -44,6 +47,16 @@ namespace CarWorkshop.Infrastructure.Services
             Employee newEmployee = _mapper.Map<EmployeeDTO, Employee>(employee);
 
             newEmployee.EmploymentDate = DateTime.UtcNow;
+
+            if (!await _validator.ValidateIdNumber(newEmployee.IdentityCardNumber))
+            {
+                throw new Exception("Wrong ID NUMBER");
+            }
+
+            if (!await _validator.ValidatePesel(newEmployee.Pesel))
+            {
+                throw new Exception("Wron pesel");
+            }
 
             await _employeeRepository.AddEmployee(newEmployee);
 

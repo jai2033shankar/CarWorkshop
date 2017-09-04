@@ -19,8 +19,9 @@ namespace CarWorkshop.Tests.Services
         {
             var EmployeeRepositoryMock = new Mock<IEmployeeRepository>();
             var MapperMock = new Mock<IMapper>();
+            var validator = new ValidationService();
 
-            var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object);
+            var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object, validator);
 
             await EmployeeService.GetAllEmployees();
 
@@ -32,8 +33,9 @@ namespace CarWorkshop.Tests.Services
         {
             var EmployeeRepositoryMock = new Mock<IEmployeeRepository>();
             var MapperMock = new Mock<IMapper>();
+            var validator = new ValidationService();
 
-            var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object);
+            var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object, validator);
 
             await EmployeeService.GetEmployee(It.IsAny<int>());
 
@@ -51,8 +53,9 @@ namespace CarWorkshop.Tests.Services
         {
             var EmployeeRepositoryMock = new Mock<IEmployeeRepository>();
             var MapperMock = new Mock<IMapper>();
+            var validator = new ValidationService();
 
-            var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object);
+            var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object, validator);
 
             await EmployeeService.GetPositions();
 
@@ -64,8 +67,9 @@ namespace CarWorkshop.Tests.Services
         {
             var EmployeeRepositoryMock = new Mock<IEmployeeRepository>();
             var MapperMock = new Mock<IMapper>();
+            var validator = new ValidationService();
 
-            var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object);
+            var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object, validator);
 
             await EmployeeService.GetRoles();
 

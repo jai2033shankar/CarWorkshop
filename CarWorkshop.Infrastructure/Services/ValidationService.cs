@@ -53,7 +53,6 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task<bool> ValidatePesel(string Pesel)
         {
-            // 96 05 24 11 596
             // 1 3 7 9 1 3 7 9 1 3
             if (Pesel.Length != PeselLength)
             {
@@ -82,11 +81,6 @@ namespace CarWorkshop.Infrastructure.Services
 
             return true;
 
-        }
-
-        public Task<bool> ValidateRegistrationNumber(string RegistrationNumber)
-        {
-            throw new NotImplementedException();
         }
     }
 }

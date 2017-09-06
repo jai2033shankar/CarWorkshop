@@ -8,36 +8,36 @@ using CarWorkshop.Infrastructure.Services;
 
 namespace CarWorkshop.Employee.Controllers
 {
-    [Area("Administrator")]
-    public class CarController : Controller
+    public class RepairController : Controller
     {
-        private readonly ICarService _service;
-        public CarController(ICarService service)
+        private readonly IRepairService _service;
+
+        public RepairController(IRepairService service)
         {
             _service = service;
         }
 
-        // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult Add(int clientId)
+        public IActionResult Add(int CarId)
         {
-            CarDTO newCar = new CarDTO();
-            newCar.ClientId = clientId;
+            RepairDTO newRepair = new RepairDTO();
 
-            return View(newCar);
+            newRepair.CarId = CarId;
+
+            return View(newRepair);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(CarDTO model)
+        public async Task<IActionResult> Add(RepairDTO model)
         {
             if (ModelState.IsValid)
             {
-                await _service.AddCar(model);
+                await _service.AddRepair(model);
 
                 return RedirectToAction("Index");
             }
@@ -48,18 +48,18 @@ namespace CarWorkshop.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            CarDTO car = await _service.GetCar(Id);
+            RepairDTO repair = await _service.GetRepair(Id);
 
-            return View(car);
+            return View(repair);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(CarDTO model)
+        public async Task<IActionResult> Edit(RepairDTO model)
         {
             if (ModelState.IsValid)
             {
-                await _service.UpdateCar(model);
-
+                await _service.UpdateRepair(model);
+                
                 return RedirectToAction("Index");
             }
 
@@ -69,7 +69,7 @@ namespace CarWorkshop.Employee.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int Id)
         {
-            await _service.RemoveCar(Id);
+            await _service.RemoveRepair(Id);
 
             return View("Index");
         }

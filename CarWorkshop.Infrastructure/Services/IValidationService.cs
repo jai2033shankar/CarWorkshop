@@ -10,7 +10,5 @@ namespace CarWorkshop.Infrastructure.Services
         Task<Boolean> ValidatePesel(string Pesel);
 
         Task<Boolean> ValidateIdNumber(string IdNumber);
-
-        Task<Boolean> ValidateRegistrationNumber(string RegistrationNumber);
     }
 }

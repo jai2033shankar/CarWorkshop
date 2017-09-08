@@ -60,6 +60,14 @@ namespace CarWorkshop.Employee
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.CookieHttpOnly = true;
+            });
+
             services.AddSingleton<IControllerActivator>(
                 new SimpleInjectorControllerActivator(container));
 
@@ -99,6 +107,8 @@ namespace CarWorkshop.Employee
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true
             });
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

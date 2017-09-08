@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using CarWorkshop.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace CarWorkshop.Employee.Controllers
 {
@@ -55,6 +56,8 @@ namespace CarWorkshop.Employee.Controllers
                     new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme));
 
                 await HttpContext.Authentication.SignInAsync("EmployeeAuthCookieMiddleware", principal);
+
+                HttpContext.Session.SetInt32("EmployeeId", employee.EmployeeId);
 
                 return RedirectToAction("Index");
             }

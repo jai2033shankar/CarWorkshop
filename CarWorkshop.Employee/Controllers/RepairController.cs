@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CarWorkshop.Infrastructure.DTO;
 using CarWorkshop.Infrastructure.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace CarWorkshop.Employee.Controllers
 {
@@ -37,6 +38,7 @@ namespace CarWorkshop.Employee.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.EmployeeId = (int)HttpContext.Session.GetInt32("EmployeeId");
                 await _service.AddRepair(model);
 
                 return RedirectToAction("Index");

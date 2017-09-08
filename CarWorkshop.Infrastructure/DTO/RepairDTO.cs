@@ -6,7 +6,15 @@ namespace CarWorkshop.Infrastructure.DTO
 {
     public class RepairDTO
     {
-        public decimal Payment { get; set; }
+        public decimal Payment
+        {
+            get => Price * (1 - (Discount / 100));
+            //set => Payment = Price * (1 - (Discount / 100));
+        }
+
+        public decimal Price { get; set; }
+
+        public decimal Discount { get; set; }
 
         public DateTime? BeginDate { get; set; }
 
@@ -15,6 +23,8 @@ namespace CarWorkshop.Infrastructure.DTO
         public string Description { get; set; }
         public int RepairId { get; set; }
         public int CarId { get; set; }
+
+        public int EmployeeId { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,8 @@ namespace CarWorkshop.Employee.Models
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public int Salary { get; set; }
+
+        [StringLength(3, ErrorMessage = "Please enter three digit code for currency.")]
         public string Currency { get; set; }
         public int Position { get; set; }
         public int UserRole { get; set; }

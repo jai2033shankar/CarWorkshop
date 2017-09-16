@@ -22,6 +22,17 @@ namespace CarWorkshop.Employee.Controllers
             _service = service;
             _mapper = mapper;
         }
+
+        private async Task<SelectList> FillPositions()
+        {
+            return new SelectList(await _service.GetPositions(), "PositionId", "Description");
+        }
+
+        private async Task<SelectList> FillRoles()
+        {
+            return new SelectList(await _service.GetRoles(), "RoleId", "Name");
+        }
+
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -33,8 +44,8 @@ namespace CarWorkshop.Employee.Controllers
         {
             EmployeeViewModel model = new EmployeeViewModel();
 
-            model.Positions = new SelectList(await _service.GetPositions(), "PositionId", "Description");
-            model.Roles = new SelectList(await _service.GetRoles(), "RoleId", "Name");
+            model.Positions = await FillPositions();
+            model.Roles = await FillRoles();
 
             return View(model);
         }
@@ -47,7 +58,7 @@ namespace CarWorkshop.Employee.Controllers
                 // Temporary solution.
                 EmployeeDTO emp = new EmployeeDTO
                 {
-                    Currency = "PLN",
+                    Currency = model.Currency,
                     EmailAddress = model.EmailAddress,
                     EmploymentDate = model.EmploymentDate,
                     FirstName = model.FirstName,
@@ -66,7 +77,10 @@ namespace CarWorkshop.Employee.Controllers
             }
 
             // Something failed redisplay form.
-            return View();
+            model.Positions = await FillPositions();
+            model.Roles = await FillRoles();
+
+            return View(model);
         }
 
         [HttpGet]

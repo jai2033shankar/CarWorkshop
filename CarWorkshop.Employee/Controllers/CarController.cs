@@ -72,5 +72,20 @@ namespace CarWorkshop.Employee.Controllers
 
             return View("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ListRepairs(int CarId)
+        {
+            if (CarId <= 0)
+            {
+                //temporary solution.
+                return View("Index");
+            }
+
+
+            var car = await _service.GetCar(CarId);
+
+            return View(car);
+        }
     }
 }

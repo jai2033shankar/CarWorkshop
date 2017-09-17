@@ -39,6 +39,12 @@
                                 <input class="btn btn-default" type="submit" value="Add Repair" />
                             </form>
                         </div>
+                        <div style="display:inline-block">
+                            <form method="get" asp-area="" asp-controller="Car" asp-action="ListRepairs">
+                                <input name="CarId" type="hidden" value="@car.CarId" />
+                                <input class="btn btn-default" type="submit" value="Show Repairs" />
+                            </form>
+                        </div>
                     </div>
                     </td>
                 </tr>

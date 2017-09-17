@@ -68,7 +68,8 @@ namespace CarWorkshop.Employee.Controllers
                     PhoneNumber = model.PhoneNumber,
                     PositionId = model.Position,
                     Salary = model.Salary,
-                    UserRoleId = model.UserRole
+                    UserRoleId = model.UserRole,
+                    Password = "tmp"
                 };
 
                 await _service.AddEmployee(emp);

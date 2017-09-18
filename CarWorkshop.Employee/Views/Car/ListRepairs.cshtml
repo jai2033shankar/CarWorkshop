@@ -1,4 +1,4 @@
 ﻿@model CarWorkshop.Infrastructure.DTO.CarDTO
-<h1>Repairs for @Model.Brand @Model.CarModel</h1>
+<h1>Repairs for @Model.Brand @Model.CarModel @Model.RegistrationNumber</h1>
 
 @await  Component.InvokeAsync("RepairList", new { carId = Model.CarId})

@@ -71,5 +71,13 @@ namespace CarWorkshop.Employee.Controllers
 
             return View("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ListCars(int clientId)
+        {
+            var client = await _service.GetClient(clientId);
+
+            return View(client);
+        }
     }
 }

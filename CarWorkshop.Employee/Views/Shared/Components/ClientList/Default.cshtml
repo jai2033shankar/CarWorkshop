@@ -8,8 +8,6 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th>Car</th>
-                <th>Reg No.</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,12 +19,11 @@
                     <td>@Html.DisplayFor(item => client.LastName)</td>
                     <td>@Html.DisplayFor(item => client.EmailAddress)</td>
                     <td>@Html.DisplayFor(item => client.PhoneNumber)</td>
-                    <td>PlaceHolder</td>
-                    <td>PlaceHolder</td>
                     <td>
                     <input class="btn btn-default" type="submit" value="Delete" onclick="location.href='@Url.Action("Delete", "Client", new {Id = client.ClientId})'" />
                     <input class="btn btn-default" type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Client", new {Id = client.ClientId})'" />
                     <input class="btn btn-default" type="submit" value="Add Car" onclick="location.href='@Url.Action("Add", "Car", new {clientId = client.ClientId})'" />
+                    <input class="btn btn-default" type="submit" value="Show Cars" onclick="location.href='@Url.Action("ListCars", "Client", new { clientId = client.ClientId})'" />
                     </td>
                 </tr>
             }

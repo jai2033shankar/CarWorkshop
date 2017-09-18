@@ -1,0 +1,5 @@
+﻿@model CarWorkshop.Infrastructure.DTO.ClientDTO
+
+<h1>@Model.FirstName @Model.LastName's Cars</h1>
+
+@await  Component.InvokeAsync("CarList", new { clientId = Model.ClientId})

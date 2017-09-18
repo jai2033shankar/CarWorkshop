@@ -6,6 +6,7 @@ using CarWorkshop.Core.Repositories;
 using CarWorkshop.Core.Models;
 using AutoMapper;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace CarWorkshop.Infrastructure.Services
 {
@@ -69,7 +70,8 @@ namespace CarWorkshop.Infrastructure.Services
 
         public async Task<List<UserRole>> GetRoles()
         {
-            return await _employeeRepository.GetRoles();
+            var result = await _employeeRepository.GetRoles();
+            return result.Where(x => x.Name != "Client").ToList();
         }
 
         public async Task<EmployeeDTO> GetEmployee(string email)

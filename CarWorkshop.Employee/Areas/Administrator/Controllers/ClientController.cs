@@ -35,6 +35,7 @@ namespace CarWorkshop.Employee.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Password = "tmpPass";
                 await _service.AddClient(model);
 
                 return RedirectToAction("Index");

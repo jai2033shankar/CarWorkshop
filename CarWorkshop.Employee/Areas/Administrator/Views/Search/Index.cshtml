@@ -40,7 +40,7 @@
 <div id="container">
     @if (ViewData["ViewComponent"] != null)
     {
-        @await Component.InvokeAsync(ViewData["ViewComponent"].ToString(), new { query = ViewData["Query"], inactive = ViewData["Inactive"], carId = 0 })
+        @await Component.InvokeAsync(ViewData["ViewComponent"].ToString(), new { query = ViewData["Query"], inactive = ViewData["Inactive"] })
     }
     @if (ViewData["WrongOption"] != null)
     {

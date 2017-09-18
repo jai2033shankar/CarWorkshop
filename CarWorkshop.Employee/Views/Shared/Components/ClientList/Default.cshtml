@@ -22,8 +22,15 @@
                     <td style="text-align: center">
                     <input class="btn btn-default" type="submit" value="Delete" onclick="location.href='@Url.Action("Delete", "Client", new {Id = client.ClientId})'" />
                     <input class="btn btn-default" type="submit" value="Edit" onclick="location.href='@Url.Action("Edit", "Client", new {Id = client.ClientId})'" />
-                    <input class="btn btn-default" type="submit" value="Add Car" onclick="location.href='@Url.Action("Add", "Car", new {clientId = client.ClientId})'" />
+                    @*<input class="btn btn-default" type="submit" value="Add Car" onclick="location.href='@Url.Action("Add", "Car", new {clientId = client.ClientId})'" />*@
+                    <div style="display:inline-block">
+                        <form method="get" asp-area="" asp-controller="Car" asp-action="Add">
+                            <input name="clientId" type="hidden" value="@client.ClientId" />
+                            <input class="btn btn-default" type="submit" value="Add" />
+                        </form>
+                    </div>
                     <input class="btn btn-default" type="submit" value="Show Cars" onclick="location.href='@Url.Action("ListCars", "Client", new { clientId = client.ClientId})'" />
+
                     </td>
                 </tr>
             }

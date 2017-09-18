@@ -1,6 +1,6 @@
 ﻿@model CarWorkshop.Infrastructure.DTO.EmployeeDTO
 
-<form method="get" asp-controller="Profile" asp-action="Edit">
+<form>
 
     <div class="form-group">
         <label asp-for="FirstName">First Name</label>
@@ -32,14 +32,14 @@
         <input class="form-control" asp-for="EmailAddress" readonly>
     </div>
 
-    <input asp-for="EmployeeId" type="hidden" />
+</form>
 
-    <input asp-for="EmploymentDate" type="hidden" />
+<form method="get" asp-controller="Profile" asp-action="Edit">
+    <input asp-for="EmployeeId" type="hidden" />
 
     <div>
         <input class="btn btn-success" type="submit" value="Edit" />
     </div>
-
 </form>
 
 

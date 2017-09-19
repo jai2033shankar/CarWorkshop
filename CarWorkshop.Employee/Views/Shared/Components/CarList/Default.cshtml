@@ -7,8 +7,7 @@
                 <th>Brand</th>
                 <th>Model</th>
                 <th>Reg. No.</th>
-                <th>Owner</th>
-                <th>Actions</th>
+                <th style="text-align: center">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,8 +17,7 @@
                     <td>@Html.DisplayFor(item => car.Brand)</td>
                     <td>@Html.DisplayFor(item => car.CarModel)</td>
                     <td>@Html.DisplayFor(item => car.RegistrationNumber)</td>
-                    <td>@Html.DisplayFor(item => car.ClientId)</td>
-                    <td>
+                    <td style="text-align: center">
                     <div>
                         <div style="display:inline-block">
                             <form method="get" asp-area="" asp-controller="Car" asp-action="Delete">

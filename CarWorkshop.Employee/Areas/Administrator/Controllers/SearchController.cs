@@ -13,7 +13,7 @@ namespace CarWorkshop.Employee.Controllers
     public class SearchController : Controller
     {
         [HttpGet]
-        public async Task<IActionResult> Index(string query, string option, bool inactive)
+        public async Task<IActionResult> Index(string option, bool inactive)
         {
             switch(option)
             {
@@ -38,7 +38,6 @@ namespace CarWorkshop.Employee.Controllers
                     break;
             }
 
-            ViewData["Query"] = query;
             ViewData["Inactive"] = inactive;
 
             return View();

@@ -17,7 +17,7 @@ namespace CarWorkshop.Employee.Models
         public DateTime EmploymentDate { get; set; }
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
-        public int Salary { get; set; }
+        public decimal Salary { get; set; }
 
         [StringLength(3, ErrorMessage = "Please enter three digit code for currency.")]
         public string Currency { get; set; }

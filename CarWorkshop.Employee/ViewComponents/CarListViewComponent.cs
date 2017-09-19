@@ -16,7 +16,7 @@ namespace CarWorkshop.Employee.ViewComponents
             _service = service;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string query, bool inactive, int clientId)
+        public async Task<IViewComponentResult> InvokeAsync(bool inactive, int clientId)
         {
             var cars = await _service.GetAllCars();
 

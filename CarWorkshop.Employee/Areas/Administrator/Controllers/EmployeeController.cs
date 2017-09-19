@@ -95,7 +95,6 @@ namespace CarWorkshop.Employee.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             EmployeeDTO employee = await _service.GetEmployee(Id);
-
             return View(employee);
         }
 

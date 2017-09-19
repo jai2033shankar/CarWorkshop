@@ -1,9 +1,4 @@
-﻿
-<form method="get" asp-controller="Search" asp-action="Index">
-
-    <div class="form-group">
-        <input type="text" class="form-control" name="query" id="searchText" placeholder="Search..." />
-    </div>
+﻿<form method="get" asp-controller="Search" asp-action="Index">
 
     <div class="form-check">
         <div style="display: block">
@@ -32,7 +27,7 @@
     </div>
 
     <div>
-        <input type="submit" value="Search" class="btn btn-success" />
+        <input type="submit" value="Show" class="btn btn-success" />
     </div>
 
 </form>
@@ -40,7 +35,7 @@
 <div id="container">
     @if (ViewData["ViewComponent"] != null)
     {
-        @await Component.InvokeAsync(ViewData["ViewComponent"].ToString(), new { query = ViewData["Query"], inactive = ViewData["Inactive"] })
+        @await Component.InvokeAsync(ViewData["ViewComponent"].ToString(), new { inactive = ViewData["Inactive"] })
     }
     @if (ViewData["WrongOption"] != null)
     {

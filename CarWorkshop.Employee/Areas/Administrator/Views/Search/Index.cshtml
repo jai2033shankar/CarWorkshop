@@ -35,7 +35,7 @@
 <div id="container">
     @if (ViewData["ViewComponent"] != null)
     {
-        @await Component.InvokeAsync(ViewData["ViewComponent"].ToString(), new { inactive = ViewData["Inactive"] })
+        @await Component.InvokeAsync(ViewData["ViewComponent"].ToString(), new { inactive = ViewData["Inactive"], page = 1})
     }
     @if (ViewData["WrongOption"] != null)
     {

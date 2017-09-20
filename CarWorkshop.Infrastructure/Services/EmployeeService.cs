@@ -56,7 +56,7 @@ namespace CarWorkshop.Infrastructure.Services
 
             if (!await _validator.ValidatePesel(newEmployee.Pesel))
             {
-                throw new Exception("Wron pesel");
+                throw new Exception("Wrong pesel");
             }
 
             await _employeeRepository.AddEmployee(newEmployee);

@@ -1,4 +1,5 @@
-﻿using CarWorkshop.Infrastructure.Services;
+﻿using CarWorkshop.Infrastructure.DTO;
+using CarWorkshop.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,12 @@ namespace CarWorkshop.Employee.ViewComponents
             _service = service;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(bool inactive)
+        public async Task<IViewComponentResult> InvokeAsync(bool inactive, int? page)
         {
             var employees = await _service.GetAllEmployees();
+            int pageSize = 5;
 
-            return View(employees);
+            return View(await PaginatedList<EmployeeDTO>.CreateList(employees.AsQueryable(), page ?? 1, pageSize));
         }
     }
 }

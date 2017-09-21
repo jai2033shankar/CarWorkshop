@@ -1,4 +1,4 @@
-﻿@model List<CarWorkshop.Infrastructure.DTO.CarDTO>
+﻿@model PaginatedList<CarWorkshop.Infrastructure.DTO.CarDTO>
 
 <div class="container">
     <table class="table table-striped">
@@ -50,3 +50,22 @@
         </tbody>
     </table>
 </div>
+
+@{
+    var hasNext = Model.HasNextPage ? "" : "disabled";
+    var hasPrevious = Model.HasPreviousPage ? "" : "disabled";
+}
+
+<a class="btn btn-default @hasPrevious" asp-area="Administrator" asp-controller="Search" asp-action="Index"
+   asp-route-option="@ViewData["ViewComponent"]"
+   asp-route-inactive="@ViewData["Inactive"]"
+   asp-route-page="@(Model.PageIndex-1)">
+    Previous
+</a>
+
+<a class="btn btn-default @hasNext" asp-area="Administrator" asp-controller="Search" asp-action="Index"
+   asp-route-option="@ViewData["ViewComponent"]"
+   asp-route-inactive="@ViewData["Inactive"]"
+   asp-route-page="@(Model.PageIndex+1)">
+    Next
+</a>

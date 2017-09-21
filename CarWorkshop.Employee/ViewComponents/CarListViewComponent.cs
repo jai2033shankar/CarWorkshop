@@ -1,4 +1,5 @@
-﻿using CarWorkshop.Infrastructure.Services;
+﻿using CarWorkshop.Infrastructure.DTO;
+using CarWorkshop.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace CarWorkshop.Employee.ViewComponents
             _service = service;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(bool inactive, int clientId)
+        public async Task<IViewComponentResult> InvokeAsync(bool inactive, int clientId, int? page)
         {
             var cars = await _service.GetAllCars();
 
@@ -25,7 +26,9 @@ namespace CarWorkshop.Employee.ViewComponents
                 cars = cars.Where(car => car.ClientId == clientId).ToList();
             }
 
-            return View(cars); 
+            int pageSize = 5;
+
+            return View(await PaginatedList<CarDTO>.CreateList(cars.AsQueryable(), page ?? 1, pageSize)); 
         }
     }
 }

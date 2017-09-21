@@ -34,3 +34,19 @@
         </tbody>
     </table>
 </div>
+
+
+<a class="btn btn-default" asp-area="Administrator" asp-controller="Search" asp-action="Index"
+   asp-route-option="@ViewData["ViewComponent"]"
+   asp-route-inactive="@ViewData["Inactive"]"
+   asp-route-page="@(Model.PageIndex-1)">
+    Previous
+</a>
+
+<a class="btn btn-default" asp-area="Administrator" asp-controller="Search" asp-action="Index"  
+   asp-route-option="@ViewData["ViewComponent"]"
+   asp-route-inactive="@ViewData["Inactive"]"
+   asp-route-page="@(Model.PageIndex+1)">
+    Next
+</a>
+

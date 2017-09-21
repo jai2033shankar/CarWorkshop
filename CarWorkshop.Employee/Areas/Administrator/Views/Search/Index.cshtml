@@ -23,7 +23,7 @@
     </div>
     <div>
         <label class="form-check-label">Include Inactive</label>
-        <input type="checkbox" name="inactive" id="inactive" value="true" />
+        <input type="checkbox" name="inactive" id="inactive" value="True" />
     </div>
 
     <div>
@@ -35,7 +35,7 @@
 <div id="container">
     @if (ViewData["ViewComponent"] != null)
     {
-        @await Component.InvokeAsync(ViewData["ViewComponent"].ToString(), new { inactive = ViewData["Inactive"], page = 1})
+        @await Component.InvokeAsync(ViewData["ViewComponent"].ToString(), new { inactive = ViewData["Inactive"], page = ViewData["CurrentListPage"] })
     }
     @if (ViewData["WrongOption"] != null)
     {

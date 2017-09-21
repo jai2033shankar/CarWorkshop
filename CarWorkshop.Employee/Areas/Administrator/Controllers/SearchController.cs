@@ -13,7 +13,7 @@ namespace CarWorkshop.Employee.Controllers
     public class SearchController : Controller
     {
         [HttpGet]
-        public async Task<IActionResult> Index(string option, bool inactive)
+        public async Task<IActionResult> Index(string option, bool inactive, int? page)
         {
             switch(option)
             {
@@ -39,6 +39,7 @@ namespace CarWorkshop.Employee.Controllers
             }
 
             ViewData["Inactive"] = inactive;
+            ViewData["CurrentListPage"] = page ?? 1;
 
             return View();
         }

@@ -1,4 +1,5 @@
 ﻿@model PaginatedList<CarWorkshop.Infrastructure.DTO.CarDTO>
+@using  System.Security.Claims
 
 <div class="container">
     <table class="table table-striped">
@@ -56,16 +57,31 @@
     var hasPrevious = Model.HasPreviousPage ? "" : "disabled";
 }
 
+@if (User.HasClaim(ClaimTypes.Role, "Admin"))
+{
 <a class="btn btn-default @hasPrevious" asp-area="Administrator" asp-controller="Search" asp-action="Index"
    asp-route-option="@ViewData["ViewComponent"]"
    asp-route-inactive="@ViewData["Inactive"]"
-   asp-route-page="@(Model.PageIndex-1)">
+   asp-route-page="@(Model.PageIndex - 1)">
     Previous
 </a>
 
 <a class="btn btn-default @hasNext" asp-area="Administrator" asp-controller="Search" asp-action="Index"
    asp-route-option="@ViewData["ViewComponent"]"
    asp-route-inactive="@ViewData["Inactive"]"
-   asp-route-page="@(Model.PageIndex+1)">
+   asp-route-page="@(Model.PageIndex + 1)">
     Next
 </a>
+}
+else if (User.HasClaim(ClaimTypes.Role, "Employee"))
+{
+    <a class="btn btn-default @hasPrevious" asp-area="Employee" asp-controller="Home" asp-action="Index"
+       asp-route-page="@(Model.PageIndex - 1)">
+        Previous
+    </a>
+
+    <a class="btn btn-default @hasNext" asp-area="Employee" asp-controller="Home" asp-action="Index"
+       asp-route-page="@(Model.PageIndex + 1)">
+        Next
+    </a>
+}

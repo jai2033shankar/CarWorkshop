@@ -10,8 +10,10 @@ namespace CarWorkshop.Employee.Areas.Employee.Controllers
     public class HomeController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
+            ViewData["EmpCarPage"] = page ?? 1;
+
             return View();
         }
     }

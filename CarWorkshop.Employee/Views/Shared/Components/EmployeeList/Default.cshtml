@@ -35,15 +35,24 @@
     </table>
 </div>
 
+<div>
+    <label class="form-check-label">Include Inactive</label>
+    <input type="checkbox" name="inactive" id="inactive" value="True" />
+</div>
 
-<a class="btn btn-default" asp-area="Administrator" asp-controller="Search" asp-action="Index"
+@{ 
+    var hasNext = Model.HasNextPage ? "" : "disabled";
+    var hasPrevious = Model.HasPreviousPage ? "" : "disabled";
+}
+
+<a class="btn btn-default @hasPrevious" asp-area="Administrator" asp-controller="Search" asp-action="Index"
    asp-route-option="@ViewData["ViewComponent"]"
    asp-route-inactive="@ViewData["Inactive"]"
    asp-route-page="@(Model.PageIndex-1)">
     Previous
 </a>
 
-<a class="btn btn-default" asp-area="Administrator" asp-controller="Search" asp-action="Index"  
+<a class="btn btn-default @hasNext" asp-area="Administrator" asp-controller="Search" asp-action="Index"  
    asp-route-option="@ViewData["ViewComponent"]"
    asp-route-inactive="@ViewData["Inactive"]"
    asp-route-page="@(Model.PageIndex+1)">

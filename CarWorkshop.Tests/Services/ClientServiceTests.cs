@@ -118,12 +118,28 @@ namespace CarWorkshop.Tests.Services
             var CarRepositoryMock = new Mock<ICarRepository>();
             var MapperMock = new Mock<IMapper>();
 
-            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object, CarRepositoryMock.Object);
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object,
+                CarRepositoryMock.Object);
 
             await ClientService.RemoveClient(It.IsAny<int>());
 
             ClientRepositoryMock.Verify(x => x.RemoveClient(It.IsAny<int>()), Times.Once);
 
+        }
+
+        [Fact]
+        public async Task AddCar_should_call_AddCar_on_repository()
+        {
+            var ClientRepositoryMock = new Mock<IClientRepository>();
+            var CarRepositoryMock = new Mock<ICarRepository>();
+            var MapperMock = new Mock<IMapper>();
+
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object, 
+                CarRepositoryMock.Object);
+
+            await ClientService.AddCar(It.IsAny<CarDTO>());
+
+            ClientRepositoryMock.Verify(x => x.AddCar(It.IsAny<Car>()), Times.Once);
         }
 
     }

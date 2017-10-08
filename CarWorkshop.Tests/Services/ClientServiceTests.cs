@@ -152,12 +152,50 @@ namespace CarWorkshop.Tests.Services
             var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object,
                 CarRepositoryMock.Object);
 
-
+            // TODO: substitute object for mock.
             var carDTOMock = new CarDTO { CarId = 2 };
 
             await ClientService.EditCar(carDTOMock);
 
             CarRepositoryMock.Verify(x => x.GetCar(carDTOMock.CarId), Times.Once);
+        }
+
+        [Fact]
+        public async Task EditCar_should_call_UpdateCar_on_CarRepository()
+        {
+            var ClientRepositoryMock = new Mock<IClientRepository>();
+            var CarRepositoryMock = new Mock<ICarRepository>();
+            var MapperMock = new Mock<IMapper>();
+
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object,
+                CarRepositoryMock.Object);
+
+            var carDTO = new CarDTO { CarId = 2 };
+
+            CarRepositoryMock.Setup(x => x.GetCar(It.IsAny<int>()))
+                .Returns(Task.FromResult(new Car()));
+
+            await ClientService.EditCar(carDTO);
+
+            CarRepositoryMock.Verify(x => x.UpdateCar(It.IsAny<Car>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task GetRepairs_should_call_GetCar_on_CarRepository()
+        {
+            var ClientRepositoryMock = new Mock<IClientRepository>();
+            var CarRepositoryMock = new Mock<ICarRepository>();
+            var MapperMock = new Mock<IMapper>();
+
+            CarRepositoryMock.Setup(x =>  x.GetCar(It.IsAny<int>()))
+                .Returns(Task.FromResult(new Car()));
+
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object,
+                CarRepositoryMock.Object);
+
+            await ClientService.GetRepairs(It.IsAny<int>());
+
+            CarRepositoryMock.Verify(x => x.GetCar(It.IsAny<int>()), Times.Once);
         }
     }
 }

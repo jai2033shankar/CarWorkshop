@@ -62,18 +62,18 @@ namespace CarWorkshop.Tests.Services
             EmployeeRepositoryMock.Verify(x => x.GetPositions(), Times.Once);
         }
 
-        [Fact]
-        public async Task GetRoles_should_call_GetRoles_on_repository()
-        {
-            var EmployeeRepositoryMock = new Mock<IEmployeeRepository>();
-            var MapperMock = new Mock<IMapper>();
-            var validator = new ValidationService();
+        //[Fact]
+        //public async Task GetRoles_should_call_GetRoles_on_repository()
+        //{
+        //    var EmployeeRepositoryMock = new Mock<IEmployeeRepository>();
+        //    var MapperMock = new Mock<IMapper>();
+        //    var validator = new ValidationService();
 
-            var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object, validator);
+        //    var EmployeeService = new EmployeeService(EmployeeRepositoryMock.Object, MapperMock.Object, validator);
 
-            await EmployeeService.GetRoles();
+        //    await EmployeeService.GetRoles();
 
-            EmployeeRepositoryMock.Verify(x => x.GetRoles(), Times.Once);
-        }
+        //    EmployeeRepositoryMock.Verify(x => x.GetRoles(), Times.Once);
+        //}
     }
 }

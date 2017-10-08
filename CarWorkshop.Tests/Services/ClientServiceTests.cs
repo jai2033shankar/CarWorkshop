@@ -142,5 +142,22 @@ namespace CarWorkshop.Tests.Services
             ClientRepositoryMock.Verify(x => x.AddCar(It.IsAny<Car>()), Times.Once);
         }
 
+        [Fact]
+        public async Task EditCar_should_call_GetCar_on_CarRepository()
+        {
+            var ClientRepositoryMock = new Mock<IClientRepository>();
+            var CarRepositoryMock = new Mock<ICarRepository>();
+            var MapperMock = new Mock<IMapper>();
+
+            var ClientService = new ClientService(ClientRepositoryMock.Object, MapperMock.Object,
+                CarRepositoryMock.Object);
+
+
+            var carDTOMock = new CarDTO { CarId = 2 };
+
+            await ClientService.EditCar(carDTOMock);
+
+            CarRepositoryMock.Verify(x => x.GetCar(carDTOMock.CarId), Times.Once);
+        }
     }
 }
